@@ -12,6 +12,11 @@ require_cmd() {
   fi
 }
 
+can_use_tty() {
+  [[ -r /dev/tty ]] || return 1
+  { :; } >/dev/null 2>&1 </dev/tty
+}
+
 ensure_zig() {
   if command -v zig >/dev/null 2>&1; then
     return
@@ -45,7 +50,12 @@ trap cleanup EXIT
 echo "Downloading ${REPO_SLUG}@${REPO_REF}..."
 curl -fsSL "${TARBALL_URL}" | tar -xzf - -C "${tmp_dir}"
 
-repo_dir="${tmp_dir}/skills-${REPO_REF}"
+repo_dir="$(find "${tmp_dir}" -mindepth 1 -maxdepth 1 -type d | head -n 1)"
+if [[ -z "${repo_dir}" ]]; then
+  echo "Could not find extracted repository directory in ${tmp_dir}" >&2
+  exit 1
+fi
+
 if [[ ! -d "${repo_dir}/cli" ]]; then
   echo "Expected CLI directory at ${repo_dir}/cli" >&2
   exit 1
@@ -54,7 +64,7 @@ fi
 cd "${repo_dir}/cli"
 
 if [[ $# -eq 0 ]]; then
-  if [[ -r /dev/tty ]]; then
+  if can_use_tty; then
     cat >/dev/tty <<'EOF'
 Nairon Skills
 
@@ -76,8 +86,8 @@ EOF
   fi
 fi
 
-if [[ -r /dev/tty ]]; then
-  zig build run -- "$@" </dev/tty
+  if can_use_tty; then
+    zig build run -- "$@" </dev/tty
 else
   zig build run -- "$@"
 fi

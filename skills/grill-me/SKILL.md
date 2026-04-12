@@ -20,4 +20,11 @@ Estimated time left: ~6 minutes
 
 If the decision tree expands and the total question count changes, say so explicitly and update the progress numbers rather than pretending the original estimate was fixed.
 
+Along with each question, strongly prefer including a small diagram that helps the developer visualize the options. Use either:
+- a simple ASCII diagram
+- a compact flow diagram
+- a branch diagram showing the current decision and downstream consequences
+
+Keep diagrams tight and decision-oriented. They should clarify the choice, not decorate the answer.
+
 If a question can be answered by exploring the codebase, explore the codebase instead.

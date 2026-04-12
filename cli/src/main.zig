@@ -215,12 +215,6 @@ fn hasInstallArtifacts(cwd: []const u8) bool {
     };
     if (dir.access("skills-lock.json", .{})) |_| return true else |_| {}
 
-    dir.access("skills", .{}) catch |err| switch (err) {
-        error.FileNotFound => {},
-        else => return false,
-    };
-    if (dir.access("skills", .{})) |_| return true else |_| {}
-
     dir.access(".agents/skills", .{}) catch |err| switch (err) {
         error.FileNotFound => return false,
         else => return false,

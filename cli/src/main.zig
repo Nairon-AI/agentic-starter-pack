@@ -1,7 +1,6 @@
 const std = @import("std");
 const zeke = @import("zeke");
 
-const repo_source = "Nairon-AI/agentic-starter-pack";
 const InstallMode = enum { all, choose };
 
 const Install = zeke.cmd("install [target]", "Install all skills or launch the interactive skill picker, then write the recommended starter AGENTS.md.")
@@ -29,6 +28,10 @@ fn targetDir(target: ?[]const u8) []const u8 {
     return target orelse ".";
 }
 
+fn stdinIsInteractive() bool {
+    return std.posix.isatty(std.posix.STDIN_FILENO);
+}
+
 fn runCommand(allocator: std.mem.Allocator, argv: []const []const u8, cwd: []const u8) !void {
     var child = std.process.Child.init(argv, allocator);
     child.cwd = cwd;
@@ -54,6 +57,27 @@ fn runShellCommand(allocator: std.mem.Allocator, script: []const u8, cwd: []cons
         script,
     };
     try runCommand(allocator, &argv, cwd);
+}
+
+fn buildInstallSourceScriptPath(allocator: std.mem.Allocator) ![]u8 {
+    return std.fs.cwd().realpathAlloc(allocator, "../scripts/build-install-source.sh");
+}
+
+fn runSkillsWithPreparedSource(allocator: std.mem.Allocator, cwd: []const u8, command: []const u8) !void {
+    const build_script = try buildInstallSourceScriptPath(allocator);
+    defer allocator.free(build_script);
+
+    const script = try std.fmt.allocPrint(
+        allocator,
+        \\source_dir="$("{s}")"
+        \\trap 'rm -rf "$source_dir"' EXIT
+        \\{s}
+    ,
+        .{ build_script, command },
+    );
+    defer allocator.free(script);
+
+    try runShellCommand(allocator, script, cwd);
 }
 
 fn shellCommandSucceeds(allocator: std.mem.Allocator, script: []const u8, cwd: []const u8) bool {
@@ -97,6 +121,173 @@ fn promptMode() !InstallMode {
     return .choose;
 }
 
+fn promptWithDefault(allocator: std.mem.Allocator, label: []const u8, default_value: []const u8) ![]u8 {
+    if (!stdinIsInteractive()) return allocator.dupe(u8, default_value);
+
+    const stdout = getStdout();
+    try stdout.print("{s} [{s}]: ", .{ label, default_value });
+
+    var buf: [1024]u8 = undefined;
+    const bytes_read = try std.fs.File.stdin().read(&buf);
+    const line = std.mem.trim(u8, buf[0..bytes_read], " \r\n\t");
+
+    if (line.len == 0) return allocator.dupe(u8, default_value);
+    return allocator.dupe(u8, line);
+}
+
+fn writeFileIfMissing(dir: std.fs.Dir, sub_path: []const u8, data: []const u8) !void {
+    dir.access(sub_path, .{}) catch |err| switch (err) {
+        error.FileNotFound => {
+            try dir.writeFile(.{
+                .sub_path = sub_path,
+                .data = data,
+            });
+            return;
+        },
+        else => return err,
+    };
+}
+
+fn scaffoldProjectContextIfSelected(allocator: std.mem.Allocator, cwd: []const u8) !void {
+    if (!skillInstalled(cwd, "project-context")) return;
+
+    var dir = try std.fs.cwd().openDir(cwd, .{ .access_sub_paths = true });
+    defer dir.close();
+
+    try dir.makePath("project-context/architecture");
+    try dir.makePath("project-context/business-context");
+    try dir.makePath("project-context/decisions");
+    try dir.makePath("project-context/pitfalls");
+
+    const real_cwd = try std.fs.cwd().realpathAlloc(allocator, cwd);
+    defer allocator.free(real_cwd);
+    const repo_name = std.fs.path.basename(real_cwd);
+
+    const project_name = try promptWithDefault(allocator, "Project name", repo_name);
+    defer allocator.free(project_name);
+    const product_type = try promptWithDefault(allocator, "Product type", "software product");
+    defer allocator.free(product_type);
+    const product_stage = try promptWithDefault(allocator, "Product stage", "early");
+    defer allocator.free(product_stage);
+    const primary_users = try promptWithDefault(allocator, "Primary users", "TBD");
+    defer allocator.free(primary_users);
+    const team_owner = try promptWithDefault(allocator, "Team owner or main builder", "TBD");
+    defer allocator.free(team_owner);
+
+    const root_index = try std.fmt.allocPrint(
+        allocator,
+        \\# Project context
+        \\
+        \\Use this folder as the durable repo-local memory layer for coding agents.
+        \\
+        \\## Sections
+        \\
+        \\- [Principles](principles.md)
+        \\- [Architecture overview](architecture/overview.md)
+        \\- [Business context](business-context/index.md)
+        \\- `decisions/`
+        \\- `pitfalls/`
+    ,
+        .{},
+    );
+    defer allocator.free(root_index);
+
+    const principles = try std.fmt.allocPrint(
+        allocator,
+        \\# Principles
+        \\
+        \\- Keep durable repo knowledge here instead of trapped in chat history.
+        \\- Put always-on rules and workflow constraints in `AGENTS.md`.
+        \\- Keep notes short, linkable, and specific.
+        \\- Prefer one topic per decision or pitfall file.
+    ,
+        .{},
+    );
+    defer allocator.free(principles);
+
+    const architecture = try std.fmt.allocPrint(
+        allocator,
+        \\# Architecture overview
+        \\
+        \\- Project: {s}
+        \\- Product type: {s}
+        \\- Main product surfaces:
+        \\- Main services or apps:
+        \\- External integrations:
+        \\- Main data flow:
+        \\- Trust boundaries worth remembering:
+    ,
+        .{ project_name, product_type },
+    );
+    defer allocator.free(architecture);
+
+    const business_index = try std.fmt.allocPrint(
+        allocator,
+        \\# Business context
+        \\
+        \\- [Context](context.md)
+        \\- [Glossary](glossary.md)
+        \\- [Team](team.md)
+    ,
+        .{},
+    );
+    defer allocator.free(business_index);
+
+    const business_context = try std.fmt.allocPrint(
+        allocator,
+        \\# Context
+        \\
+        \\- Project: {s}
+        \\- Product type: {s}
+        \\- Product stage: {s}
+        \\- Primary users: {s}
+        \\- Constraints that affect prioritization:
+        \\- Important stakeholder or launch context:
+    ,
+        .{ project_name, product_type, product_stage, primary_users },
+    );
+    defer allocator.free(business_context);
+
+    const glossary = try std.fmt.allocPrint(
+        allocator,
+        \\# Glossary
+        \\
+        \\Add domain terms that could confuse an agent.
+        \\
+        \\## Starter format
+        \\
+        \\- `Canonical term`: short definition
+        \\- `Alias to avoid`: what people also say, if relevant
+        \\- `Related term`: how it differs
+    ,
+        .{},
+    );
+    defer allocator.free(glossary);
+
+    const team = try std.fmt.allocPrint(
+        allocator,
+        \\# Team
+        \\
+        \\- Owner or primary builder: {s}
+        \\- Other contributors:
+        \\- Technical / non-technical ownership notes:
+    ,
+        .{team_owner},
+    );
+    defer allocator.free(team);
+
+    try writeFileIfMissing(dir, "project-context/index.md", root_index);
+    try writeFileIfMissing(dir, "project-context/principles.md", principles);
+    try writeFileIfMissing(dir, "project-context/architecture/overview.md", architecture);
+    try writeFileIfMissing(dir, "project-context/business-context/index.md", business_index);
+    try writeFileIfMissing(dir, "project-context/business-context/context.md", business_context);
+    try writeFileIfMissing(dir, "project-context/business-context/glossary.md", glossary);
+    try writeFileIfMissing(dir, "project-context/business-context/team.md", team);
+
+    const stdout = getStdout();
+    try stdout.print("Scaffolded project-context/ in {s}\n", .{cwd});
+}
+
 fn backupAndWriteAgents(allocator: std.mem.Allocator, cwd: []const u8, make_backup: bool) !void {
     var dir = try std.fs.cwd().openDir(cwd, .{ .access_sub_paths = true });
     defer dir.close();
@@ -134,10 +325,6 @@ fn backupAndWriteAgents(allocator: std.mem.Allocator, cwd: []const u8, make_back
 fn skillInstalled(cwd: []const u8, skill_name: []const u8) bool {
     var dir = std.fs.cwd().openDir(cwd, .{ .access_sub_paths = true }) catch return false;
     defer dir.close();
-
-    const local_path = std.fmt.allocPrint(std.heap.smp_allocator, "skills/{s}", .{skill_name}) catch return false;
-    defer std.heap.smp_allocator.free(local_path);
-    if (dir.access(local_path, .{})) |_| return true else |_| {}
 
     const agent_path = std.fmt.allocPrint(std.heap.smp_allocator, ".agents/skills/{s}", .{skill_name}) catch return false;
     defer std.heap.smp_allocator.free(agent_path);
@@ -223,39 +410,27 @@ fn hasInstallArtifacts(cwd: []const u8) bool {
 }
 
 fn installAll(allocator: std.mem.Allocator, cwd: []const u8) !void {
-    const argv = [_][]const u8{
-        "npx",
-        "-y",
-        "skills@latest",
-        "add",
-        repo_source,
-        "--all",
-        "-y",
-    };
-    try runCommand(allocator, &argv, cwd);
+    try runSkillsWithPreparedSource(
+        allocator,
+        cwd,
+        "npx -y skills@latest add \"$source_dir\" --all -y",
+    );
 }
 
 fn installChoose(allocator: std.mem.Allocator, cwd: []const u8) !void {
-    const argv = [_][]const u8{
-        "npx",
-        "-y",
-        "skills@latest",
-        "add",
-        repo_source,
-    };
-    try runCommand(allocator, &argv, cwd);
+    try runSkillsWithPreparedSource(
+        allocator,
+        cwd,
+        "npx -y skills@latest add \"$source_dir\"",
+    );
 }
 
 fn listSkills(allocator: std.mem.Allocator) !void {
-    const argv = [_][]const u8{
-        "npx",
-        "-y",
-        "skills@latest",
-        "add",
-        repo_source,
-        "--list",
-    };
-    try runCommand(allocator, &argv, ".");
+    try runSkillsWithPreparedSource(
+        allocator,
+        ".",
+        "npx -y skills@latest add \"$source_dir\" --list",
+    );
 }
 
 fn installAction(args: Install.Args, opts: Install.Options) !void {
@@ -285,6 +460,7 @@ fn installAction(args: Install.Args, opts: Install.Options) !void {
 
     if (hasInstallArtifacts(cwd)) {
         try installSelectedDependencies(allocator, cwd);
+        try scaffoldProjectContextIfSelected(allocator, cwd);
     }
 
     if (!opts.skip_agents and hasInstallArtifacts(cwd)) {

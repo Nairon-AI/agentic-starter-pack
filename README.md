@@ -31,6 +31,7 @@ This command:
 
 - installs all 87 skills
 - auto-installs supported third-party CLIs for selected skills
+- rewrites the local `skills/` folder into the same category layout as this repo for easier browsing
 - backs up an existing `AGENTS.md`
 - writes our recommended starter `AGENTS.md`
 

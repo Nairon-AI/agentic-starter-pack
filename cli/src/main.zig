@@ -55,6 +55,10 @@ fn buildInstallSourceScriptPath(allocator: std.mem.Allocator) ![]u8 {
     return std.fs.cwd().realpathAlloc(allocator, "../scripts/build-install-source.sh");
 }
 
+fn repoRootPath(allocator: std.mem.Allocator) ![]u8 {
+    return std.fs.cwd().realpathAlloc(allocator, "..");
+}
+
 fn runSkillsWithPreparedSource(allocator: std.mem.Allocator, cwd: []const u8, command: []const u8) !void {
     const build_script = try buildInstallSourceScriptPath(allocator);
     defer allocator.free(build_script);
@@ -196,6 +200,31 @@ fn installSelectedDependencies(allocator: std.mem.Allocator, cwd: []const u8) !v
     );
 }
 
+fn materializeCategorizedSkillsDir(allocator: std.mem.Allocator, cwd: []const u8) !void {
+    const repo_root = try repoRootPath(allocator);
+    defer allocator.free(repo_root);
+
+    const target_abs = try std.fs.cwd().realpathAlloc(allocator, cwd);
+    defer allocator.free(target_abs);
+
+    const script = try std.fmt.allocPrint(
+        allocator,
+        \\set -e
+        \\rm -rf "{s}/skills"
+        \\mkdir -p "{s}/skills"
+        \\for category in context planning frontend engineering security writing marketing; do
+        \\  if [ -d "{s}/$category" ]; then
+        \\    cp -R "{s}/$category" "{s}/skills/$category"
+        \\  fi
+        \\done
+    ,
+        .{ target_abs, target_abs, repo_root, repo_root, target_abs },
+    );
+    defer allocator.free(script);
+
+    try runShellCommand(allocator, script, cwd);
+}
+
 fn hasInstallArtifacts(cwd: []const u8) bool {
     var dir = std.fs.cwd().openDir(cwd, .{ .access_sub_paths = true }) catch return false;
     defer dir.close();
@@ -239,6 +268,7 @@ fn installAction(args: Install.Args, opts: Install.Options) !void {
 
     if (hasInstallArtifacts(cwd)) {
         try installSelectedDependencies(allocator, cwd);
+        try materializeCategorizedSkillsDir(allocator, cwd);
     }
 
     if (!opts.skip_agents and hasInstallArtifacts(cwd)) {

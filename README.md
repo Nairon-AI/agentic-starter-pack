@@ -13,93 +13,87 @@ curl -fsSL https://raw.githubusercontent.com/Nairon-AI/agentic-starter-pack/main
 This single command will:
 
 - open the installer CLI
-- let you install all 52 skills or choose specific skills
+- let you install all 87 skills or choose specific skills
 - auto-install required third-party CLI tools for selected skills when supported
 - back up an existing `AGENTS.md`
 - write our recommended starter `AGENTS.md`
 
 It uses the `nairon-skills` installer CLI under the hood. On macOS, the launcher will install Zig via Homebrew if it is missing. The actual skill installation still uses `npx skills@latest add` so it stays compatible with the standard Agent Skills ecosystem.
 
-If someone wants to choose specific skills instead, they can run the CLI directly after cloning the repo.
+## Repo Layout
 
-## Project Context
+```text
+skills/   # install-compatible source of truth for every skill
+catalog/  # grouped browsing view of the same skills
+cli/      # zeke-based installer CLI
+scripts/  # bootstrap launcher and helper scripts
+```
 
-These are the context-building skills we use early so agents are not working from scratch:
+The `catalog/` folder is there for humans. The `skills/` folder is the installable source of truth that `npx skills add` reads.
 
-- **project-context** — scaffold the repo-local context vault, persist durable repo knowledge, and maintain the canonical business glossary
-- **improve-agents-md** — restructure long `AGENTS.md` files so coding agents follow them more reliably
+## Skill Catalog
 
-## Planning & Design
+### `catalog/context`
 
-- **design-interface** — explore multiple interface designs and compare tradeoffs
-- **design-and-refine** — generate multiple UI directions, compare them, and synthesize the winner
-- **frontend-design** — the core aesthetic and implementation baseline for distinctive frontend work
-- **ui-skills** — the orchestration layer that routes frontend tasks through the right specialist skills
-- **design-taste-frontend** — high-agency frontend generation constraints that counter common LLM UI clichés
-- **grill-me** — stress-test a plan or design by resolving each branch of the decision tree
-- **write-a-spec** — create a feature spec or refactor RFC and publish it as a GitHub issue or local Markdown file
-- **prd-to-plan** — turn a PRD into phased tracer-bullet implementation plan files
-- **prd-to-issues** — turn a PRD into independently grabbable issues or local issue drafts
-- **improve-codebase-architecture** — surface architectural friction and propose deeper module boundaries
+- `project-context`, `obsidian-vault`
 
-## Frontend Specialists
+### `catalog/planning`
 
-- **adapt** — adapt layouts and interactions for different devices and usage contexts
-- **animate** — add purposeful motion, micro-interactions, and feedback
-- **arrange** — improve composition, spacing, hierarchy, and rhythm
-- **audit** — run a technical UI audit across accessibility, performance, theming, and responsiveness
-- **baseline-ui** — enforce a strong anti-slop baseline for implementation choices
-- **bolder** — push a safe design toward more distinct visual impact
-- **clarify** — improve UX copy, labels, errors, and instructions
-- **colorize** — introduce more expressive color intentionally
-- **critique** — evaluate UI quality, hierarchy, cognitive load, and design effectiveness
-- **delight** — add personality, joy, and memorable interaction moments
-- **distill** — simplify cluttered or noisy interfaces
-- **extract** — turn repeated UI patterns into reusable components and tokens
-- **fixing-accessibility** — fix accessibility issues without rewriting the whole UI
-- **fixing-metadata** — ship correct titles, descriptions, canonicals, and share metadata
-- **fixing-motion-performance** — fix janky motion and rendering bottlenecks
-- **harden** — add resilience for edge cases, overflow, i18n, and failures
-- **normalize** — bring drifted UI back in line with the design system
-- **onboard** — improve first-run UX, onboarding, and empty states
-- **optimize** — make UI loading, rendering, and motion faster
-- **overdrive** — build technically ambitious, high-impact UI moments
-- **polish** — perform a final pass on spacing, states, consistency, and detail
-- **quieter** — tone down visually aggressive interfaces without making them bland
-- **teach-impeccable** — gather durable design context and save it to portable repo-local files
-- **typeset** — improve typography, readability, and hierarchy
+- `grill-me`, `prd-to-issues`, `prd-to-plan`, `scaffold-exercises`, `write-a-spec`
 
-## Development & Review
+### `catalog/frontend/core`
 
-- **tdd** — work in red-green-refactor vertical slices
-- **desloppify** — improve maintainability across dead code, duplication, complexity, naming, and architecture
-- **review-for-engineering-taste** — catch subtle design papercuts that create long-term slop
-- **issue-triage** — run conversational QA intake or deep-dive one issue into a root-cause and TDD fix plan
+- `frontend-design`, `ui-skills`, `design-interface`, `design-and-refine`, `design-taste-frontend`
+- `baseline-ui`, `fixing-accessibility`, `fixing-metadata`, `fixing-motion-performance`
 
-## Security
+### `catalog/frontend/specialists`
 
-- **threat-model** — generate a STRIDE-based threat model for a repo
-- **security-scan** — scan diffs and code changes for likely vulnerabilities
-- **security-review** — do a focused exploitability-driven security review
-- **vuln-validate** — separate real vulnerabilities from false positives
+- `adapt`, `animate`, `arrange`, `audit`, `bolder`, `clarify`, `colorize`, `critique`, `delight`, `distill`
+- `extract`, `harden`, `normalize`, `onboard`, `optimize`, `overdrive`, `polish`, `quieter`, `teach-impeccable`, `typeset`
 
-## Tooling & Workflow
+### `catalog/engineering`
 
-- **browser-qa** — browser automation and browser QA with `agent-browser`, including install guidance
-- **git-guardrails** — install local guardrails that block dangerous git commands
-- **setup-pre-commit** — add Husky, lint-staged, Prettier, typecheck, and test hooks
-- **github-triage** — run structured GitHub triage with state labels and agent briefs
-- **obsidian-vault** — search, create, and organize Obsidian notes without hard-coded local paths
-- **scaffold-exercises** — scaffold exercise repositories and validate them against the current repo’s own checks
+- `browser-qa`, `desloppify`, `git-guardrails`, `github-triage`, `improve-agents-md`
+- `improve-codebase-architecture`, `issue-triage`, `review-for-engineering-taste`, `setup-pre-commit`, `tdd`, `write-a-skill`
 
-## Writing & Knowledge
+### `catalog/security`
 
-- **edit-article** — restructure and tighten article drafts
-- **write-a-skill** — create new skills with good routing, progressive disclosure, and useful resources
+- `security-review`, `security-scan`, `threat-model`, `vuln-validate`
+
+### `catalog/writing`
+
+- `edit-article`, `humanizer`
+
+### `catalog/marketing/foundation`
+
+- `product-marketing-context`, `customer-research`, `content-strategy`
+- `marketing-ideas`, `marketing-psychology`, `pricing-strategy`
+
+### `catalog/marketing/cro`
+
+- `ab-test-setup`, `page-cro`, `signup-flow-cro`, `onboarding-cro`
+- `form-cro`, `popup-cro`, `paywall-upgrade-cro`, `lead-magnets`
+
+### `catalog/marketing/content`
+
+- `copywriting`, `copy-editing`, `cold-email`, `email-sequence`, `social-content`
+
+### `catalog/marketing/seo`
+
+- `ai-seo`, `seo-audit`, `programmatic-seo`, `schema-markup`, `site-architecture`, `competitor-alternatives`
+
+### `catalog/marketing/distribution`
+
+- `paid-ads`, `ad-creative`, `launch-strategy`, `community-marketing`
+
+### `catalog/marketing/revenue`
+
+- `churn-prevention`, `free-tool-strategy`, `referral-program`, `revops`, `sales-enablement`
 
 ## Notes
 
 - Every skill in this repo is intended to be installable in arbitrary repos, not just ours.
 - Where a workflow used to assume repo-specific hooks, hidden local tooling, or hard-coded local paths, it has been rewritten to use portable repo-local files or clear prerequisites instead.
 - The starter `AGENTS.md` in this repo is the baseline we recommend when a new project does not already have strong agent instructions.
+- `analytics-tracking` stays excluded from this repo by design.
 - The launcher command is the only command most users need.

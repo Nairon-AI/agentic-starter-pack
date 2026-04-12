@@ -14,6 +14,7 @@ This single command will:
 
 - open the installer CLI
 - let you install all 53 skills or choose specific skills
+- auto-install required third-party CLI tools for selected skills when supported
 - back up an existing `AGENTS.md`
 - write our recommended starter `AGENTS.md`
 

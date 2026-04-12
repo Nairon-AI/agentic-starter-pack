@@ -47,6 +47,35 @@ fn runCommand(allocator: std.mem.Allocator, argv: []const []const u8, cwd: []con
     }
 }
 
+fn runShellCommand(allocator: std.mem.Allocator, script: []const u8, cwd: []const u8) !void {
+    const argv = [_][]const u8{
+        "/bin/sh",
+        "-lc",
+        script,
+    };
+    try runCommand(allocator, &argv, cwd);
+}
+
+fn shellCommandSucceeds(allocator: std.mem.Allocator, script: []const u8, cwd: []const u8) bool {
+    const argv = [_][]const u8{
+        "/bin/sh",
+        "-lc",
+        script,
+    };
+
+    var child = std.process.Child.init(&argv, allocator);
+    child.cwd = cwd;
+    child.stdin_behavior = .Ignore;
+    child.stdout_behavior = .Ignore;
+    child.stderr_behavior = .Ignore;
+
+    const term = child.spawnAndWait() catch return false;
+    return switch (term) {
+        .Exited => |code| code == 0,
+        else => false,
+    };
+}
+
 fn promptMode() !InstallMode {
     const stdout = getStdout();
     try stdout.print(
@@ -100,6 +129,80 @@ fn backupAndWriteAgents(allocator: std.mem.Allocator, cwd: []const u8, make_back
         .sub_path = "AGENTS.md",
         .data = starter,
     });
+}
+
+fn skillInstalled(cwd: []const u8, skill_name: []const u8) bool {
+    var dir = std.fs.cwd().openDir(cwd, .{ .access_sub_paths = true }) catch return false;
+    defer dir.close();
+
+    const local_path = std.fmt.allocPrint(std.heap.smp_allocator, "skills/{s}", .{skill_name}) catch return false;
+    defer std.heap.smp_allocator.free(local_path);
+    if (dir.access(local_path, .{})) |_| return true else |_| {}
+
+    const agent_path = std.fmt.allocPrint(std.heap.smp_allocator, ".agents/skills/{s}", .{skill_name}) catch return false;
+    defer std.heap.smp_allocator.free(agent_path);
+    if (dir.access(agent_path, .{})) |_| return true else |_| {}
+
+    return false;
+}
+
+fn installDependencyIfSelected(
+    allocator: std.mem.Allocator,
+    cwd: []const u8,
+    skill_name: []const u8,
+    tool_name: []const u8,
+    check_script: []const u8,
+    install_script: []const u8,
+    manual_hint: []const u8,
+) !void {
+    if (!skillInstalled(cwd, skill_name)) return;
+    if (shellCommandSucceeds(allocator, check_script, cwd)) return;
+
+    const stdout = getStdout();
+    try stdout.print("Installing {s} for skill {s}...\n", .{ tool_name, skill_name });
+
+    runShellCommand(allocator, install_script, cwd) catch {
+        const stderr = getStderr();
+        try stderr.print(
+            "Could not auto-install {s} for skill {s}. Manual install: {s}\n",
+            .{ tool_name, skill_name, manual_hint },
+        );
+        return;
+    };
+
+    try stdout.print("Installed {s} for skill {s}.\n", .{ tool_name, skill_name });
+}
+
+fn installSelectedDependencies(allocator: std.mem.Allocator, cwd: []const u8) !void {
+    try installDependencyIfSelected(
+        allocator,
+        cwd,
+        "browser-qa",
+        "agent-browser",
+        "command -v agent-browser >/dev/null 2>&1",
+        "npm install -g agent-browser && agent-browser install",
+        "npm install -g agent-browser && agent-browser install",
+    );
+
+    try installDependencyIfSelected(
+        allocator,
+        cwd,
+        "desloppify",
+        "desloppify",
+        "command -v desloppify >/dev/null 2>&1",
+        "if command -v pipx >/dev/null 2>&1; then pipx install 'desloppify[full]' || pipx upgrade 'desloppify[full]'; elif command -v python3 >/dev/null 2>&1; then python3 -m pip install --user --upgrade 'desloppify[full]'; else exit 1; fi",
+        "pipx install 'desloppify[full]' or python3 -m pip install --user --upgrade 'desloppify[full]'",
+    );
+
+    try installDependencyIfSelected(
+        allocator,
+        cwd,
+        "github-triage",
+        "gh",
+        "command -v gh >/dev/null 2>&1",
+        "if command -v brew >/dev/null 2>&1; then brew install gh; elif command -v apt-get >/dev/null 2>&1; then sudo apt-get update && sudo apt-get install -y gh; elif command -v dnf >/dev/null 2>&1; then sudo dnf install -y gh; elif command -v pacman >/dev/null 2>&1; then sudo pacman -Sy --noconfirm github-cli; elif command -v winget >/dev/null 2>&1; then winget install --id GitHub.cli -e; else exit 1; fi",
+        "install GitHub CLI from https://cli.github.com/ or your OS package manager",
+    );
 }
 
 fn hasInstallArtifacts(cwd: []const u8) bool {
@@ -184,6 +287,10 @@ fn installAction(args: Install.Args, opts: Install.Options) !void {
     switch (mode) {
         .all => try installAll(allocator, cwd),
         .choose => try installChoose(allocator, cwd),
+    }
+
+    if (hasInstallArtifacts(cwd)) {
+        try installSelectedDependencies(allocator, cwd);
     }
 
     if (!opts.skip_agents and hasInstallArtifacts(cwd)) {

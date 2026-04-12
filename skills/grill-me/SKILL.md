@@ -7,9 +7,20 @@ Interview me relentlessly about every aspect of this plan until we reach a share
 
 Ask the questions one at a time.
 
+Before asking any real question, scan the repository to confirm current behavior and implementation shape.
+
+That scan should:
+- identify the files, modules, routes, components, schemas, or tests most relevant to the topic
+- confirm what the system appears to do today rather than relying on assumptions
+- note gaps where the behavior is unclear or not covered by tests
+
+Do not start grilling from pure speculation if the repo can answer part of the question first.
+
 Before the first real question, estimate:
 - total questions currently expected
 - estimated time to finish the grilling
+
+Also briefly summarize what you found in the codebase that is most relevant to the grilling.
 
 When you start asking questions, every question must include progress in this format:
 
@@ -27,4 +38,23 @@ Along with each question, strongly prefer including a small diagram that helps t
 
 Keep diagrams tight and decision-oriented. They should clarify the choice, not decorate the answer.
 
-If a question can be answered by exploring the codebase, explore the codebase instead.
+For every question that relates to existing code, include a short code-context block that names the relevant file and shows a short snippet. Keep snippets short and only include the minimum needed to orient the developer.
+
+Use a structure like:
+
+```text
+Question: 4 / 17
+Estimated time left: ~5 minutes
+
+Code context: src/billing/checkout.ts
+Snippet:
+  if (plan === "pro") {
+    return createStripeCheckoutSession(...)
+  }
+```
+
+If the question is tied to multiple implementation points, mention the primary file first and optionally list 1-2 secondary files or tests.
+
+Each question should make it obvious which part of the codebase it is about. Name the file, the behavior, and the design tension being resolved.
+
+If a question can be answered by exploring the codebase, explore the codebase instead. Only ask the user what the repo cannot reliably tell you.

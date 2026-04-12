@@ -31,7 +31,6 @@ This command:
 
 - installs all 87 skills
 - auto-installs supported third-party CLIs for selected skills
-- writes `project-context/BOOTSTRAP_PROMPT.md` when `project-context` is installed so your coding agent can scan the repo and build the context vault properly
 - backs up an existing `AGENTS.md`
 - writes our recommended starter `AGENTS.md`
 

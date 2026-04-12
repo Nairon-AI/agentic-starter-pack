@@ -92,75 +92,6 @@ fn shellCommandSucceeds(allocator: std.mem.Allocator, script: []const u8, cwd: [
     };
 }
 
-fn writeFile(dir: std.fs.Dir, sub_path: []const u8, data: []const u8) !void {
-    try dir.writeFile(.{
-        .sub_path = sub_path,
-        .data = data,
-    });
-}
-
-fn writeProjectContextBootstrapPromptIfSelected(allocator: std.mem.Allocator, cwd: []const u8) !void {
-    if (!skillInstalled(cwd, "project-context")) return;
-
-    var dir = try std.fs.cwd().openDir(cwd, .{ .access_sub_paths = true });
-    defer dir.close();
-
-    const real_cwd = try std.fs.cwd().realpathAlloc(allocator, cwd);
-    defer allocator.free(real_cwd);
-    const repo_name = std.fs.path.basename(real_cwd);
-    try dir.makePath("project-context");
-
-    const prompt = try std.fmt.allocPrint(
-        allocator,
-        \\# Project-context bootstrap prompt
-        \\
-        \\Paste this into your coding agent after install:
-        \\
-        \\```text
-        \\Use the installed `project-context` skill and bootstrap the repo-local context vault for this repository.
-        \\
-        \\Repository: {s}
-        \\Absolute path: {s}
-        \\
-        \\Your job:
-        \\1. Scan the repo first before asking questions.
-        \\2. Read the highest-signal files first: `README*`, `AGENTS.md`, package manifests, lockfiles, top-level app folders, `docs/`, CI config, deployment config, database/schema files, API routes, and major UI entrypoints.
-        \\3. Infer as much as possible from the codebase before asking anything.
-        \\4. Then build or refresh:
-        \\   - `project-context/index.md`
-        \\   - `project-context/principles.md`
-        \\   - `project-context/architecture/overview.md`
-        \\   - `project-context/business-context/index.md`
-        \\   - `project-context/business-context/context.md`
-        \\   - `project-context/business-context/glossary.md`
-        \\   - `project-context/business-context/team.md`
-        \\   - topic files under `project-context/decisions/` and `project-context/pitfalls/` when the repo clearly warrants them
-        \\5. Do not fill the folder with vague placeholders. If the repo already answers something, write the answer.
-        \\6. Only ask targeted follow-up questions for gaps the repo cannot answer, like user segments, internal ownership, or business terminology not present in code/docs.
-        \\7. Keep the result concise, durable, and linkable.
-        \\
-        \\Rules:
-        \\- `AGENTS.md` is for always-on instructions and workflow rules.
-        \\- `project-context/` is for durable repo memory, business context, architecture, decisions, and pitfalls.
-        \\- Prefer bullets over essays.
-        \\- One topic per decision/pitfall file.
-        \\- If a glossary exists already, merge instead of overwrite.
-        \\```
-    ,
-        .{ repo_name, real_cwd },
-    );
-    defer allocator.free(prompt);
-
-    try writeFile(dir, "project-context/BOOTSTRAP_PROMPT.md", prompt);
-
-    const stdout = getStdout();
-    try stdout.print(
-        \\Created project-context bootstrap prompt in {s}/project-context/BOOTSTRAP_PROMPT.md
-        \\Next step: paste that prompt into your coding agent so it scans the repo and builds the context vault properly.
-        \\
-    , .{cwd});
-}
-
 fn backupAndWriteAgents(allocator: std.mem.Allocator, cwd: []const u8, make_backup: bool) !void {
     var dir = try std.fs.cwd().openDir(cwd, .{ .access_sub_paths = true });
     defer dir.close();
@@ -308,7 +239,6 @@ fn installAction(args: Install.Args, opts: Install.Options) !void {
 
     if (hasInstallArtifacts(cwd)) {
         try installSelectedDependencies(allocator, cwd);
-        try writeProjectContextBootstrapPromptIfSelected(allocator, cwd);
     }
 
     if (!opts.skip_agents and hasInstallArtifacts(cwd)) {

@@ -7,7 +7,7 @@ This is our default agentic starter pack when we begin a new project.
 Run this from the root of any repo:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Nairon-AI/skills/main/scripts/bootstrap.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Nairon-AI/agentic-starter-pack/main/scripts/bootstrap.sh | bash
 ```
 
 This single command will:

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-REPO_SLUG="${NAIRON_SKILLS_REPO:-Nairon-AI/skills}"
+REPO_SLUG="${NAIRON_SKILLS_REPO:-Nairon-AI/agentic-starter-pack}"
 REPO_REF="${NAIRON_SKILLS_REF:-main}"
 TARBALL_URL="${NAIRON_SKILLS_TARBALL_URL:-https://codeload.github.com/${REPO_SLUG}/tar.gz/refs/heads/${REPO_REF}}"
 

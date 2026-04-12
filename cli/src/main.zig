@@ -1,7 +1,7 @@
 const std = @import("std");
 const zeke = @import("zeke");
 
-const repo_source = "Nairon-AI/skills";
+const repo_source = "Nairon-AI/agentic-starter-pack";
 const InstallMode = enum { all, choose };
 
 const Install = zeke.cmd("install [target]", "Install all skills or launch the interactive skill picker, then write the recommended starter AGENTS.md.")

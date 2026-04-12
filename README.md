@@ -29,37 +29,13 @@ curl -fsSL https://raw.githubusercontent.com/Nairon-AI/agentic-starter-pack/main
 
 This command:
 
-- opens the installer CLI
-- lets you install all 87 skills or choose specific skills
+- installs all 87 skills
 - auto-installs supported third-party CLIs for selected skills
-- auto-scaffolds `project-context/` when `project-context` is installed
+- writes `project-context/BOOTSTRAP_PROMPT.md` when `project-context` is installed so your coding agent can scan the repo and build the context vault properly
 - backs up an existing `AGENTS.md`
 - writes our recommended starter `AGENTS.md`
 
 On macOS, the launcher installs Zig via Homebrew if needed. The installer builds a temporary flat source from the category folders, then runs `npx skills@latest add` against that generated source.
-
----
-
-## How the CLI works
-
-The bootstrap flow is:
-
-1. Download the repo tarball for `Nairon-AI/agentic-starter-pack`
-2. Launch the Zig installer CLI from the bundled `cli/`
-3. Prompt:
-   - `1` installs all skills plus the starter `AGENTS.md`
-   - `2` opens the interactive `npx skills` picker for specific skills
-4. Build a temporary install source from the category folders
-5. Run `npx skills add` against that generated source
-6. After install, auto-install supported tool dependencies for selected skills:
-   - `browser-qa` -> `agent-browser`
-   - `desloppify` -> `desloppify`
-   - `github-triage` -> `gh`
-7. If `project-context` was installed, scaffold `project-context/` immediately and seed the core files
-8. If skills were actually installed, write the starter `AGENTS.md`
-9. If the picker is cancelled before install, do not write `AGENTS.md`
-
-When the launcher is run without a TTY, it falls back to `install all`.
 
 ---
 
@@ -139,16 +115,6 @@ The category folders are the real source of truth. The CLI builds a temporary fl
 ### `marketing/revenue`
 
 - `churn-prevention`, `free-tool-strategy`, `referral-program`, `revops`, `sales-enablement`
-
----
-
-## Notes
-
-- Every skill in this repo is intended to be installable in arbitrary repos, not just ours.
-- Repo-specific hooks, hidden local tooling, and hard-coded local paths have been removed or rewritten.
-- The starter `AGENTS.md` is the baseline we recommend when a project does not already have strong agent instructions.
-- Installing `project-context` does more than install the skill: it also scaffolds the repo-local `project-context/` folder with starter files. In an interactive terminal, the installer asks a few short questions to seed it; otherwise it uses sane defaults.
-- `analytics-tracking` stays excluded from this repo by design.
 
 ---
 

@@ -1,15 +1,11 @@
 const std = @import("std");
 const zeke = @import("zeke");
 
-const InstallMode = enum { all, choose };
-
-const Install = zeke.cmd("install [target]", "Install all skills or launch the interactive skill picker, then write the recommended starter AGENTS.md.")
-    .option("--all", "Install every skill without prompting")
-    .option("--choose", "Open the interactive skill picker")
+const Install = zeke.cmd("install [target]", "Install all skills, install supported tool dependencies, and write the recommended starter AGENTS.md.")
     .option("--skip-agents", "Do not write the starter AGENTS.md")
     .option("--no-backup", "Overwrite AGENTS.md without creating a backup")
-    .example("nairon-skills install . --all")
-    .example("nairon-skills install ~/code/my-repo --choose");
+    .example("nairon-skills install .")
+    .example("nairon-skills install ~/code/my-repo");
 
 const List = zeke.cmd("list", "List the available skills in this repo");
 
@@ -26,10 +22,6 @@ fn getStderr() std.fs.File.DeprecatedWriter {
 
 fn targetDir(target: ?[]const u8) []const u8 {
     return target orelse ".";
-}
-
-fn stdinIsInteractive() bool {
-    return std.posix.isatty(std.posix.STDIN_FILENO);
 }
 
 fn runCommand(allocator: std.mem.Allocator, argv: []const []const u8, cwd: []const u8) !void {
@@ -100,192 +92,73 @@ fn shellCommandSucceeds(allocator: std.mem.Allocator, script: []const u8, cwd: [
     };
 }
 
-fn promptMode() !InstallMode {
-    const stdout = getStdout();
-    try stdout.print(
-        \\Nairon Skills
-        \\
-        \\1. Install all skills + starter AGENTS.md (recommended)
-        \\2. Choose specific skills interactively + starter AGENTS.md
-        \\
-        \\Select [1/2]:
-    , .{});
-
-    var buf: [64]u8 = undefined;
-    const bytes_read = try std.fs.File.stdin().read(&buf);
-    const line = std.mem.trim(u8, buf[0..bytes_read], " \r\n\t");
-
-    if (line.len == 0 or std.mem.eql(u8, line, "1") or std.ascii.eqlIgnoreCase(line, "all")) {
-        return .all;
-    }
-    return .choose;
+fn writeFile(dir: std.fs.Dir, sub_path: []const u8, data: []const u8) !void {
+    try dir.writeFile(.{
+        .sub_path = sub_path,
+        .data = data,
+    });
 }
 
-fn promptWithDefault(allocator: std.mem.Allocator, label: []const u8, default_value: []const u8) ![]u8 {
-    if (!stdinIsInteractive()) return allocator.dupe(u8, default_value);
-
-    const stdout = getStdout();
-    try stdout.print("{s} [{s}]: ", .{ label, default_value });
-
-    var buf: [1024]u8 = undefined;
-    const bytes_read = try std.fs.File.stdin().read(&buf);
-    const line = std.mem.trim(u8, buf[0..bytes_read], " \r\n\t");
-
-    if (line.len == 0) return allocator.dupe(u8, default_value);
-    return allocator.dupe(u8, line);
-}
-
-fn writeFileIfMissing(dir: std.fs.Dir, sub_path: []const u8, data: []const u8) !void {
-    dir.access(sub_path, .{}) catch |err| switch (err) {
-        error.FileNotFound => {
-            try dir.writeFile(.{
-                .sub_path = sub_path,
-                .data = data,
-            });
-            return;
-        },
-        else => return err,
-    };
-}
-
-fn scaffoldProjectContextIfSelected(allocator: std.mem.Allocator, cwd: []const u8) !void {
+fn writeProjectContextBootstrapPromptIfSelected(allocator: std.mem.Allocator, cwd: []const u8) !void {
     if (!skillInstalled(cwd, "project-context")) return;
 
     var dir = try std.fs.cwd().openDir(cwd, .{ .access_sub_paths = true });
     defer dir.close();
 
-    try dir.makePath("project-context/architecture");
-    try dir.makePath("project-context/business-context");
-    try dir.makePath("project-context/decisions");
-    try dir.makePath("project-context/pitfalls");
-
     const real_cwd = try std.fs.cwd().realpathAlloc(allocator, cwd);
     defer allocator.free(real_cwd);
     const repo_name = std.fs.path.basename(real_cwd);
+    try dir.makePath("project-context");
 
-    const project_name = try promptWithDefault(allocator, "Project name", repo_name);
-    defer allocator.free(project_name);
-    const product_type = try promptWithDefault(allocator, "Product type", "software product");
-    defer allocator.free(product_type);
-    const product_stage = try promptWithDefault(allocator, "Product stage", "early");
-    defer allocator.free(product_stage);
-    const primary_users = try promptWithDefault(allocator, "Primary users", "TBD");
-    defer allocator.free(primary_users);
-    const team_owner = try promptWithDefault(allocator, "Team owner or main builder", "TBD");
-    defer allocator.free(team_owner);
-
-    const root_index = try std.fmt.allocPrint(
+    const prompt = try std.fmt.allocPrint(
         allocator,
-        \\# Project context
+        \\# Project-context bootstrap prompt
         \\
-        \\Use this folder as the durable repo-local memory layer for coding agents.
+        \\Paste this into your coding agent after install:
         \\
-        \\## Sections
+        \\```text
+        \\Use the installed `project-context` skill and bootstrap the repo-local context vault for this repository.
         \\
-        \\- [Principles](principles.md)
-        \\- [Architecture overview](architecture/overview.md)
-        \\- [Business context](business-context/index.md)
-        \\- `decisions/`
-        \\- `pitfalls/`
+        \\Repository: {s}
+        \\Absolute path: {s}
+        \\
+        \\Your job:
+        \\1. Scan the repo first before asking questions.
+        \\2. Read the highest-signal files first: `README*`, `AGENTS.md`, package manifests, lockfiles, top-level app folders, `docs/`, CI config, deployment config, database/schema files, API routes, and major UI entrypoints.
+        \\3. Infer as much as possible from the codebase before asking anything.
+        \\4. Then build or refresh:
+        \\   - `project-context/index.md`
+        \\   - `project-context/principles.md`
+        \\   - `project-context/architecture/overview.md`
+        \\   - `project-context/business-context/index.md`
+        \\   - `project-context/business-context/context.md`
+        \\   - `project-context/business-context/glossary.md`
+        \\   - `project-context/business-context/team.md`
+        \\   - topic files under `project-context/decisions/` and `project-context/pitfalls/` when the repo clearly warrants them
+        \\5. Do not fill the folder with vague placeholders. If the repo already answers something, write the answer.
+        \\6. Only ask targeted follow-up questions for gaps the repo cannot answer, like user segments, internal ownership, or business terminology not present in code/docs.
+        \\7. Keep the result concise, durable, and linkable.
+        \\
+        \\Rules:
+        \\- `AGENTS.md` is for always-on instructions and workflow rules.
+        \\- `project-context/` is for durable repo memory, business context, architecture, decisions, and pitfalls.
+        \\- Prefer bullets over essays.
+        \\- One topic per decision/pitfall file.
+        \\- If a glossary exists already, merge instead of overwrite.
+        \\```
     ,
-        .{},
+        .{ repo_name, real_cwd },
     );
-    defer allocator.free(root_index);
+    defer allocator.free(prompt);
 
-    const principles = try std.fmt.allocPrint(
-        allocator,
-        \\# Principles
-        \\
-        \\- Keep durable repo knowledge here instead of trapped in chat history.
-        \\- Put always-on rules and workflow constraints in `AGENTS.md`.
-        \\- Keep notes short, linkable, and specific.
-        \\- Prefer one topic per decision or pitfall file.
-    ,
-        .{},
-    );
-    defer allocator.free(principles);
-
-    const architecture = try std.fmt.allocPrint(
-        allocator,
-        \\# Architecture overview
-        \\
-        \\- Project: {s}
-        \\- Product type: {s}
-        \\- Main product surfaces:
-        \\- Main services or apps:
-        \\- External integrations:
-        \\- Main data flow:
-        \\- Trust boundaries worth remembering:
-    ,
-        .{ project_name, product_type },
-    );
-    defer allocator.free(architecture);
-
-    const business_index = try std.fmt.allocPrint(
-        allocator,
-        \\# Business context
-        \\
-        \\- [Context](context.md)
-        \\- [Glossary](glossary.md)
-        \\- [Team](team.md)
-    ,
-        .{},
-    );
-    defer allocator.free(business_index);
-
-    const business_context = try std.fmt.allocPrint(
-        allocator,
-        \\# Context
-        \\
-        \\- Project: {s}
-        \\- Product type: {s}
-        \\- Product stage: {s}
-        \\- Primary users: {s}
-        \\- Constraints that affect prioritization:
-        \\- Important stakeholder or launch context:
-    ,
-        .{ project_name, product_type, product_stage, primary_users },
-    );
-    defer allocator.free(business_context);
-
-    const glossary = try std.fmt.allocPrint(
-        allocator,
-        \\# Glossary
-        \\
-        \\Add domain terms that could confuse an agent.
-        \\
-        \\## Starter format
-        \\
-        \\- `Canonical term`: short definition
-        \\- `Alias to avoid`: what people also say, if relevant
-        \\- `Related term`: how it differs
-    ,
-        .{},
-    );
-    defer allocator.free(glossary);
-
-    const team = try std.fmt.allocPrint(
-        allocator,
-        \\# Team
-        \\
-        \\- Owner or primary builder: {s}
-        \\- Other contributors:
-        \\- Technical / non-technical ownership notes:
-    ,
-        .{team_owner},
-    );
-    defer allocator.free(team);
-
-    try writeFileIfMissing(dir, "project-context/index.md", root_index);
-    try writeFileIfMissing(dir, "project-context/principles.md", principles);
-    try writeFileIfMissing(dir, "project-context/architecture/overview.md", architecture);
-    try writeFileIfMissing(dir, "project-context/business-context/index.md", business_index);
-    try writeFileIfMissing(dir, "project-context/business-context/context.md", business_context);
-    try writeFileIfMissing(dir, "project-context/business-context/glossary.md", glossary);
-    try writeFileIfMissing(dir, "project-context/business-context/team.md", team);
+    try writeFile(dir, "project-context/BOOTSTRAP_PROMPT.md", prompt);
 
     const stdout = getStdout();
-    try stdout.print("Scaffolded project-context/ in {s}\n", .{cwd});
+    try stdout.print(
+        \\Created project-context bootstrap prompt in {s}/project-context/BOOTSTRAP_PROMPT.md
+        \\Next step: paste that prompt into your coding agent so it scans the repo and builds the context vault properly.
+        \\
+    , .{cwd});
 }
 
 fn backupAndWriteAgents(allocator: std.mem.Allocator, cwd: []const u8, make_backup: bool) !void {
@@ -417,14 +290,6 @@ fn installAll(allocator: std.mem.Allocator, cwd: []const u8) !void {
     );
 }
 
-fn installChoose(allocator: std.mem.Allocator, cwd: []const u8) !void {
-    try runSkillsWithPreparedSource(
-        allocator,
-        cwd,
-        "npx -y skills@latest add \"$source_dir\"",
-    );
-}
-
 fn listSkills(allocator: std.mem.Allocator) !void {
     try runSkillsWithPreparedSource(
         allocator,
@@ -434,33 +299,16 @@ fn listSkills(allocator: std.mem.Allocator) !void {
 }
 
 fn installAction(args: Install.Args, opts: Install.Options) !void {
-    if (opts.all and opts.choose) {
-        const stderr = getStderr();
-        try stderr.print("Choose either --all or --choose, not both.\n", .{});
-        return error.InvalidArguments;
-    }
-
     const allocator = std.heap.smp_allocator;
     const cwd = targetDir(args.target);
     const make_backup = !opts.no_backup;
 
     try std.fs.cwd().makePath(cwd);
-
-    const mode: InstallMode = if (opts.all)
-        .all
-    else if (opts.choose)
-        .choose
-    else
-        try promptMode();
-
-    switch (mode) {
-        .all => try installAll(allocator, cwd),
-        .choose => try installChoose(allocator, cwd),
-    }
+    try installAll(allocator, cwd);
 
     if (hasInstallArtifacts(cwd)) {
         try installSelectedDependencies(allocator, cwd);
-        try scaffoldProjectContextIfSelected(allocator, cwd);
+        try writeProjectContextBootstrapPromptIfSelected(allocator, cwd);
     }
 
     if (!opts.skip_agents and hasInstallArtifacts(cwd)) {

@@ -64,30 +64,11 @@ fi
 cd "${repo_dir}/cli"
 
 if [[ $# -eq 0 ]]; then
-  if can_use_tty; then
-    cat >/dev/tty <<'EOF'
-Nairon Skills
-
-1. Install all skills + starter AGENTS.md (recommended)
-2. Choose specific skills interactively + starter AGENTS.md
-
-EOF
-    read -r -p "Select [1/2]: " choice </dev/tty
-    case "${choice:-1}" in
-      2)
-        set -- install "${launch_dir}" --choose
-        ;;
-      *)
-        set -- install "${launch_dir}" --all
-        ;;
-    esac
-  else
-    set -- install "${launch_dir}" --all
-  fi
+  set -- install "${launch_dir}"
 fi
 
-  if can_use_tty; then
-    zig build run -- "$@" </dev/tty
+if can_use_tty; then
+  zig build run -- "$@" </dev/tty
 else
   zig build run -- "$@"
 fi

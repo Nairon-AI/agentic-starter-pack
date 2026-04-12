@@ -42,12 +42,27 @@ Work out whether the user is asking for one of these:
 - **Remember**: persist a rule or fact for future work
 - **Glossary**: define domain terms or standardize ubiquitous language
 
-### 2. Detect what already exists
+### 2. Scan the repo before asking questions
+
+Before asking the user anything, scan the repo for the highest-signal sources of truth:
+
+- `README*`
+- `AGENTS.md`
+- package manifests and lockfiles
+- top-level app/service folders
+- `docs/`
+- CI and deployment config
+- schema, migrations, and API route files
+- major UI entrypoints and core domain models
+
+Infer as much as possible from code and docs first. Only ask follow-up questions for business or ownership gaps the repo genuinely cannot answer.
+
+### 3. Detect what already exists
 
 - Read any existing files in `project-context/` first.
 - Merge and extend them. Do not overwrite useful content with empty templates.
 
-### 3. Route the knowledge
+### 4. Route the knowledge
 
 #### Put it in `AGENTS.md` when it is:
 
@@ -68,9 +83,9 @@ Work out whether the user is asking for one of these:
 
 If the user said "remember" or "don't forget", strip the trigger phrase and keep only the durable content before storing it.
 
-### 4. Capture the starter business context
+### 5. Capture the starter business context
 
-Ask only the minimum needed to seed the files:
+After the repo scan, ask only the minimum still needed to seed the files:
 
 - product type
 - product stage
@@ -79,7 +94,7 @@ Ask only the minimum needed to seed the files:
 - team members and roles
 - domain terms likely to confuse an agent
 
-### 5. Write the core files
+### 6. Write the core files
 
 Seed these files with concise, durable content:
 
@@ -91,7 +106,7 @@ Seed these files with concise, durable content:
 
 Keep them lean. Bullet points beat essays.
 
-### 6. Build or update the glossary
+### 7. Build or update the glossary
 
 When the request is about domain language:
 
@@ -109,12 +124,12 @@ Write or update:
 
 If a standalone glossary is explicitly requested and `project-context/` is out of scope, use `UBIQUITOUS_LANGUAGE.md` instead.
 
-### 7. Create the indexes
+### 8. Create the indexes
 
 - `project-context/index.md` should link to the main sections.
 - `project-context/business-context/index.md` should link to business context, glossary, and team files.
 
-### 8. Use topic files for decisions and pitfalls
+### 9. Use topic files for decisions and pitfalls
 
 Do not create mega-docs for everything. When you discover a specific decision or pitfall, create one file per topic under:
 
@@ -168,6 +183,7 @@ Record high-level engineering or product principles that matter across many task
 
 ## Gotchas
 
+- Do not treat this as a template-fill exercise. Start from the repo, not from placeholders.
 - `AGENTS.md` is for always-on rules. `project-context/` is for context, rationale, and shared memory.
 - Keep one topic per file in `decisions/` and `pitfalls/`.
 - A context vault nobody can scan is almost as bad as no vault at all. Favor short, linkable notes.

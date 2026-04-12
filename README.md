@@ -13,7 +13,7 @@ curl -fsSL https://raw.githubusercontent.com/Nairon-AI/agentic-starter-pack/main
 This single command will:
 
 - open the installer CLI
-- let you install all 53 skills or choose specific skills
+- let you install all 52 skills or choose specific skills
 - auto-install required third-party CLI tools for selected skills when supported
 - back up an existing `AGENTS.md`
 - write our recommended starter `AGENTS.md`
@@ -89,7 +89,6 @@ These are the context-building skills we use early so agents are not working fro
 - **git-guardrails** — install local guardrails that block dangerous git commands
 - **setup-pre-commit** — add Husky, lint-staged, Prettier, typecheck, and test hooks
 - **github-triage** — run structured GitHub triage with state labels and agent briefs
-- **analytics-tracking** — define, implement, and validate analytics events and conversion measurement
 - **obsidian-vault** — search, create, and organize Obsidian notes without hard-coded local paths
 - **scaffold-exercises** — scaffold exercise repositories and validate them against the current repo’s own checks
 

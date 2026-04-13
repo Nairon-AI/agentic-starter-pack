@@ -80,7 +80,7 @@ The category folders are the real source of truth. The CLI builds a temporary fl
 ### `engineering/`
 
 - `browser-qa`, `desloppify`, `git-guardrails`, `github-triage`, `improve-agents-md`
-- `improve-codebase-architecture`, `issue-triage`, `review-for-engineering-taste`, `setup-pre-commit`, `tdd`, `write-a-skill`
+- `improve-codebase-architecture`, `issue-triage`, `rca`, `review-for-engineering-taste`, `setup-pre-commit`, `tdd`, `write-a-skill`
 
 ### `security/`
 

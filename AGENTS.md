@@ -247,6 +247,21 @@ This is the non-Flux decision surface for Codex and Claude Code. Treat these poi
 
 ---
 
+### Shared Brain Vault
+
+When `brain/` exists, treat it as persistent project memory.
+
+- Start by reading `brain/index.md`, then only the linked notes relevant to the task.
+- Use the `brain` skill before adding or reorganizing brain notes.
+- Use `reflect` when wrapping up significant work, after mistakes/corrections, or after learning durable codebase facts.
+- Use `meditate` to prune stale brain content and improve skills from recurring lessons.
+- Use `plan` for medium/large implementation plans saved under `brain/plans/`.
+- Use `review` for principle-grounded reviews of code, PRs, or plans.
+
+Keep brain notes short, link-only indexes scannable, and durable knowledge separate from one-off session state.
+
+---
+
 ## Plan Mode
 
 When creating plans, PRDs, specs, or epic/task breakdowns:

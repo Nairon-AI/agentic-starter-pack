@@ -10,7 +10,7 @@
 
 ## User Flow + Platform Scope
 - **User flow affected:**
-- **App area(s):** (`skills`, installer CLI, bootstrap script, docs, GitHub metadata, etc.)
+- **App area(s):** (`skills`, install prompt, docs, GitHub metadata, etc.)
 - **In scope:**
 - **Out of scope / non-goals:**
 
@@ -41,8 +41,8 @@
 ## Testing Checklist
 
 ### Automated
-- [ ] `npx -y skills@latest add . --list`
-- [ ] `cd cli && zig build`
+- [ ] `source_dir="$(bash scripts/build-install-source.sh)" && npx -y skills@latest add "$source_dir" --list`
+- [ ] `bash -n scripts/*.sh`
 - [ ] Targeted tests run:
 
 ### Manual

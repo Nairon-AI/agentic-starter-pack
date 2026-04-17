@@ -2,14 +2,13 @@
 
 # Agentic Starter Pack
 
-### Default repo bootstrap for coding agents
+### Default repo setup for coding agents
 
-**One command -> installer CLI -> starter AGENTS.md -> 87 portable skills**
-*Context, planning, frontend, engineering, security, writing, and marketing skills in one public repo.*
+**One agent prompt -> starter AGENTS.md -> 95 portable skills + brain vault**
+*Context, planning, frontend, engineering, security, writing, marketing, and persistent-agent-memory workflows in one public repo.*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/Skills-87-111827.svg)](#skill-catalog)
-[![Zig](https://img.shields.io/badge/Zig-CLI-f7a41d.svg)](https://ziglang.org/)
+[![Skills](https://img.shields.io/badge/Skills-95-111827.svg)](#skill-catalog)
 
 ---
 
@@ -21,21 +20,35 @@
 
 ## Quick start
 
-Run this from the root of any repo:
+### Agent installer prompt
 
-```bash
-curl -fsSL https://raw.githubusercontent.com/Nairon-AI/agentic-starter-pack/main/scripts/bootstrap.sh | bash
+Paste this into Claude Code, Codex, or any repo-aware coding agent while it is working from the root of the repo you want to equip:
+
+```text
+Install the Nairon Agentic Starter Pack from https://github.com/Nairon-AI/agentic-starter-pack/ into this repo.
+
+Do the full install cleanly:
+- Read this repo's existing AGENTS.md, CLAUDE.md, README.md, and nearest SKILLS.md first.
+- Preserve existing work. Back up before overwriting. Do not use git add -A.
+- Install every starter-pack skill into this repo's normal agent skill location.
+- Add a browsable skills/ mirror using the starter-pack category folders.
+- Back up existing AGENTS.md, then install the starter-pack AGENTS.md.
+- Add the starter brain/ vault without overwriting existing brain notes.
+- If this repo uses Claude Code, install the .claude brain hooks and merge hook settings instead of replacing unrelated settings.
+- Install optional helper CLIs only when missing and useful here: agent-browser, desloppify, gh.
+- Verify the result: installed skills exist, skills/ exists, AGENTS.md exists, brain/index.md exists, Claude hooks work when applicable.
+- Show git status, changed files, checks run, and any warnings.
 ```
 
-This command:
+### What gets installed
 
-- installs all 87 skills
-- auto-installs supported third-party CLIs for selected skills
-- rewrites the local `skills/` folder into the same category layout as this repo for easier browsing
-- backs up an existing `AGENTS.md`
-- writes our recommended starter `AGENTS.md`
-
-On macOS, the launcher installs Zig via Homebrew if needed. The installer builds a temporary flat source from the category folders, then runs `npx skills@latest add` against that generated source.
+- **95 skills** - task-specific workflows for context, planning, frontend polish, engineering cleanup, security, writing, and marketing. They give agents concrete procedures instead of vibes.
+- **Categorized `skills/` mirror** - browsable source layout inside the target repo, useful for humans and future agents to inspect or edit installed skills.
+- **Starter `AGENTS.md`** - repo-local operating rules: type checks, tests, git safety, PR workflow, browser validation, and handoff expectations.
+- **`brain/` vault** - persistent Obsidian-compatible memory for project principles, plans, gotchas, and durable lessons across sessions.
+- **Brain loop skills** - `brain`, `reflect`, `ruminate`, `meditate`, `plan`, and `review` keep the vault useful: write memories, mine old sessions, prune stale notes, plan work, and review against principles.
+- **Claude Code hooks** - optional `.claude/hooks` integration loads `brain/index.md` at session start and keeps the brain index synced after edits.
+- **Optional tool dependencies** - install CLIs such as `agent-browser`, `desloppify`, and `gh` only when the corresponding skills are useful in that repo.
 
 ---
 
@@ -49,11 +62,12 @@ engineering/ source of truth for engineering skills
 security/    source of truth for security skills
 writing/     source of truth for writing skills
 marketing/   source of truth for marketing skills
-cli/         zeke-based installer CLI
-scripts/     bootstrap launcher and helper scripts
+brain/       starter persistent-memory vault and principles
+.claude/     optional Claude Code brain hooks
+scripts/     helper scripts for building the flat skill install source
 ```
 
-The category folders are the real source of truth. The CLI builds a temporary flat install source from them before calling `npx skills add`.
+The category folders are the real source of truth. `scripts/build-install-source.sh` builds a temporary flat install source for `npx skills add`.
 
 ---
 
@@ -61,11 +75,11 @@ The category folders are the real source of truth. The CLI builds a temporary fl
 
 ### `context/`
 
-- `project-context`, `obsidian-vault`
+- `brain`, `meditate`, `obsidian-vault`, `project-context`, `reflect`, `ruminate`
 
 ### `planning/`
 
-- `grill-me`, `prd-to-issues`, `prd-to-plan`, `scaffold-exercises`, `write-a-spec`
+- `grill-me`, `plan`, `prd-to-issues`, `prd-to-plan`, `scaffold-exercises`, `write-a-spec`
 
 ### `frontend/core`
 
@@ -79,8 +93,8 @@ The category folders are the real source of truth. The CLI builds a temporary fl
 
 ### `engineering/`
 
-- `browser-qa`, `desloppify`, `git-guardrails`, `github-triage`, `improve-agents-md`
-- `improve-codebase-architecture`, `issue-triage`, `rca`, `review-for-engineering-taste`, `setup-pre-commit`, `tdd`, `write-a-skill`
+- `browser-qa`, `desloppify`, `git-guardrails`, `github-triage`, `how`, `improve-agents-md`
+- `improve-codebase-architecture`, `issue-triage`, `rca`, `review`, `review-for-engineering-taste`, `setup-pre-commit`, `tdd`, `write-a-skill`
 
 ### `security/`
 

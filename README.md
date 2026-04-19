@@ -79,7 +79,7 @@ The category folders are the real source of truth. `scripts/build-install-source
 
 ### `planning/`
 
-- `grill-me`, `plan`, `prd-to-issues`, `prd-to-plan`, `scaffold-exercises`, `write-a-spec`
+- `grill-me`, `grill-me-v2`, `plan`, `prd-to-issues`, `prd-to-plan`, `scaffold-exercises`, `write-a-spec`
 
 ### `frontend/core`
 
@@ -93,7 +93,7 @@ The category folders are the real source of truth. `scripts/build-install-source
 
 ### `engineering/`
 
-- `browser-qa`, `desloppify`, `domain-model`, `git-guardrails`, `github-triage`, `how`, `improve-agents-md`
+- `browser-qa`, `desloppify`, `git-guardrails`, `github-triage`, `how`, `improve-agents-md`
 - `improve-codebase-architecture`, `issue-triage`, `rca`, `review`, `review-for-engineering-taste`, `setup-pre-commit`, `tdd`, `write-a-skill`
 
 ### `security/`

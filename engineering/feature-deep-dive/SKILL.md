@@ -30,6 +30,13 @@ Do not change code unless the user explicitly asks. Start with understanding.
    - core business object(s)
    - boundaries
 
+4. **Anchor to the high-level tour when available**
+   - Start from the parent journey doc if one exists.
+   - Inherit:
+     - parent journey
+     - why this slice matters
+     - open questions from the high-level tour
+
 ## Deep-Dive Workflow
 
 1. **Trace end-to-end**
@@ -50,6 +57,9 @@ Do not change code unless the user explicitly asks. Start with understanding.
    - retries, idempotency, race conditions
    - permissions and role gates
    - observability and debug handles
+   - source of truth
+   - owner surface
+   - first alert/debug surface
 
 3. **Grill the feature**
    - Why is state owned here and not elsewhere?
@@ -60,7 +70,13 @@ Do not change code unless the user explicitly asks. Start with understanding.
    - What manual ops step exists because code is weak?
    - What tests would catch the most important regressions?
 
-4. **Separate intended from accidental behavior**
+4. **Resolve drift as you go**
+   - If code and docs disagree:
+     - intended -> update docs now
+     - bug -> flag or fix
+     - unclear -> ask the user and leave ambiguity explicit only if unresolved
+
+5. **Separate intended from accidental behavior**
    - intended design
    - current actual behavior
    - bugs
@@ -72,6 +88,7 @@ Do not change code unless the user explicitly asks. Start with understanding.
 Use sections like:
 
 - overview
+- verification coverage
 - actor and boundary map
 - runtime path
 - state transitions
@@ -82,6 +99,8 @@ Use sections like:
 - test surface
 - questions to ask the team
 - top risks / recommended fixes
+- quick recall
+- understanding checkpoint
 
 ## Writing Rules
 
@@ -90,6 +109,7 @@ Use sections like:
 - Prefer diagrams and state tables over long prose.
 - Do not confuse "how it should work" with "what the code does today".
 - When unsure, verify with code rather than infer.
+- Keep sections short enough that someone can use them live on a call or during an incident.
 
 ## Completion Standard
 
@@ -100,3 +120,68 @@ The deep dive should let a strong engineer answer:
 - What can fail, race, or drift?
 - Which assumptions are safe vs shaky?
 - What should be tested before changing it?
+- Where do I look first when this breaks in production?
+
+## Compact Output Contracts
+
+### Verification Coverage
+
+Every deep dive should declare what was actually checked:
+
+```md
+## Verification Coverage
+- Entry points/UI: verified | partial | not checked
+- API/services: verified | partial | not checked
+- Tables/schema: verified | partial | not checked
+- Jobs/events: verified | partial | not checked
+- Providers/webhooks: verified | partial | not checked
+- Tests/fixtures: verified | partial | not checked
+- Browser/runtime check: verified | partial | not checked
+- Confidence: low | medium | high
+```
+
+### Parent Handoff
+
+When possible, inherit context from the tour:
+
+```md
+## Parent Journey Handoff
+- Parent journey: `...`
+- Reason this slice matters:
+- Open questions inherited:
+  - ...
+```
+
+### Pressure Debug Table
+
+For important steps, include:
+
+```md
+| Step | Source of truth | Owner surface | First alert/debug surface |
+| --- | --- | --- | --- |
+```
+
+### Quick Recall
+
+End with a compact memory/debug summary:
+
+```md
+## Quick Recall
+- What this feature does:
+- Main trigger:
+- Source of truth:
+- Top 3 files/boundaries:
+- Top 3 tables/models:
+- Top 3 providers:
+- First 3 places to check when broken:
+- Biggest trap:
+```
+
+### Understanding Checkpoint
+
+Before closing the deep dive, ask:
+
+- `normal mode`: 2 questions
+- `rigorous mode`: 4 questions
+
+Questions should verify the reader can explain the feature off the cuff and debug a bad production state quickly.

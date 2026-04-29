@@ -4,11 +4,11 @@
 
 ### Default repo setup for coding agents
 
-**One agent prompt -> starter AGENTS.md -> 98 portable skills + brain vault**
+**One agent prompt -> starter AGENTS.md -> 175 portable skills + brain vault**
 *Context, planning, frontend, engineering, security, writing, marketing, and persistent-agent-memory workflows in one public repo.*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/Skills-98-111827.svg)](#skill-catalog)
+[![Skills](https://img.shields.io/badge/Skills-175-111827.svg)](#skill-catalog)
 
 ---
 
@@ -42,7 +42,7 @@ Do the full install cleanly:
 
 ### What gets installed
 
-- **98 skills** - task-specific workflows for context, planning, frontend polish, engineering cleanup, security, writing, and marketing. They give agents concrete procedures instead of vibes.
+- **175 skills** - task-specific workflows for context, planning, frontend polish, engineering cleanup, security, writing, and marketing. They give agents concrete procedures instead of vibes.
 - **Categorized `skills/` mirror** - browsable source layout inside the target repo, useful for humans and future agents to inspect or edit installed skills.
 - **Starter `AGENTS.md`** - repo-local operating rules: type checks, tests, git safety, PR workflow, browser validation, and handoff expectations.
 - **`brain/` vault** - persistent Obsidian-compatible memory for project principles, plans, gotchas, and durable lessons across sessions.
@@ -81,16 +81,44 @@ The category folders are the real source of truth. `scripts/build-install-source
 
 - `grill-me`, `plan`, `prd-to-issues`, `prd-to-plan`, `scaffold-exercises`, `write-a-spec`
 
+### `frontend/accessibility`
+
+- `contrast-checker`, `link-purpose`, `refactor`, `use-of-color`, `wcag-audit-patterns`
+
 ### `frontend/core`
 
-- `frontend-design`, `ui-skills`, `design-interface`, `design-and-refine`, `design-taste-frontend`
-- `image-first-frontend`, `stitch-design-system`
-- `baseline-ui`, `make-interfaces-feel-better`, `fixing-accessibility`, `fixing-metadata`, `fixing-motion-performance`
+- `antfu-web-design-guidelines`, `baseline-ui`, `canvas-design`, `design-and-refine`, `design-interface`, `design-lab`, `design-taste-frontend`
+- `fixing-accessibility`, `fixing-metadata`, `fixing-motion-performance`, `frontend-design`, `image-first-frontend`, `interaction-design`
+- `interface-design`, `make-interfaces-feel-better`, `stitch-design-system`, `ui-skills`, `web-design-guidelines`
+
+### `frontend/frameworks`
+
+- `antfu`, `antfu-vue-best-practices`, `antfu-vue-router-best-practices`, `antfu-vue-testing-best-practices`
+- `create-adaptable-composable`, `next-best-practices`, `next-cache-components`, `next-upgrade`, `nuxt`, `pinia`, `pnpm`
+- `react-native-best-practices`, `shadcn`, `slidev`, `swiftui-ui-patterns`, `tsdown`, `turborepo`, `unocss`
+- `vite`, `vitepress`, `vitest`, `vue`, `vue-best-practices`, `vue-debug-guides`, `vue-jsx-best-practices`
+- `vue-options-api-best-practices`, `vue-pinia-best-practices`, `vue-router-best-practices`, `vue-testing-best-practices`, `vueuse-functions`
+
+### `frontend/motion`
+
+- `12-principles-of-animation`, `frontend-slides`, `generating-sounds-with-ai`, `mastering-animate-presence`
+- `morphing-icons`, `pseudo-elements`, `remotion-best-practices`, `sounds-on-the-web`, `to-spring-or-not-to-spring`, `transitions-dev`
 
 ### `frontend/specialists`
 
-- `adapt`, `animate`, `audit`, `bolder`, `clarify`, `colorize`, `critique`, `delight`, `distill`
-- `harden`, `impeccable`, `layout`, `optimize`, `overdrive`, `polish`, `quieter`, `shape`, `typeset`
+- `adapt`, `animate`, `audit`, `bencium-innovative-ux-designer`, `bolder`, `brutalist-skill`, `clarify`, `colorize`, `critique`
+- `delight`, `distill`, `emil-design-eng`, `gpt-tasteskill`, `harden`, `impeccable`, `layout`, `minimalist-skill`
+- `oklch-skill`, `optimize`, `output-skill`, `overdrive`, `polish`, `quieter`, `redesign-skill`, `shape`, `soft-skill`
+- `stitch-skill`, `taste-skill`, `typeset`, `ui-ux-pro-max`
+
+### `frontend/threejs`
+
+- `threejs-animation`, `threejs-fundamentals`, `threejs-geometry`, `threejs-interaction`, `threejs-lighting`
+- `threejs-loaders`, `threejs-materials`, `threejs-postprocessing`, `threejs-shaders`, `threejs-textures`
+
+### `frontend/tools`
+
+- `agent-browser`, `budge`, `rams`, `react-doctor`
 
 ### `engineering/`
 

@@ -1,2 +1,3 @@
 cli/.zig-cache/
 cli/zig-out/
+.o11y/

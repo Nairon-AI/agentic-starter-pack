@@ -4,11 +4,11 @@
 
 ### Default repo setup for coding agents
 
-**One agent prompt -> starter AGENTS.md -> 174 portable skills + brain vault**
+**One agent prompt -> starter AGENTS.md -> 185 portable skills + brain vault**
 *Context, planning, frontend, engineering, security, writing, marketing, and persistent-agent-memory workflows in one public repo.*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/Skills-174-111827.svg)](#skill-catalog)
+[![Skills](https://img.shields.io/badge/Skills-185-111827.svg)](#skill-catalog)
 
 ---
 
@@ -35,20 +35,20 @@ Do the full install cleanly:
 - Back up existing AGENTS.md, then install the starter-pack AGENTS.md.
 - Add the starter brain/ vault without overwriting existing brain notes.
 - If this repo uses Claude Code, install the .claude brain hooks and merge hook settings instead of replacing unrelated settings.
-- Install optional helper CLIs only when missing and useful here: agent-browser, desloppify, gh.
+- Install optional helper CLIs only when missing and useful here: agent-browser, browse, bb, desloppify, gh.
 - Verify the result: installed skills exist, skills/ exists, AGENTS.md exists, brain/index.md exists, Claude hooks work when applicable.
 - Show git status, changed files, checks run, and any warnings.
 ```
 
 ### What gets installed
 
-- **174 skills** - task-specific workflows for context, planning, frontend polish, engineering cleanup, security, writing, and marketing. They give agents concrete procedures instead of vibes.
+- **185 skills** - task-specific workflows for context, planning, frontend polish, engineering cleanup, security, writing, and marketing. They give agents concrete procedures instead of vibes.
 - **Categorized `skills/` mirror** - browsable source layout inside the target repo, useful for humans and future agents to inspect or edit installed skills.
 - **Starter `AGENTS.md`** - repo-local operating rules: type checks, tests, git safety, PR workflow, browser validation, and handoff expectations.
 - **`brain/` vault** - persistent Obsidian-compatible memory for project principles, plans, gotchas, and durable lessons across sessions.
 - **Brain loop skills** - `brain`, `reflect`, `ruminate`, `meditate`, `plan`, and `review` keep the vault useful: write memories, mine old sessions, prune stale notes, plan work, and review against principles.
 - **Claude Code hooks** - optional `.claude/hooks` integration loads `brain/index.md` at session start and keeps the brain index synced after edits.
-- **Optional tool dependencies** - install CLIs such as `agent-browser`, `desloppify`, and `gh` only when the corresponding skills are useful in that repo.
+- **Optional tool dependencies** - install CLIs such as `agent-browser`, `browse`, `bb`, `desloppify`, and `gh` only when the corresponding skills are useful in that repo.
 
 ---
 
@@ -79,7 +79,7 @@ The category folders are the real source of truth. `scripts/build-install-source
 
 ### `planning/`
 
-- `grill-me`, `plan`, `prd-to-issues`, `prd-to-plan`, `scaffold-exercises`, `write-a-spec`
+- `grill-me`, `plan`, `prd-to-issues`, `prd-to-plan`, `scaffold-exercises`, `to-issues`, `to-prd`, `write-a-spec`
 
 ### `frontend/accessibility`
 
@@ -118,13 +118,13 @@ The category folders are the real source of truth. `scripts/build-install-source
 
 ### `frontend/tools`
 
-- `agent-browser`, `budge`, `rams`
+- `agent-browser`, `browser-trace`, `budge`, `rams`
 
 ### `engineering/`
 
-- `browser-qa`, `desloppify`, `git-guardrails`, `github-triage`, `how`, `improve-agents-md`
-- `codebase-tour`, `feature-deep-dive`, `improve-codebase-architecture`, `issue-triage`, `rca`
-- `review`, `review-for-engineering-taste`, `setup-pre-commit`, `tdd`, `write-a-skill`
+- `browser-qa`, `desloppify`, `diagnose`, `git-guardrails`, `git-guardrails-claude-code`, `github-triage`, `grill-with-docs`, `how`
+- `codebase-tour`, `feature-deep-dive`, `improve-codebase-architecture`, `issue-triage`, `migrate-to-shoehorn`, `rca`
+- `review`, `review-for-engineering-taste`, `setup-matt-pocock-skills`, `setup-pre-commit`, `tdd`, `triage`, `write-a-skill`, `zoom-out`
 
 ### `security/`
 
@@ -132,7 +132,7 @@ The category folders are the real source of truth. `scripts/build-install-source
 
 ### `writing/`
 
-- `edit-article`, `humanizer`
+- `caveman`, `edit-article`, `humanizer`
 
 ### `marketing/foundation`
 

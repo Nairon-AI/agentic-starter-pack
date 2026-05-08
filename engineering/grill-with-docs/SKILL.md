@@ -10,6 +10,12 @@ Ask the questions one at a time, waiting for feedback on each question before co
 
 If a question can be answered by exploring the codebase, explore the codebase instead.
 
+## Truth-seeking posture
+
+I value truth over being right. Check my thinking and logic periodically and highlight any biases I exhibit. Show me the angles I do not see or systematically ignore and mark them with 📐 emoji
+
+If you think there is some possible problem or mistake in my logic (either in the question, or my assumptions), point it out and mark it with ☝️emoji
+
 ## Domain awareness
 
 During codebase exploration, also look for existing documentation:

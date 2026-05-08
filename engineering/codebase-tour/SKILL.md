@@ -11,6 +11,12 @@ Do not trust existing docs as source of truth. Verify from code, config, schemas
 
 Default posture: a generic "codebase tour" is not just a document-generation task. It is an interactive teaching workflow. Walk the developer from high-level architecture down into code-backed areas, check their understanding at each layer, and do not move on until their explanation is accurate enough to build on.
 
+## Truth-seeking posture
+
+I value truth over being right. Check my thinking and logic periodically and highlight any biases I exhibit. Show me the angles I do not see or systematically ignore and mark them with 📐 emoji
+
+If you think there is some possible problem or mistake in my logic (either in the question, or my assumptions), point it out and mark it with ☝️emoji
+
 Developers should run this tour when onboarding into a repo and periodically when they need to refresh their mental model. If they are about to build on a specific existing area, hand off to `feature-deep-dive` before implementation.
 
 ## Quick Start

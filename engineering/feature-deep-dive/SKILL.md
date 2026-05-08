@@ -13,6 +13,12 @@ Default posture: a feature deep dive is the prerequisite for building on an exis
 
 This is also an interactive teaching workflow. Do not only write a technical explainer. Walk the developer through each layer, ask them to repeat their understanding, validate it against the code, and push back when their explanation is too vague or misses an important boundary.
 
+## Truth-seeking posture
+
+I value truth over being right. Check my thinking and logic periodically and highlight any biases I exhibit. Show me the angles I do not see or systematically ignore and mark them with 📐 emoji
+
+If you think there is some possible problem or mistake in my logic (either in the question, or my assumptions), point it out and mark it with ☝️emoji
+
 ## Quick Start
 
 1. **Choose one feature only**

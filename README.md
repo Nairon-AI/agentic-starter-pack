@@ -4,11 +4,11 @@
 
 ### Default repo setup for coding agents
 
-**One agent prompt -> starter AGENTS.md -> 187 portable skills + brain vault**
+**One agent prompt -> starter AGENTS.md -> 189 portable skills + brain vault**
 *Context, planning, frontend, engineering, security, writing, marketing, and persistent-agent-memory workflows in one public repo.*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/Skills-187-111827.svg)](#skill-catalog)
+[![Skills](https://img.shields.io/badge/Skills-189-111827.svg)](#skill-catalog)
 
 ---
 
@@ -42,7 +42,7 @@ Do the full install cleanly:
 
 ### What gets installed
 
-- **187 skills** - task-specific workflows for context, planning, frontend polish, engineering cleanup, security, writing, and marketing. They give agents concrete procedures instead of vibes.
+- **189 skills** - task-specific workflows for context, planning, frontend polish, engineering cleanup, security, writing, and marketing. They give agents concrete procedures instead of vibes.
 - **Categorized `skills/` mirror** - browsable source layout inside the target repo, useful for humans and future agents to inspect or edit installed skills.
 - **Starter `AGENTS.md`** - repo-local operating rules: type checks, tests, git safety, PR workflow, browser validation, and handoff expectations.
 - **`brain/` vault** - persistent Obsidian-compatible memory for project principles, plans, gotchas, and durable lessons across sessions.
@@ -75,7 +75,7 @@ The category folders are the real source of truth. `scripts/build-install-source
 
 ### `context/`
 
-- `brain`, `meditate`, `obsidian-vault`, `project-context`, `reflect`, `ruminate`
+- `brain`, `handoff`, `meditate`, `obsidian-vault`, `project-context`, `reflect`, `ruminate`
 
 ### `planning/`
 
@@ -123,7 +123,7 @@ The category folders are the real source of truth. `scripts/build-install-source
 ### `engineering/`
 
 - `browser-qa`, `desloppify`, `diagnose`, `git-guardrails`, `git-guardrails-claude-code`, `github-triage`, `grill-with-docs`, `how`
-- `codebase-tour`, `feature-deep-dive`, `improve-codebase-architecture`, `issue-triage`, `migrate-to-shoehorn`, `rca`
+- `codebase-tour`, `feature-deep-dive`, `improve-codebase-architecture`, `issue-triage`, `migrate-to-shoehorn`, `prototype`, `rca`
 - `review`, `review-for-engineering-taste`, `setup-matt-pocock-skills`, `setup-pre-commit`, `tdd`, `triage`, `write-a-skill`, `zoom-out`
 
 ### `security/`

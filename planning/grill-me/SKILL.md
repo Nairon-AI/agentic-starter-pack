@@ -1,85 +1,78 @@
 ---
 name: grill-me
-description: Grilling session that challenges your plan against the existing domain model, sharpens terminology, and updates documentation (CONTEXT.md, ADRs) inline as decisions crystallise. Use when user wants to stress-test a plan against their project's language and documented decisions.
-disable-model-invocation: true
+description: General-purpose grilling for plans, writing, strategy, life decisions, or early ideas when there is no useful repo/domain documentation to update. Do not prefer for coding work in an existing codebase; use grill-with-docs instead. Use when user wants to stress-test a non-code plan, get grilled on an idea, or mentions "grill me" without a repo-specific task.
 ---
+
+<what-to-do>
 
 Interview me relentlessly about every aspect of this plan until we reach a shared understanding. Walk down each branch of the design tree, resolving dependencies between decisions one-by-one. For each question, provide your recommended answer.
 
-Ask the questions one at a time, waiting for feedback on each question before continuing.
+Ask the questions one at a time.
 
-If a question can be answered by exploring the codebase, explore the codebase instead.
+Before asking any real question, scan the repository to confirm current behavior and implementation shape.
 
-## Truth-seeking posture
+That scan should:
+- identify the files, modules, routes, components, schemas, or tests most relevant to the topic
+- confirm what the system appears to do today rather than relying on assumptions
+- note gaps where the behavior is unclear or not covered by tests
 
-I value truth over being right. Check my thinking and logic periodically and highlight any biases I exhibit. Show me the angles I do not see or systematically ignore and mark them with 📐 emoji
+Do not start grilling from pure speculation if the repo can answer part of the question first.
 
-If you think there is some possible problem or mistake in my logic (either in the question, or my assumptions), point it out and mark it with ☝️emoji
+Before the first real question, estimate:
+- total questions currently expected
+- estimated time to finish the grilling
 
-## Domain awareness
+Also briefly summarize what you found in the codebase that is most relevant to the grilling.
 
-During codebase exploration, also look for existing documentation:
+When you start asking questions, every question must include progress using the format in [Progress format](#progress-format).
 
-### File structure
+If the decision tree expands and the total question count changes, say so explicitly and update the progress numbers rather than pretending the original estimate was fixed.
 
-Most repos have a single context:
+Along with each question, strongly prefer including a small diagram that helps the developer visualize the options.
 
-```
-/
-├── CONTEXT.md
-├── docs/
-│   └── adr/
-│       ├── 0001-event-sourced-orders.md
-│       └── 0002-postgres-for-write-model.md
-└── src/
-```
+For every question that relates to existing code, include a short code-context block that names the relevant file and shows a short snippet.
 
-If a `CONTEXT-MAP.md` exists at the root, the repo has multiple contexts. The map points to where each one lives:
+If the question is tied to multiple implementation points, mention the primary file first and optionally list 1-2 secondary files or tests.
 
-```
-/
-├── CONTEXT-MAP.md
-├── docs/
-│   └── adr/                          ← system-wide decisions
-├── src/
-│   ├── ordering/
-│   │   ├── CONTEXT.md
-│   │   └── docs/adr/                 ← context-specific decisions
-│   └── billing/
-│       ├── CONTEXT.md
-│       └── docs/adr/
+Each question should make it obvious which part of the codebase it is about. Name the file, the behavior, and the design tension being resolved.
+
+If a question can be answered by exploring the codebase, explore the codebase instead. Only ask the user what the repo cannot reliably tell you.
+
+</what-to-do>
+
+<supporting-info>
+
+## Progress format
+
+```text
+Question: 12 / 23
+Estimated time left: ~6 minutes
 ```
 
-Create files lazily — only when you have something to write. If no `CONTEXT.md` exists, create one when the first term is resolved. If no `docs/adr/` exists, create it when the first ADR is needed.
+## Diagrams
 
-## During the session
+Along with each question, strongly prefer including a small diagram that helps the developer visualize the options. Use either:
+- a simple ASCII diagram
+- a compact flow diagram
+- a branch diagram showing the current decision and downstream consequences
 
-### Challenge against the glossary
+Keep diagrams tight and decision-oriented. They should clarify the choice, not decorate the answer.
 
-When the user uses a term that conflicts with the existing language in `CONTEXT.md`, call it out immediately. "Your glossary defines 'cancellation' as X, but you seem to mean Y — which is it?"
+## Code context format
 
-### Sharpen fuzzy language
+For every question that relates to existing code, include a short code-context block that names the relevant file and shows a short snippet. Keep snippets short and only include the minimum needed to orient the developer.
 
-When the user uses vague or overloaded terms, propose a precise canonical term. "You're saying 'account' — do you mean the Customer or the User? Those are different things."
+Use a structure like:
 
-### Discuss concrete scenarios
+```text
+Question: 4 / 17
+Estimated time left: ~5 minutes
 
-When domain relationships are being discussed, stress-test them with specific scenarios. Invent scenarios that probe edge cases and force the user to be precise about the boundaries between concepts.
+Code context: src/billing/checkout.ts
+Snippet:
+  if (plan === "pro") {
+    return createStripeCheckoutSession(...)
+  }
+```
 
-### Cross-reference with code
-
-When the user states how something works, check whether the code agrees. If you find a contradiction, surface it: "Your code cancels entire Orders, but you just said partial cancellation is possible — which is right?"
-
-### Update CONTEXT.md inline
-
-When a term is resolved, update `CONTEXT.md` right there. Don't batch these up — capture them as they happen. Use the format in [CONTEXT-FORMAT.md](./CONTEXT-FORMAT.md).
-
-### Offer ADRs sparingly
-
-Only offer to create an ADR when all three are true:
-
-1. **Hard to reverse** — the cost of changing your mind later is meaningful
-2. **Surprising without context** — a future reader will wonder "why did they do it this way?"
-3. **The result of a real trade-off** — there were genuine alternatives and you picked one for specific reasons
-
-If any of the three is missing, skip the ADR. Use the format in [ADR-FORMAT.md](./ADR-FORMAT.md).
+</supporting-info>

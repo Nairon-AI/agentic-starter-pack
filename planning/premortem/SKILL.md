@@ -1,6 +1,6 @@
 ---
 name: premortem
-description: "Run a premortem on any plan, launch, product, hire, strategy, or decision. Assumes it already failed 6 months from now and works backward to find every reason why. Produces a revised plan with blind spots exposed. MANDATORY TRIGGERS: 'premortem this', 'premortem my', 'run a premortem', 'what could kill this', 'future-proof this', 'stress test this plan', 'what am i missing here', 'find the blind spots'. STRONG TRIGGERS: 'what could go wrong', 'am i missing anything', 'poke holes in this', 'where will this break', 'devil's advocate this'. Do NOT trigger on simple feedback requests, factual questions, or LLM Council requests. DO trigger when someone has a plan or commitment where the cost of being wrong is high."
+description: "Run a premortem on any plan, launch, product, hire, strategy, novel feature idea, or decision. First grills vague novel ideas until they are concrete enough to fail-test, then assumes the plan failed 6 months from now and works backward to find every reason why. Produces a revised plan with blind spots exposed. MANDATORY TRIGGERS: 'premortem this', 'premortem my', 'run a premortem', 'what could kill this', 'future-proof this', 'stress test this plan', 'what am i missing here', 'find the blind spots'. STRONG TRIGGERS: 'what could go wrong', 'am i missing anything', 'poke holes in this', 'where will this break', 'devil's advocate this'. Do NOT trigger on simple feedback requests, factual questions, or LLM Council requests. DO trigger when someone has a plan or commitment where the cost of being wrong is high."
 ---
 
 # Premortem
@@ -27,7 +27,7 @@ Good premortem targets:
 - Any commitment where the cost of being wrong is high
 
 Bad premortem targets:
-- Vague ideas with no concrete plan yet (help them plan first, then premortem)
+- Vague ideas with no concrete plan yet, unless the user explicitly asks to premortem a novel idea or feature. In that case, run the premortem-ready grilling phase first.
 - Questions with one right answer (just answer them)
 - Requests for creative feedback on a draft (that's editing, not a premortem)
 - Decisions that are already made and irreversible (a premortem is only useful when you can still change course)
@@ -77,11 +77,105 @@ The goal is to reach the minimum bar as fast as possible without making the user
 
 ---
 
+## premortem-ready grilling for novel ideas
+
+Use this phase only when the user brings a novel idea or feature that is interesting but too fuzzy to premortem well. The goal is not to run a full `/grill-me` session. The goal is to make the idea concrete enough that failure scenarios can be specific.
+
+### when to grill first
+
+Grill first when any of these are true:
+- The user describes a new product/feature/idea, but not the audience or user job.
+- The success criteria are missing or fuzzy.
+- The idea is framed as "wouldn't it be cool if..." rather than a plan with constraints.
+- The risky behavior change is unclear: who must do what differently for this to work?
+- The idea touches an existing codebase or workflow, but the affected surface is unclear.
+
+Skip this phase when the plan is already concrete enough to fail-test. Do not make users answer questions just because the skill has questions available.
+
+### how to grill
+
+Ask one question at a time. After each answer, decide whether the premortem-ready threshold is met. Stop grilling as soon as it is.
+
+Before the first grilling question, estimate:
+- total questions currently expected
+- estimated time to reach premortem-ready context
+
+Every grilling question must include clear progress and estimated time left:
+
+```text
+Question: 3 / 8
+Estimated time left until premortem-ready: ~4 minutes
+```
+
+If the idea gets more complex and the question count changes, say so explicitly and update the total. Do not pretend the first estimate was fixed.
+
+Be more relentless than polite brainstorming, but keep the target narrow: expose the assumptions that make the idea premortemable. Do not drift into implementation planning unless implementation constraints are the source of risk.
+
+For repo/codebase feature ideas, inspect the relevant files/docs before asking if the repository can answer the question. If the issue is really unsettled domain language, glossary, or ADRs, say that `/grill-with-docs` should run before or alongside the premortem.
+
+### question ladder
+
+Use only the questions needed, in roughly this order:
+
+1. **User/job** — Who is this for, and what painful job does it solve?
+2. **Trigger** — What moment makes them need this?
+3. **Current alternative** — What do they do today instead?
+4. **Behavior change** — What must they start doing, stop doing, or trust differently?
+5. **Success** — What observable outcome proves this worked?
+6. **Failure** — What outcome would make you admit this failed?
+7. **Novelty** — What is genuinely new here versus normal product work?
+8. **Distribution/adoption** — How will users discover and start using it?
+9. **Constraints** — What time, budget, technical, legal, operational, or brand constraints matter?
+10. **Collision** — What existing workflow, data model, team habit, or user expectation could this fight?
+11. **Riskiest assumption** — Which assumption would kill the idea fastest if false?
+12. **Smallest proof** — What is the smallest test that would make you more or less confident?
+13. **Kill/scope-down criteria** — What evidence would make you cancel, defer, or cut scope?
+
+### premortem-ready threshold
+
+Before moving on, summarize the idea in this compact format:
+
+```text
+Idea:
+Audience:
+Job/pain:
+Behavior change:
+Success:
+Failure:
+Riskiest assumption:
+Known constraints:
+```
+
+Proceed only when each line has a concrete answer. If one line is weak, ask the next best question to strengthen it.
+
+When the threshold is met, stop and tell the user the idea is ready for a premortem. Show the compact summary, then ask for confirmation before running the premortem.
+
+Use this handoff format:
+
+```text
+This is ready for a premortem.
+
+Idea:
+Audience:
+Job/pain:
+Behavior change:
+Success:
+Failure:
+Riskiest assumption:
+Known constraints:
+
+Want me to run the premortem now?
+```
+
+Do not proceed to the premortem until the user confirms.
+
+---
+
 ## how a premortem session works
 
 ### step 1: set the frame
 
-After gathering sufficient context, set the premortem frame explicitly. Something like:
+After gathering sufficient context and getting confirmation from the user, set the premortem frame explicitly. Something like:
 
 "OK, I have enough context. Let's run the premortem. Here's the premise: it's 6 months from now. [The plan/launch/decision] has failed. It's done. We're looking back and trying to understand what went wrong."
 

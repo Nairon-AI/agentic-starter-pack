@@ -4,11 +4,11 @@
 
 ### Default repo setup for coding agents
 
-**One agent prompt -> starter AGENTS.md -> 189 portable skills + brain vault**
+**One agent prompt -> starter AGENTS.md -> 190 portable skills + brain vault**
 *Context, planning, frontend, engineering, security, writing, marketing, and persistent-agent-memory workflows in one public repo.*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/Skills-189-111827.svg)](#skill-catalog)
+[![Skills](https://img.shields.io/badge/Skills-190-111827.svg)](#skill-catalog)
 
 ---
 
@@ -42,7 +42,7 @@ Do the full install cleanly:
 
 ### What gets installed
 
-- **189 skills** - task-specific workflows for context, planning, frontend polish, engineering cleanup, security, writing, and marketing. They give agents concrete procedures instead of vibes.
+- **190 skills** - task-specific workflows for context, planning, frontend polish, engineering cleanup, security, writing, and marketing. They give agents concrete procedures instead of vibes.
 - **Categorized `skills/` mirror** - browsable source layout inside the target repo, useful for humans and future agents to inspect or edit installed skills.
 - **Starter `AGENTS.md`** - repo-local operating rules: type checks, tests, git safety, PR workflow, browser validation, and handoff expectations.
 - **`brain/` vault** - persistent Obsidian-compatible memory for project principles, plans, gotchas, and durable lessons across sessions.
@@ -88,7 +88,7 @@ The category folders are the real source of truth. `scripts/build-install-source
 ### `frontend/core`
 
 - `antfu-web-design-guidelines`, `baseline-ui`, `canvas-design`, `design-and-refine`, `design-interface`, `design-lab`, `design-taste-frontend`
-- `fixing-accessibility`, `fixing-metadata`, `fixing-motion-performance`, `frontend-design`, `image-first-frontend`, `interaction-design`
+- `fixing-accessibility`, `fixing-metadata`, `fixing-motion-performance`, `frontend-design`, `hallmark`, `image-first-frontend`, `interaction-design`
 - `interface-design`, `make-interfaces-feel-better`, `stitch-design-system`, `ui-skills`, `web-design-guidelines`
 
 ### `frontend/frameworks`

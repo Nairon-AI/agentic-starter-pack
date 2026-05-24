@@ -123,7 +123,7 @@ The category folders are the real source of truth. `scripts/build-install-source
 ### `engineering/`
 
 - `browser-qa`, `desloppify`, `diagnose`, `git-guardrails`, `git-guardrails-claude-code`, `github-triage`, `grill-with-docs`, `how`
-- `codebase-tour`, `feature-deep-dive`, `improve-codebase-architecture`, `issue-triage`, `migrate-to-shoehorn`, `prototype`, `rca`
+- `rebuild-mental-model`, `feature-deep-dive`, `improve-codebase-architecture`, `issue-triage`, `migrate-to-shoehorn`, `prototype`, `rca`
 - `review`, `review-for-engineering-taste`, `setup-matt-pocock-skills`, `setup-pre-commit`, `tdd`, `triage`, `write-a-skill`, `zoom-out`
 
 ### `security/`

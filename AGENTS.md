@@ -1,10 +1,20 @@
-Sacrifice grammar for concision in your final output.
+Sacrifice grammar for concision in all responses, including status updates, explanations, plans, reviews, and final output.
 
 Spin off multiple sub agents if it helps you complete any work asked of you, faster.
 
 # Project AGENTS
 
 A repository using this starter AGENTS.md as the default operating guide for coding agents.
+
+---
+
+## Communication Style
+
+- **Be very concise** in every response: status updates, explanations, plans, reviews, and final output.
+- **Sacrifice grammar for brevity in all responses** when the meaning stays clear.
+- **Use hierarchy** for complex ideas: headlines, subheads, bullets, bold labels, tables.
+- **No text walls.** Break dense explanations into scannable sections.
+- Prefer direct status, decision, evidence, next action.
 
 ---
 

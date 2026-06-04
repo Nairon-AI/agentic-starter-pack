@@ -4,11 +4,11 @@
 
 ### Default repo setup for coding agents
 
-**One agent prompt -> starter AGENTS.md -> 193 portable skills + brain vault**
+**One agent prompt -> starter AGENTS.md -> 202 portable skills + brain vault**
 *Context, planning, frontend, engineering, security, writing, marketing, and persistent-agent-memory workflows in one public repo.*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/Skills-193-111827.svg)](#skill-catalog)
+[![Skills](https://img.shields.io/badge/Skills-202-111827.svg)](#skill-catalog)
 
 ---
 
@@ -42,7 +42,7 @@ Do the full install cleanly:
 
 ### What gets installed
 
-- **193 skills** - task-specific workflows for context, planning, frontend polish, engineering cleanup, security, writing, and marketing. They give agents concrete procedures instead of vibes.
+- **202 skills** - task-specific workflows for context, planning, frontend polish, engineering cleanup, security, writing, and marketing. They give agents concrete procedures instead of vibes.
 - **Categorized `skills/` mirror** - browsable source layout inside the target repo, useful for humans and future agents to inspect or edit installed skills.
 - **Starter `AGENTS.md`** - repo-local operating rules: type checks, tests, git safety, PR workflow, browser validation, and handoff expectations.
 - **`brain/` vault** - persistent Obsidian-compatible memory for project principles, plans, gotchas, and durable lessons across sessions.
@@ -136,29 +136,32 @@ The category folders are the real source of truth. `scripts/build-install-source
 
 ### `marketing/foundation`
 
-- `product-marketing-context`, `customer-research`, `content-strategy`
-- `marketing-ideas`, `marketing-psychology`, `pricing-strategy`
+- `product-marketing`, `customer-research`, `content-strategy`
+- `marketing-ideas`, `marketing-psychology`, `pricing`, `marketing-plan`
 
 ### `marketing/cro`
 
-- `ab-test-setup`, `page-cro`, `signup-flow-cro`, `onboarding-cro`
-- `form-cro`, `popup-cro`, `paywall-upgrade-cro`, `lead-magnets`
+- `ab-testing`, `cro`, `signup`, `onboarding`
+- `popups`, `paywalls`, `lead-magnets`
 
 ### `marketing/content`
 
-- `copywriting`, `copy-editing`, `cold-email`, `email-sequence`, `social-content`
+- `copywriting`, `copy-editing`, `cold-email`, `emails`, `social`
+- `video`, `image`, `sms`
 
 ### `marketing/seo`
 
-- `ai-seo`, `seo-audit`, `programmatic-seo`, `schema-markup`, `site-architecture`, `competitor-alternatives`
+- `ai-seo`, `seo-audit`, `programmatic-seo`, `schema`, `site-architecture`, `competitors`, `aso`
 
 ### `marketing/distribution`
 
-- `paid-ads`, `ad-creative`, `launch-strategy`, `community-marketing`
+- `ads`, `ad-creative`, `launch`, `community-marketing`
+- `co-marketing`, `directory-submissions`
 
 ### `marketing/revenue`
 
-- `churn-prevention`, `free-tool-strategy`, `referral-program`, `revops`, `sales-enablement`
+- `analytics`, `churn-prevention`, `free-tools`, `referrals`, `revops`, `sales-enablement`
+- `prospecting`, `competitor-profiling`
 
 ---
 

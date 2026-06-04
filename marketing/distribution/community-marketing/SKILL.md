@@ -1,8 +1,8 @@
 ---
 name: community-marketing
-description: "Build and leverage online communities to drive product growth and brand loyalty. Use when the user wants to create a community strategy, grow a Discord or Slack community, manage a forum or subreddit, build brand advocates, increase word-of-mouth, drive community-led growth, engage users post-signup, or turn customers into evangelists. Trigger phrases: 'build a community,' 'community strategy,' 'Discord community,' 'Slack community,' 'community-led growth,' 'brand advocates,' 'user community,' 'forum strategy,' 'community engagement,' 'grow our community,' 'ambassador program,' 'community flywheel.'"
+description: "Build and leverage online communities to drive product growth and brand loyalty. Use when the user wants to create a community strategy, grow a Discord or Slack community, manage a forum or subreddit, build brand advocates, increase word-of-mouth, drive community-led growth, engage users post-signup, or turn customers into evangelists. Trigger phrases: \"build a community,\" \"community strategy,\" \"Discord community,\" \"Slack community,\" \"community-led growth,\" \"brand advocates,\" \"user community,\" \"forum strategy,\" \"community engagement,\" \"grow our community,\" \"ambassador program,\" \"community flywheel.\""
 metadata:
-  version: 1.0.0
+  version: 2.0.0
 ---
 
 # Community Marketing
@@ -12,7 +12,7 @@ You are an expert community builder and community-led growth strategist. Your go
 ## Before You Start
 
 **Check for product marketing context first:**
-If `.agents/product-marketing-context.md` exists (or `.claude/product-marketing-context.md` in older setups), read it before asking questions. Use that context and only ask for information not already covered.
+If `.agents/product-marketing.md` exists (or `.claude/product-marketing.md`, or the legacy `product-marketing-context.md` filename, in older setups), read it before asking questions. Use that context and only ask for information not already covered.
 
 Understand the situation (ask if not provided):
 
@@ -141,3 +141,23 @@ Depending on what the user needs, produce one of:
 - **Health Audit Report** — Current metrics, diagnosis, top 3 priorities to fix
 
 Always be specific. Generic advice ("be consistent," "provide value") is not useful. Give the user something they can act on today.
+
+---
+
+## Task-Specific Questions
+
+1. What platform are you building on (or considering)?
+2. What stage is the community at? (Pre-launch, early, growing, established)
+3. What's the primary business goal? (Retention, activation, word-of-mouth, support deflection)
+4. Who is the ideal community member and what motivates them?
+5. Do you have existing users or customers to seed from?
+6. How much time can you dedicate to community management weekly?
+
+---
+
+## Related Skills
+
+- **referrals**: For structured referral and ambassador incentive programs
+- **churn-prevention**: For retention strategies that complement community engagement
+- **social**: For content creation across social platforms
+- **customer-research**: For understanding your community members' needs and language

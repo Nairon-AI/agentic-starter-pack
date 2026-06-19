@@ -7,6 +7,12 @@
       "skillPath": "skills/emil-design-eng/SKILL.md",
       "computedHash": "8bdf9e4e6de7a4969147bf4828a4ad2c5aacd9fba4b690b250a85e0467ca387d"
     },
+    "pr-walkthrough": {
+      "source": "warpdotdev/common-skills",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/pr-walkthrough/SKILL.md",
+      "computedHash": "fd5ff2a22f4cc80ef8d0ab3a7bdef427d6463719f9e5fdf47f6fa1371fc4d3f9"
+    },
     "vercel-composition-patterns": {
       "source": "vercel-labs/agent-skills",
       "sourceType": "github",

@@ -1,127 +1,69 @@
 ---
 name: review
-description: >-
-  Principle-grounded review of code changes, PRs, or plans. Use when asked to review, critique,
-  or assess quality of work - "review", "review this", "code review", "check this".
+description: Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes — Standards (does the code follow this repo's documented coding standards?) and Spec (does the code match what the originating issue/PRD asked for?). Runs both reviews in parallel sub-agents and reports them side by side. Use when the user wants to review a branch, a PR, work-in-progress changes, or asks to "review since X".
 ---
 
-# Review
+Two-axis review of the diff between `HEAD` and a fixed point the user supplies:
 
-Thorough review grounded in project principles. **Do NOT make changes - the review is the deliverable.**
+- **Standards** — does the code conform to this repo's documented coding standards?
+- **Spec** — does the code faithfully implement the originating issue / PRD / spec?
 
-Use the environment's task/plan tracker when available. Mark each review step in progress when starting and completed when done.
+Both axes run as **parallel sub-agents** so they don't pollute each other's context, then this skill aggregates their findings.
 
-## Step 1 - Load Principles
+The issue tracker should have been provided to you — run `/setup-matt-pocock-skills` if `docs/agents/issue-tracker.md` is missing.
 
-Read `brain/principles.md`. Follow every `[[wikilink]]` and read each linked principle file. These principles govern review judgments - refer back to them when evaluating issues.
+## Process
 
-**Do NOT skip this. Do NOT use memorized principle content - always read fresh.**
+### 1. Pin the fixed point
 
-## Step 2 - Determine Scope
+Whatever the user said is the fixed point — a commit SHA, branch name, tag, `main`, `HEAD~5`, etc. If they didn't specify one, ask for it.
 
-Infer what to review from context - the user's message, recent diffs, or referenced plans/PRs. If genuinely ambiguous (nothing to infer), ask.
+Capture the diff command once: `git diff <fixed-point>...HEAD` (three-dot, so the comparison is against the merge-base). Also note the list of commits via `git log <fixed-point>..HEAD --oneline`.
 
-Auto-detect review mode from change size:
-- **BIG CHANGE** (50+ lines changed, 3+ files, or new architecture) - all sections, at most 4 top issues per section
-- **SMALL CHANGE** (under those thresholds) - one issue per section
+Before going further, confirm the fixed point resolves (`git rev-parse <fixed-point>`) and the diff is non-empty. A bad ref or empty diff should fail here — not inside two parallel sub-agents.
 
-## Step 3 - Gather Context
+### 2. Identify the spec source
 
-For **SMALL CHANGE** reviews, read files directly in the main context - delegation overhead exceeds the cost of reading a few files.
+Look for the originating spec, in this order:
 
-For **BIG CHANGE** reviews, delegate exploration to read-only subagents when available.
+1. Issue references in the commit messages (`#123`, `Closes #45`, GitLab `!67`, etc.) — fetch via the workflow in `docs/agents/issue-tracker.md`.
+2. A path the user passed as an argument.
+3. A PRD/spec file under `docs/`, `specs/`, or `.scratch/` matching the branch name or feature.
+4. If nothing is found, ask the user where the spec is. If they say there isn't one, the **Spec** sub-agent will skip and report "no spec available".
 
-Spawn exploration agents to:
-- Read the code or plan under review
-- Identify dependencies, callers, and downstream effects
-- Map relevant types, tests, and infrastructure
+### 3. Identify the standards sources
 
-Run multiple agents in parallel when investigating independent areas. If subagents are unavailable, perform the same focused exploration passes yourself.
+Anything in the repo that documents how code should be written, such as `CODING_STANDARDS.md` or `CONTRIBUTING.md`.
 
-## Step 4 - Gather Domain Skills
+### 4. Spawn both sub-agents in parallel
 
-Check installed skills (`.agents/skills/`, `.claude/skills/`, or equivalent) for any that match the review's domain.
+Send a single message with two `Agent` tool calls. Use the `general-purpose` subagent for both.
 
-**Invoke matched skills now** - read their output and use domain guidance to inform your review.
+**Standards sub-agent prompt** — include:
 
-For domains not covered by installed skills, use `find-skills` to search for a relevant skill.
+- The full diff command and commit list.
+- The list of standards-source files you found in step 3.
+- The brief: "Report — per file/hunk where relevant — every place the diff violates a documented standard. Cite the standard (file + the rule). Distinguish hard violations from judgement calls. Skip anything tooling enforces. Under 400 words."
 
-## Step 5 - Assessment Pipeline
+**Spec sub-agent prompt** — include:
 
-Work through all sections in order. For each section, check against loaded principles.
+- The diff command and commit list.
+- The path or fetched contents of the spec.
+- The brief: "Report: (a) requirements the spec asked for that are missing or partial; (b) behaviour in the diff that wasn't asked for (scope creep); (c) requirements that look implemented but where the implementation looks wrong. Quote the spec line for each finding. Under 400 words."
 
-### 1. Scope Check
+If the spec is missing, skip the Spec sub-agent and note this in the final report.
 
-If the review targets work against a plan phase:
-- Read the plan phase that was assigned.
-- Run `git diff --stat` and `git log --oneline` for the relevant commits.
-- Flag files changed outside the plan phase's stated scope as scope violations.
+### 5. Aggregate
 
-If no plan phase applies, skip this subsection.
+Present the two reports under `## Standards` and `## Spec` headings, verbatim or lightly cleaned. Do **not** merge or rerank findings — the two axes are deliberately separate (see _Why two axes_).
 
-### 2. Architecture
-- System design and component boundaries
-- Dependency graph and coupling
-- Data flow patterns and bottlenecks
-- Security architecture (auth, data access, API boundaries)
+End with a one-line summary: total findings per axis, and the worst issue _within each axis_ (if any). Don't pick a single winner across axes — that's the reranking the separation exists to prevent.
 
-### 3. Code Quality
-- Code organization and module structure
-- DRY violations - be aggressive
-- Error handling patterns and missing edge cases (call out explicitly)
-- Over-engineering or under-engineering relative to principles; consider redesign-from-first-principles
-- Technical debt hotspots
+## Why two axes
 
-### 4. Tests
-- Coverage gaps (unit, integration, e2e)
-- Test quality and assertion strength
-- Missing edge case coverage - be thorough
-- Untested failure modes and error paths
-- New behavior must have new tests. Tests must assert outcomes, not implementation details.
+A change can pass one axis and fail the other:
 
-### 5. Performance
-- N+1 queries and database access patterns
-- Memory-usage concerns
-- Caching opportunities
-- Slow or high-complexity code paths
+- Code that follows every standard but implements the wrong thing → **Standards pass, Spec fail.**
+- Code that does exactly what the issue asked but breaks the project's conventions → **Spec pass, Standards fail.**
 
-### Principle Compliance
-
-For each changed file, check against loaded principles. Common violations:
-- Bolted-on changes instead of redesign (redesign-from-first-principles)
-- Missing verification (prove-it-works)
-- Unnecessarily added complexity (subtract-before-you-add)
-
-## Step 6 - Issue Format
-
-**NUMBER** each issue (1, 2, 3...). For every issue:
-
-- Describe the problem concretely with file and line references
-- Assign severity: **high** (blocks acceptance), **medium** (worth fixing, multiple may block), **low** (style/minor)
-- Present 2-3 options with **LETTERS** (A, B, C), including "do nothing" where reasonable
-- For each option: implementation effort, risk, impact on other code, maintenance burden
-- Give a recommended option and why, mapped to principles
-- Ask whether the user agrees or wants a different direction
-
-### Severity Guide
-
-- **high**: Incorrect behavior, missing tests for new behavior, scope violation on core files, principle violation that changes architecture.
-- **medium**: Worth fixing but not blocking on its own. Multiple mediums may trigger rejection.
-- **low**: Style, documentation, minor improvements. Note but don't block on these.
-
-When using a structured user-question tool, label each option with issue NUMBER and option LETTER. Recommended option is always first.
-
-## Step 7 - Verdict
-
-After presenting all issues, give an overall verdict:
-
-- **Accept**: All checks pass, scope clean, tests present and passing.
-- **Accept with notes**: Low-severity issues only. List them for optional follow-up.
-- **Revise**: High-severity issues found. Include specific actionable feedback - reference the exact file, line context, and principle violated.
-
-## Interaction Rules
-
-- Do not assume priorities on timeline or scale
-- Do not make changes - present findings and wait for direction
-- Present all sections together, then ask for feedback once at the end
-- Per prove-it-works: if something can be tested, note how in the issue description
+Reporting them separately stops one axis from masking the other.

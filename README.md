@@ -4,11 +4,11 @@
 
 ### Default repo setup for coding agents
 
-**One agent prompt -> starter AGENTS.md -> 206 portable skills + brain vault**
+**One agent prompt -> starter AGENTS.md -> 218 portable skills + brain vault**
 *Context, planning, frontend, engineering, security, writing, marketing, and persistent-agent-memory workflows in one public repo.*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/Skills-206-111827.svg)](#skill-catalog)
+[![Skills](https://img.shields.io/badge/Skills-218-111827.svg)](#skill-catalog)
 
 ---
 
@@ -42,7 +42,7 @@ Do the full install cleanly:
 
 ### What gets installed
 
-- **206 skills** - task-specific workflows for context, planning, frontend polish, engineering cleanup, security, writing, and marketing. They give agents concrete procedures instead of vibes.
+- **218 skills** - task-specific workflows for context, planning, frontend polish, engineering cleanup, security, writing, and marketing. They give agents concrete procedures instead of vibes.
 - **Categorized `skills/` mirror** - browsable source layout inside the target repo, useful for humans and future agents to inspect or edit installed skills.
 - **Starter `AGENTS.md`** - repo-local operating rules: type checks, tests, git safety, PR workflow, browser validation, and handoff expectations.
 - **`brain/` vault** - persistent Obsidian-compatible memory for project principles, plans, gotchas, and durable lessons across sessions.
@@ -79,7 +79,7 @@ The category folders are the real source of truth. `scripts/build-install-source
 
 ### `planning/`
 
-- `code-design`, `grill-me`, `plan`, `prd-to-issues`, `prd-to-plan`, `premortem`, `scaffold-exercises`, `to-issues`, `to-prd`, `write-a-spec`
+- `code-design`, `decision-mapping`, `grill-me`, `grilling`, `plan`, `prd-to-issues`, `prd-to-plan`, `premortem`, `scaffold-exercises`, `to-issues`, `to-prd`, `write-a-spec`
 
 ### `frontend/accessibility`
 
@@ -122,9 +122,10 @@ The category folders are the real source of truth. `scripts/build-install-source
 
 ### `engineering/`
 
-- `browser-qa`, `desloppify`, `diagnose`, `git-guardrails`, `git-guardrails-claude-code`, `github-triage`, `grill-with-docs`, `how`
-- `rebuild-mental-model`, `feature-deep-dive`, `improve-codebase-architecture`, `issue-triage`, `migrate-to-shoehorn`, `prototype`, `rca`
+- `ask-matt`, `browser-qa`, `codebase-design`, `desloppify`, `diagnose`, `diagnosing-bugs`, `domain-modeling`, `git-guardrails`, `git-guardrails-claude-code`, `github-triage`, `grill-with-docs`, `how`
+- `rebuild-mental-model`, `feature-deep-dive`, `implement`, `improve-codebase-architecture`, `issue-triage`, `migrate-to-shoehorn`, `prototype`, `rca`
 - `no-mistakes`, `review`, `review-for-engineering-taste`, `setup-matt-pocock-skills`, `setup-pre-commit`, `tdd`, `teach`, `teach-implementation`, `thermo-nuclear-code-quality-review`, `triage`, `write-a-skill`, `zoom-out`
+- `resolving-merge-conflicts`, `writing-great-skills`
 
 ### `security/`
 
@@ -132,7 +133,7 @@ The category folders are the real source of truth. `scripts/build-install-source
 
 ### `writing/`
 
-- `caveman`, `edit-article`, `feedback`, `humanizer`, `stop-slop`
+- `caveman`, `edit-article`, `feedback`, `humanizer`, `stop-slop`, `writing-beats`, `writing-fragments`, `writing-shape`
 
 ### `marketing/foundation`
 

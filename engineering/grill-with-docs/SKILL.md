@@ -1,7 +1,10 @@
 ---
 name: grill-with-docs
 description: Default grilling skill for coding work in an existing repo/codebase. Challenges the plan against code, sharpens shared domain language, and updates CONTEXT.md/ADRs inline. Prefer over grill-me whenever durable repo context, domain terms, implementation behavior, or architectural decisions matter.
+disable-model-invocation: true
 ---
+
+Run a `/grilling` session, using the `/domain-modeling` skill throughout.
 
 <what-to-do>
 

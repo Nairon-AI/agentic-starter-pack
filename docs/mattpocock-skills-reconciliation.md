@@ -1,6 +1,6 @@
 # Matt Pocock Skills Reconciliation
 
-Source: `mattpocock/skills` at `6eeb81b` (`2026-06-18`).
+Source: `mattpocock/skills` at `5d78bd0` (`2026-06-28` sync).
 
 ## Imported New Skills
 
@@ -13,6 +13,7 @@ Source: `mattpocock/skills` at `6eeb81b` (`2026-06-18`).
 - `engineering/writing-great-skills`
 - `planning/decision-mapping`
 - `planning/grilling`
+- `planning/loop-me`
 - `writing/writing-beats`
 - `writing/writing-fragments`
 - `writing/writing-shape`

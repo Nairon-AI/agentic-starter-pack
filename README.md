@@ -43,6 +43,7 @@ Do the full install cleanly:
 ### What gets installed
 
 - **221 skills** - task-specific workflows for context, planning, frontend polish, engineering cleanup, security, writing, and marketing. They give agents concrete procedures instead of vibes.
+- **Curated third-party skills** - not every skill here was created by Nairon AI. This repo is a starter pack: a curated, adapted bundle of skills we have found useful while operating products.
 - **Categorized `skills/` mirror** - browsable source layout inside the target repo, useful for humans and future agents to inspect or edit installed skills.
 - **Starter `AGENTS.md`** - repo-local operating rules: type checks, tests, git safety, PR workflow, browser validation, and handoff expectations.
 - **`brain/` vault** - persistent Obsidian-compatible memory for project principles, plans, gotchas, and durable lessons across sessions.
@@ -163,6 +164,25 @@ The category folders are the real source of truth. `scripts/build-install-source
 
 - `analytics`, `churn-prevention`, `free-tools`, `referrals`, `revops`, `sales-enablement`
 - `prospecting`, `competitor-profiling`
+
+---
+
+## Credits
+
+This starter pack bundles skills from multiple authors and projects. Some are ours; many are adapted, mirrored, or inspired by work from the broader agent-skills ecosystem.
+
+Special thanks to:
+
+- [Matt Pocock](https://x.com/mattpocockuk) / `mattpocock/skills` - engineering, planning, and writing workflows.
+- [Corey Haines](https://www.corey.co/) - marketing strategy concepts adapted in the marketing planning skills.
+- [Anthony Fu](https://github.com/antfu) - generated framework skills and source tooling patterns.
+- [Emil Kowalski](https://animations.dev/) - design engineering and motion philosophy.
+- [Raphael Salaja](https://github.com/raphael-salaja) - web motion skills.
+- [Hardik Pandya](https://hvpandya.com) - `stop-slop` writing skill.
+- [WikiProject AI Cleanup](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) - AI-writing pattern references used by `humanizer`.
+- [vuejs-ai](https://github.com/vuejs-ai) and other open-source skill authors whose work helped shape this pack.
+
+If a skill has its own license, metadata, README, or source reference, treat that as authoritative. This repo is a practical starter pack, not a claim that every included skill originated here.
 
 ---
 

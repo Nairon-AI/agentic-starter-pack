@@ -4,11 +4,11 @@
 
 ### Default repo setup for coding agents
 
-**One agent prompt -> starter AGENTS.md -> 221 portable skills + brain vault**
+**One agent prompt -> starter AGENTS.md -> 222 portable skills + brain vault**
 *Context, planning, frontend, engineering, security, writing, marketing, and persistent-agent-memory workflows in one public repo.*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/Skills-221-111827.svg)](#skill-catalog)
+[![Skills](https://img.shields.io/badge/Skills-222-111827.svg)](#skill-catalog)
 
 ---
 
@@ -42,7 +42,7 @@ Do the full install cleanly:
 
 ### What gets installed
 
-- **221 skills** - task-specific workflows for context, planning, frontend polish, engineering cleanup, security, writing, and marketing. They give agents concrete procedures instead of vibes.
+- **222 skills** - task-specific workflows for context, planning, frontend polish, engineering cleanup, security, writing, and marketing. They give agents concrete procedures instead of vibes.
 - **Curated third-party skills** - not every skill here was created by Nairon AI. This repo is a starter pack: a curated, adapted bundle of skills we have found useful while operating products.
 - **Categorized `skills/` mirror** - browsable source layout inside the target repo, useful for humans and future agents to inspect or edit installed skills.
 - **Starter `AGENTS.md`** - repo-local operating rules: type checks, tests, git safety, PR workflow, browser validation, and handoff expectations.
@@ -80,7 +80,7 @@ The category folders are the real source of truth. `scripts/build-install-source
 
 ### `planning/`
 
-- `code-design`, `decision-mapping`, `grill-me`, `grilling`, `loop-me`, `plan`, `prd-to-issues`, `prd-to-plan`, `premortem`, `scaffold-exercises`, `to-issues`, `to-prd`, `write-a-spec`
+- `blindspot-pass`, `code-design`, `decision-mapping`, `grill-me`, `grilling`, `loop-me`, `plan`, `prd-to-issues`, `prd-to-plan`, `premortem`, `scaffold-exercises`, `to-issues`, `to-prd`, `write-a-spec`
 
 ### `frontend/accessibility`
 

@@ -4,11 +4,11 @@
 
 ### Default repo setup for coding agents
 
-**One agent prompt -> starter AGENTS.md -> 222 portable skills + brain vault**
+**One agent prompt -> starter AGENTS.md -> 233 portable skills + brain vault**
 *Context, planning, frontend, engineering, security, writing, marketing, and persistent-agent-memory workflows in one public repo.*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/Skills-222-111827.svg)](#skill-catalog)
+[![Skills](https://img.shields.io/badge/Skills-233-111827.svg)](#skill-catalog)
 
 ---
 
@@ -42,7 +42,7 @@ Do the full install cleanly:
 
 ### What gets installed
 
-- **222 skills** - task-specific workflows for context, planning, frontend polish, engineering cleanup, security, writing, and marketing. They give agents concrete procedures instead of vibes.
+- **233 skills** - task-specific workflows for context, planning, frontend polish, engineering cleanup, security, writing, and marketing. They give agents concrete procedures instead of vibes.
 - **Curated third-party skills** - not every skill here was created by Nairon AI. This repo is a starter pack: a curated, adapted bundle of skills we have found useful while operating products.
 - **Categorized `skills/` mirror** - browsable source layout inside the target repo, useful for humans and future agents to inspect or edit installed skills.
 - **Starter `AGENTS.md`** - repo-local operating rules: type checks, tests, git safety, PR workflow, browser validation, and handoff expectations.
@@ -76,11 +76,11 @@ The category folders are the real source of truth. `scripts/build-install-source
 
 ### `context/`
 
-- `brain`, `handoff`, `meditate`, `obsidian-vault`, `project-context`, `reflect`, `ruminate`
+- `brain`, `claude-handoff`, `handoff`, `meditate`, `obsidian-vault`, `project-context`, `reflect`, `ruminate`
 
 ### `planning/`
 
-- `blindspot-pass`, `code-design`, `decision-mapping`, `grill-me`, `grilling`, `loop-me`, `plan`, `prd-to-issues`, `prd-to-plan`, `premortem`, `scaffold-exercises`, `to-issues`, `to-prd`, `write-a-spec`
+- `blindspot-pass`, `code-design`, `decision-mapping`, `design-an-interface`, `grill-me`, `grilling`, `loop-me`, `plan`, `prd-to-issues`, `prd-to-plan`, `premortem`, `scaffold-exercises`, `to-issues`, `to-prd`, `write-a-spec`
 
 ### `frontend/accessibility`
 
@@ -123,9 +123,9 @@ The category folders are the real source of truth. `scripts/build-install-source
 
 ### `engineering/`
 
-- `ask-matt`, `browser-qa`, `codebase-design`, `desloppify`, `diagnose`, `diagnosing-bugs`, `domain-modeling`, `git-guardrails`, `git-guardrails-claude-code`, `github-triage`, `grill-with-docs`, `how`
-- `rebuild-mental-model`, `feature-deep-dive`, `implement`, `improve-codebase-architecture`, `issue-triage`, `migrate-to-shoehorn`, `napkin-math`, `prototype`, `rca`
-- `no-mistakes`, `pr-walkthrough`, `review`, `review-for-engineering-taste`, `setup-matt-pocock-skills`, `setup-pre-commit`, `tdd`, `teach`, `teach-implementation`, `thermo-nuclear-code-quality-review`, `triage`, `write-a-skill`, `zoom-out`
+- `ask-matt`, `browser-qa`, `code-review`, `codebase-design`, `desloppify`, `diagnose`, `diagnosing-bugs`, `domain-modeling`, `git-guardrails`, `git-guardrails-claude-code`, `github-triage`, `grill-with-docs`, `how`
+- `rebuild-mental-model`, `feature-deep-dive`, `implement`, `improve-agents-md`, `improve-codebase-architecture`, `issue-triage`, `migrate-to-shoehorn`, `napkin-math`, `prototype`, `qa`, `rca`, `research`
+- `no-mistakes`, `pr-walkthrough`, `request-refactor-plan`, `review`, `review-for-engineering-taste`, `setup-matt-pocock-skills`, `setup-pre-commit`, `tdd`, `teach`, `teach-implementation`, `thermo-nuclear-code-quality-review`, `to-spec`, `to-tickets`, `triage`, `ubiquitous-language`, `wayfinder`, `wizard`, `write-a-skill`, `zoom-out`
 - `resolving-merge-conflicts`, `writing-great-skills`
 
 ### `security/`

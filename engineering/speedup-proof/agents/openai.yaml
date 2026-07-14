@@ -1,0 +1,4 @@
+interface:
+  display_name: "Speedup Proof"
+  short_description: "Propose, approve, and prove safe speedups"
+  default_prompt: "Use $speedup-proof to inspect this code, propose one safe speedup, and wait for my explicit approval before modifying any project files."

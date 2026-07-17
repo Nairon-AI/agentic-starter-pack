@@ -4,11 +4,11 @@
 
 ### Default repo setup for coding agents
 
-**One agent prompt -> starter AGENTS.md -> 237 portable skills + brain vault**
+**One agent prompt -> starter AGENTS.md -> 252 portable skills + brain vault**
 *Context, planning, frontend, engineering, security, writing, marketing, and persistent-agent-memory workflows in one public repo.*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/Skills-237-111827.svg)](#skill-catalog)
+[![Skills](https://img.shields.io/badge/Skills-252-111827.svg)](#skill-catalog)
 
 ---
 
@@ -42,7 +42,7 @@ Do the full install cleanly:
 
 ### What gets installed
 
-- **237 skills** - task-specific workflows for context, planning, frontend polish, engineering cleanup, security, writing, and marketing. They give agents concrete procedures instead of vibes.
+- **252 skills** - task-specific workflows for context, planning, frontend polish, engineering cleanup, security, writing, and marketing. They give agents concrete procedures instead of vibes.
 - **Curated third-party skills** - not every skill here was created by Nairon AI. This repo is a starter pack: a curated, adapted bundle of skills we have found useful while operating products.
 - **Categorized `skills/` mirror** - browsable source layout inside the target repo, useful for humans and future agents to inspect or edit installed skills.
 - **Starter `AGENTS.md`** - repo-local operating rules: type checks, tests, git safety, PR workflow, browser validation, and handoff expectations.
@@ -76,11 +76,11 @@ The category folders are the real source of truth. `scripts/build-install-source
 
 ### `context/`
 
-- `brain`, `claude-handoff`, `handoff`, `meditate`, `obsidian-vault`, `project-context`, `reflect`, `ruminate`
+- `automate-me`, `brain`, `claude-handoff`, `handoff`, `meditate`, `obsidian-vault`, `project-context`, `recall`, `reflect`, `ruminate`, `show-me-your-work`
 
 ### `planning/`
 
-- `blindspot-pass`, `code-design`, `decision-mapping`, `design-an-interface`, `grill-me`, `grilling`, `loop-me`, `plan`, `prd-to-issues`, `prd-to-plan`, `premortem`, `scaffold-exercises`, `to-issues`, `to-prd`, `write-a-spec`
+- `architect`, `arena`, `blindspot-pass`, `code-design`, `decision-mapping`, `design-an-interface`, `figure-it-out`, `grill-me`, `grilling`, `loop-me`, `plan`, `prd-to-issues`, `prd-to-plan`, `premortem`, `scaffold-exercises`, `to-issues`, `to-prd`, `write-a-spec`
 
 ### `frontend/accessibility`
 
@@ -123,10 +123,10 @@ The category folders are the real source of truth. `scripts/build-install-source
 
 ### `engineering/`
 
-- `ask-matt`, `browser-qa`, `code-review`, `codebase-design`, `desloppify`, `diagnose`, `diagnosing-bugs`, `domain-modeling`, `git-guardrails`, `git-guardrails-claude-code`, `github-triage`, `grill-with-docs`, `how`
-- `rebuild-mental-model`, `feature-deep-dive`, `implement`, `improve-agents-md`, `improve-codebase-architecture`, `issue-triage`, `migrate-to-shoehorn`, `napkin-math`, `prototype`, `qa`, `rca`, `research`
-- `no-mistakes`, `pr-walkthrough`, `request-refactor-plan`, `review`, `review-for-engineering-taste`, `setup-matt-pocock-skills`, `setup-pre-commit`, `speedup-proof`, `tdd`, `teach`, `teach-implementation`, `thermo-nuclear-code-quality-review`, `to-spec`, `to-tickets`, `triage`, `ubiquitous-language`, `wayfinder`, `wizard`, `write-a-skill`, `zoom-out`
-- `resolving-merge-conflicts`, `verifier-setup`, `writing-great-skills`
+- `ask-matt`, `blast-radius`, `browser-qa`, `code-review`, `codebase-design`, `desloppify`, `diagnose`, `diagnosing-bugs`, `domain-modeling`, `feature-deep-dive`, `git-guardrails`, `git-guardrails-claude-code`, `github-triage`, `grill-with-docs`, `how`
+- `implement`, `improve-agents-md`, `improve-codebase-architecture`, `interrogate`, `issue-triage`, `maintain-verification-skill`, `migrate-to-shoehorn`, `napkin-math`, `no-mistakes`, `pr-walkthrough`, `principle-build-the-lever`, `principle-model-the-domain`, `principle-sequence-verifiable-units`, `principle-type-system-discipline`
+- `prototype`, `qa`, `rca`, `rebuild-mental-model`, `request-refactor-plan`, `research`, `resolving-merge-conflicts`, `review`, `review-for-engineering-taste`, `setup-matt-pocock-skills`, `setup-pre-commit`, `speedup-proof`, `tdd`, `teach`, `teach-implementation`, `thermo-nuclear-code-quality-review`
+- `to-spec`, `to-tickets`, `triage`, `typescript-best-practices`, `ubiquitous-language`, `verifier-setup`, `wayfinder`, `why`, `wizard`, `write-a-skill`, `writing-great-skills`, `zoom-out`
 
 ### `security/`
 
@@ -181,6 +181,7 @@ Special thanks to:
 - [Raphael Salaja](https://github.com/raphael-salaja) - web motion skills.
 - [Hardik Pandya](https://hvpandya.com) - `stop-slop` writing skill.
 - [Francesco Mistero / Kappaemme-git](https://github.com/Kappaemme-git) - startup validation, customer discovery, and performance proof skills.
+- [Lauren Tan / pstack](https://github.com/cursor/plugins/tree/main/pstack) - rigorous engineering workflows, evidence gathering, and verification practices.
 - [WikiProject AI Cleanup](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) - AI-writing pattern references used by `humanizer`.
 - [vuejs-ai](https://github.com/vuejs-ai) and other open-source skill authors whose work helped shape this pack.
 

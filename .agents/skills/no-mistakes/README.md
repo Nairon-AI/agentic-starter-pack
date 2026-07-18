@@ -1,4 +1,6 @@
 <h1 align="center"><code>git push no-mistakes</code></h1>
+> **Starter-pack maintainer rule:** Do not run or initialize `no-mistakes` inside the `agentic-starter-pack` repository. This vendored documentation is downstream catalog content. Follow the root `AGENTS.md`.
+
 <p align="center">
   <a href="https://github.com/kunchenguid/no-mistakes/actions/workflows/release.yml"
     ><img

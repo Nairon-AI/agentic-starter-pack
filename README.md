@@ -4,11 +4,11 @@
 
 ### Default repo setup for coding agents
 
-**One agent prompt -> starter AGENTS.md -> 252 portable skills + brain vault**
+**One agent prompt -> starter AGENTS.md -> 253 portable skills + brain vault**
 *Context, planning, frontend, engineering, security, writing, marketing, and persistent-agent-memory workflows in one public repo.*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/Skills-252-111827.svg)](#skill-catalog)
+[![Skills](https://img.shields.io/badge/Skills-253-111827.svg)](#skill-catalog)
 
 ---
 
@@ -42,7 +42,7 @@ Do the full install cleanly:
 
 ### What gets installed
 
-- **252 skills** - task-specific workflows for context, planning, frontend polish, engineering cleanup, security, writing, and marketing. They give agents concrete procedures instead of vibes.
+- **253 skills** - task-specific workflows for context, planning, frontend polish, engineering cleanup, security, writing, and marketing. They give agents concrete procedures instead of vibes.
 - **Curated third-party skills** - not every skill here was created by Nairon AI. This repo is a starter pack: a curated, adapted bundle of skills we have found useful while operating products.
 - **Categorized `skills/` mirror** - browsable source layout inside the target repo, useful for humans and future agents to inspect or edit installed skills.
 - **Starter `AGENTS.md`** - repo-local operating rules: type checks, tests, git safety, PR workflow, browser validation, and handoff expectations.
@@ -69,6 +69,10 @@ scripts/     helper scripts for building the flat skill install source
 ```
 
 The category folders are the real source of truth. `scripts/build-install-source.sh` builds a temporary flat install source for `npx skills add`.
+
+### Maintainer note
+
+Do not run or initialize the `no-mistakes` CLI while maintaining this repository. Its bundled files are catalog content for downstream installs only. Use repo-native checks and push directly to `origin` only when explicitly authorized. See `AGENTS.md` for the repository-local rule.
 
 ---
 
@@ -119,7 +123,7 @@ The category folders are the real source of truth. `scripts/build-install-source
 
 ### `frontend/tools`
 
-- `agent-browser`, `browser-trace`, `budge`, `rams`
+- `agent-browser`, `browser-trace`, `budge`, `dogfood`, `rams`
 
 ### `engineering/`
 
@@ -179,6 +183,7 @@ Special thanks to:
 - [Anthony Fu](https://github.com/antfu) - generated framework skills and source tooling patterns.
 - [Emil Kowalski](https://animations.dev/) - design engineering and motion philosophy.
 - [Raphael Salaja](https://github.com/raphael-salaja) - web motion skills.
+- [Chris Tate](https://github.com/ctate) / [Vercel Labs](https://github.com/vercel-labs/agent-browser) - `agent-browser` and `dogfood` browser automation skills.
 - [Hardik Pandya](https://hvpandya.com) - `stop-slop` writing skill.
 - [Francesco Mistero / Kappaemme-git](https://github.com/Kappaemme-git) - startup validation, customer discovery, and performance proof skills.
 - [Lauren Tan / pstack](https://github.com/cursor/plugins/tree/main/pstack) - rigorous engineering workflows, evidence gathering, and verification practices.

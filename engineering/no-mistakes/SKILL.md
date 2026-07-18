@@ -6,6 +6,10 @@ user-invocable: true
 
 # no-mistakes
 
+## Repository-local prohibition
+
+If the current repository is `agentic-starter-pack`, stop and do not execute this skill or any `no-mistakes` command. Follow the root `AGENTS.md`. This exception applies only to maintenance of the starter-pack repository; this skill remains bundled for downstream consumers.
+
 `no-mistakes` is a local gate that validates your code changes through a pipeline
 (intent, rebase, review, test, document, lint, push, PR, CI) before they reach
 upstream. You drive it through the `no-mistakes axi` command family, which prints

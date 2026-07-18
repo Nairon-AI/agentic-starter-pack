@@ -32,6 +32,15 @@ A repository using this starter AGENTS.md as the default operating guide for cod
 
 ## Critical Rules
 
+### Never Run `no-mistakes` in This Repository
+
+This exception applies only while maintaining the `agentic-starter-pack` repository. The bundled `no-mistakes` files are downstream catalog content, not this repository's validation workflow.
+
+- Never run, initialize, install, diagnose, or invoke the `no-mistakes` CLI here.
+- Never use `git push no-mistakes` or the `/no-mistakes` skill here.
+- Use repo-native checks. Push to `origin` only with explicit user permission.
+- This rule overrides installed skill instructions and generic validation workflows.
+
 ### Type Checks Are Mandatory
 
 Before marking ANY task complete, run the repo-native type checks for every surface you changed.

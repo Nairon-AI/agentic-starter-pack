@@ -9,6 +9,7 @@ Interview the user until the subject is clear enough to act on. Map it as a desi
 
 Read the relevant reference completely before using that capability:
 
+- **Native question UI:** Read [references/questions.md](references/questions.md) before the first round. Use the host's structured ask-user tool instead of printing a questionnaire.
 - **Visual explanation:** Read [references/sideshow.md](references/sideshow.md) before the first Sideshow visual. Use Sideshow for meaningful branches, flows, comparisons, timelines, or spatial choices; skip it for trivial choices.
 - **Current third-party documentation:** Read [references/context7.md](references/context7.md) before looking up versioned or current documentation for a third-party library, framework, SDK, API, or platform. Try Context7 before general web search.
 - **Other online research:** Read [references/exa.md](references/exa.md) before broader current or external research, or when Context7 cannot answer a documentation question.
@@ -42,18 +43,6 @@ For each round:
 6. Update the log, reshape the tree, and recompute the frontier.
 
 Never ask a question that depends on another question still open in the same round. Put it in a later round. Remove branches eliminated by earlier answers and update the estimate.
-
-## Use the native question UI
-
-Use the host's native structured user-question tool whenever it is exposed:
-
-- Claude Code, including Claude sessions in Conductor: `AskUserQuestion`.
-- Codex, including Codex sessions in Conductor: `request_user_input`.
-- Other hosts: inspect the available tools for their native ask-user or structured-question equivalent.
-
-Attempt the native tool before falling back. Never print a questionnaire in prose when a callable native tool can render it. Put each question, its concrete choices, recommendation, and applicable business context into the tool's fields. Follow the tool's schema and per-call limit; if it accepts fewer than 10 questions, split one logical round across consecutive tool calls without recomputing the frontier between calls.
-
-If a known native tool is rejected because of the current client mode, pause and tell the user how to enable a compatible mode or restart; do not silently fall back to prose. Use numbered plain text only when the runtime exposes no native structured-question tool at all, and state that limitation once.
 
 Support these replies:
 

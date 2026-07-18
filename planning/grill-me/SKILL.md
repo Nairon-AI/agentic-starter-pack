@@ -79,6 +79,17 @@ Apply a practical version of [Orwell's six writing rules](https://www.orwellfoun
 5. Prefer plain English; define necessary technical terms once.
 6. Break a rule when obeying it would make the writing ugly, inaccurate, or less clear.
 
+Also apply ASD-STE100 Simplified Technical English principles as mandatory drafting rules:
+
+- Use one term for each concept and one meaning for each term. Do not vary words for style.
+- Put one decision, instruction, or main idea in each sentence.
+- Keep sentences short. Split compound questions and stacked conditions.
+- Use active voice, explicit actors, simple verb forms, and concrete nouns.
+- State a condition before the action or decision that depends on it.
+- Define unavoidable technical terms once; then use the same term consistently.
+
+Use these rules as a practical clarity standard. Do not claim formal ASD-STE100 conformance unless an approved specification and conformance check are available.
+
 Before sending, ensure a smart teammate outside the conversation can understand the text on the first read. Name the actor, action, affected thing, and consequence. Make options concrete, distinct, and comparable. Replace vague references. Include enough context to answer confidently, but no irrelevant detail. Rewrite anything that fails.
 
 ## Make recommendations decision-ready

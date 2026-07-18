@@ -4,6 +4,8 @@ Use `ask <number>` for one frontier question or `ask all` for the whole frontier
 
 `ask` is not an answer. Keep copied questions and their downstream branches unresolved. Continue processing answered questions and other unblocked branches.
 
+Use `ask` to get help with selected questions while the current developer keeps the session. Use `pass` to transfer ownership of the whole unresolved frontier; follow [handoff.md](handoff.md).
+
 ## Build the packet
 
 1. Resolve the developer's name from the conversation, workspace identity, or `git config user.name`. If still unknown, ask once.

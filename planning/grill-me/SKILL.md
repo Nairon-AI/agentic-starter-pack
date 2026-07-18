@@ -1,6 +1,6 @@
 ---
 name: grill-me
-description: Relentlessly interview the user in dependency-aware batches to sharpen a plan, decision, design, idea, or codebase change. Use when the user wants to stress-test their thinking, get grilled, or mentions "grill me". In repositories, inspect current behavior and maintain durable decision docs as answers settle.
+description: Relentlessly interview the user in dependency-aware batches to sharpen a plan, decision, design, idea, or codebase change. Use when the user wants to stress-test their thinking, get grilled, pass unfinished grilling to a teammate, or pick it up from a PR. In repositories, inspect current behavior and maintain durable decision docs as answers settle.
 ---
 
 Interview the user until the subject is clear enough to act on. Map it as a design tree: every decision branches into decisions that depend on it.
@@ -15,10 +15,13 @@ Read the relevant reference completely before using that capability:
 - **Current third-party documentation:** Read [references/context7.md](references/context7.md) before looking up versioned or current documentation for a third-party library, framework, SDK, API, or platform. Try Context7 before general web search.
 - **Other online research:** Read [references/exa.md](references/exa.md) before broader current or external research, or when Context7 cannot answer a documentation question.
 - **Teammate escalation:** Read [references/ask.md](references/ask.md) when the user sends `ask <number>` or `ask all`.
+- **Cross-developer handoff:** Read [references/handoff.md](references/handoff.md) when the user sends `pass`, `pass @developer`, `pass <PR URL> [@developer]`, or `pickup <PR URL>`. Transfer the unresolved frontier through the PR; do not create another public skill.
 
 ## Start the session
 
 Before the first round:
+
+If the user invokes `pickup <PR URL>`, run the cross-developer handoff workflow first. It reconstructs the local decision log; skip blank-session initialization and rejoin at **Work in rounds** with the recovered frontier.
 
 1. Inspect the relevant conversation, files, repository, and tools.
 2. Decide whether this is a general or repository-aware session. For repository-aware work, load the reference above and identify the canonical durable document before decisions need publishing.
@@ -54,6 +57,7 @@ Support these replies:
 - `<number> rec`: accept one recommendation.
 - `idu <number>`: explain that question with a dumb-simple example, then wait for its answer.
 - `ask <number>` or `ask all`: run the teammate-escalation workflow. This does not answer the question; keep it and its downstream branches unresolved.
+- `pass`, `pass @developer`, or `pass <PR URL> [@developer]`: publish the unfinished session through the cross-developer handoff workflow, then stop.
 
 For the plain-text fallback only, end each round with:
 

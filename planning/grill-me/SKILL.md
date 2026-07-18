@@ -1,6 +1,6 @@
 ---
 name: grill-me
-description: Relentlessly interview the user in dependency-aware batches to sharpen a plan, decision, design, idea, or codebase change. Use when the user wants to stress-test their thinking, get grilled, pass unfinished grilling to a teammate, or pick it up from a PR. In repositories, inspect current behavior and maintain durable decision docs as answers settle.
+description: Relentlessly interview the user in dependency-aware batches to sharpen a plan, decision, design, idea, codebase change, or bug fix. Use when the user wants to get grilled, investigate a bug from a ticket or screenshots, pass unfinished grilling to a teammate, or pick it up from a PR. In repositories, inspect current behavior, run a mandatory gap and blast-radius pass, and maintain durable decision docs as answers settle.
 ---
 
 Interview the user until the subject is clear enough to act on. Map it as a design tree: every decision branches into decisions that depend on it.
@@ -11,6 +11,9 @@ Read the relevant reference completely before using that capability:
 
 - **Native question UI:** Read [references/questions.md](references/questions.md) before the first round. Use the host's structured ask-user tool instead of printing a questionnaire.
 - **Repository-aware grilling:** Read [references/repo-aware.md](references/repo-aware.md) before asking questions about work in an existing repository. Inspect code and docs first, then keep the canonical subject document and relevant domain docs current.
+- **Bug investigation:** Read [references/bugs.md](references/bugs.md) when the subject is a bug, regression, incident, incorrect behavior, or bug-like Linear ticket. Run RCA before debating the fix.
+- **Protected access:** Read [references/credentials.md](references/credentials.md) when investigation needs a production database, logs, vendor account, or other protected system. Discover the repository's documented access path before asking the user.
+- **Mandatory gap analysis:** Read [references/gap-analysis.md](references/gap-analysis.md) before finishing every session. Inspect all eight categories in order, then invoke `blast-radius` for repository work.
 - **Visual explanation:** Read [references/sideshow.md](references/sideshow.md) before the first Sideshow visual. Use Sideshow for meaningful branches, flows, comparisons, timelines, or spatial choices; skip it for trivial choices.
 - **Current third-party documentation:** Read [references/context7.md](references/context7.md) before looking up versioned or current documentation for a third-party library, framework, SDK, API, or platform. Try Context7 before general web search.
 - **Other online research:** Read [references/exa.md](references/exa.md) before broader current or external research, or when Context7 cannot answer a documentation question.
@@ -29,6 +32,8 @@ If the user invokes `pickup <PR URL>`, run the cross-developer handoff workflow 
 4. Map the initial design tree and frontier.
 5. Summarize known facts and assumptions in one or two sentences.
 6. Estimate total decisions, rounds, and time. Update estimates as the tree changes.
+
+For a bug, establish the symptom, root cause, confidence, and safest fix shape through the bug workflow before asking the user to choose among fixes.
 
 Finding facts is the agent's job. Retrieve facts instead of asking the user. When independent fact-finding would help and sub-agents are available, dispatch it with only the needed context. Do not block the whole frontier: defer only questions downstream of unfinished research and ask the rest now.
 
@@ -130,7 +135,7 @@ Reply by number. Use `rec all`, `1 rec`, `idu 2`, or `ask 2`.
 
 ## Finish the session
 
-Finish only when the frontier is empty: every relevant branch was visited, eliminated, or explicitly deferred; fact-finding finished; nothing remains silently assumed.
+When the normal frontier first becomes empty, run the mandatory gap analysis. If it exposes a material question, return to **Work in rounds**. Finish only when a complete gap pass adds no material question: every relevant branch was visited, eliminated, or explicitly deferred; fact-finding finished; nothing remains silently assumed.
 
 Summarize decisions, facts, assumptions, constraints, deferred items, risks, and the agreed next action. Ask the user to confirm shared understanding and record confirmation.
 
@@ -139,5 +144,7 @@ In repository-aware mode, after confirmation:
 1. Verify every settled decision is present in its canonical document.
 2. Remove in-progress markers and promote accepted ADRs as described in the repository-aware reference.
 3. Delete the transient decision log. If publication is incomplete, keep the log and state what is missing.
+
+If Sideshow was used, stop the local Sideshow server this session started, following its cleanup rules. Never kill a pre-existing or shared server.
 
 These document updates are part of grilling. Do not implement product changes or take the agreed next action unless the user explicitly asks.

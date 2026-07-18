@@ -57,6 +57,8 @@ Choose priority from confirmed blast radius:
 
 Do not inflate priority from uncertainty alone.
 
-Prefer Linear's official OAuth MCP at `https://mcp.linear.app/mcp`. Before adding it, use the main skill's current third-party documentation workflow to verify the official setup. If Linear tools are missing, add it at user scope with the client's native command (`codex mcp add linear --url https://mcp.linear.app/mcp` or `claude mcp add --transport http linear-server https://mcp.linear.app/mcp`), complete authentication, save the session state, and tell the user to restart. Never put a Linear token in project files. If setup is unavailable, prepare the exact ticket body and report the blocker instead of claiming creation.
+Prefer a usable Linear app or Linear's official OAuth MCP at `https://mcp.linear.app/mcp`. Inspect loaded tools and the client's MCP or app list before setup. If either connection is usable, continue without adding another. If Linear is configured but logged out, authenticate that connection with its native flow (`codex mcp login linear`, Claude Code `/mcp`, or the app's OAuth prompt); never add a duplicate. If Linear is missing, first verify current official setup through the main skill's third-party documentation workflow, then add it at user scope (`codex mcp add linear --url https://mcp.linear.app/mcp` or `claude mcp add --transport http linear-server https://mcp.linear.app/mcp`) and authenticate.
+
+After installation, or when authentication succeeds but tools are not loaded, save the session state and tell the user to restart. Do not claim Linear is usable before a tool call succeeds. Never put a Linear token in project files. If setup or authentication is unavailable, prepare the exact ticket body and report the blocker instead of claiming creation.
 
 Linear record creation and updates are part of bug grilling, not product implementation.

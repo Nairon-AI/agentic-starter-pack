@@ -25,9 +25,6 @@ The hosted endpoint requires no API key. Never put API keys in URLs or project f
 
 ## Restart
 
-1. Verify `exa` appears in the server list, such as `codex mcp list` or `claude mcp list`.
-2. Save the current frontier, decisions, running research, and restart reason in the decision log.
-3. Tell the user: `Exa MCP is installed. Restart this agent session, then invoke grill-me again; I will resume from the decision log.`
-4. Stop the grilling session. Do not claim Exa tools are usable before restart.
+After installation, verify `exa` appears in the client server list. Save the frontier, decisions, research, and restart reason in the log. Tell the user: `Exa MCP is installed. Restart this agent session, then invoke grill-me again; I will resume from the decision log.` Then stop; do not claim the tools work before restart.
 
 If installation fails, report the exact blocker. Continue with other unblocked frontier questions, but defer questions requiring online research. Do not silently use weaker web research unless the user asks.

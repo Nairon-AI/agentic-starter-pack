@@ -9,16 +9,16 @@ Interview the user until the subject is clear enough to act on. Map it as a desi
 
 Read the relevant reference completely before using that capability:
 
-- **Native question UI:** Read [references/questions.md](references/questions.md) before the first round. Use the host's structured ask-user tool instead of printing a questionnaire.
-- **Repository-aware grilling:** Read [references/repo-aware.md](references/repo-aware.md) before asking questions about work in an existing repository. Inspect code and docs first, then keep the canonical subject document and relevant domain docs current.
-- **Bug investigation:** Read [references/bugs.md](references/bugs.md) when the subject is a bug, regression, incident, incorrect behavior, or bug-like Linear ticket. Run RCA before debating the fix.
-- **Protected access:** Read [references/credentials.md](references/credentials.md) when investigation needs a production database, logs, vendor account, or other protected system. Discover the repository's documented access path before asking the user.
-- **Mandatory gap analysis:** Read [references/gap-analysis.md](references/gap-analysis.md) before finishing every session. Inspect all eight categories in order, then invoke `blast-radius` for repository work.
-- **Visual explanation:** Read [references/sideshow.md](references/sideshow.md) before the first Sideshow visual. Use Sideshow for meaningful branches, flows, comparisons, timelines, or spatial choices; skip it for trivial choices.
-- **Current third-party documentation:** Read [references/context7.md](references/context7.md) before looking up versioned or current documentation for a third-party library, framework, SDK, API, or platform. Try Context7 before general web search.
-- **Other online research:** Read [references/exa.md](references/exa.md) before broader current or external research, or when Context7 cannot answer a documentation question.
-- **Teammate escalation:** Read [references/ask.md](references/ask.md) when the user sends `ask <number>` or `ask all`.
-- **Cross-developer handoff:** Read [references/handoff.md](references/handoff.md) when the user sends `pass`, `pass @developer`, `pass <PR URL> [@developer]`, or `pickup <PR URL>`. Transfer the unresolved frontier through the PR; do not create another public skill.
+- **Native question UI:** Before the first round, read [references/questions.md](references/questions.md).
+- **Repository-aware grilling:** For work in an existing repository, read [references/repo-aware.md](references/repo-aware.md) before asking.
+- **Bug investigation:** For a bug, regression, incident, incorrect behavior, or bug-like Linear ticket, read [references/bugs.md](references/bugs.md).
+- **Protected access:** When investigation needs a protected system, read [references/credentials.md](references/credentials.md).
+- **Mandatory gap analysis:** Before finishing every session, read [references/gap-analysis.md](references/gap-analysis.md).
+- **Visual explanation:** Before the first useful Sideshow visual, read [references/sideshow.md](references/sideshow.md).
+- **Current third-party documentation:** Before looking up current or versioned third-party docs, read [references/context7.md](references/context7.md).
+- **Other online research:** Before broader external research, or when Context7 cannot answer, read [references/exa.md](references/exa.md).
+- **Teammate escalation:** On `ask <number>` or `ask all`, read [references/ask.md](references/ask.md).
+- **Cross-developer handoff:** On `pass`, `pass @developer`, `pass <PR URL> [@developer]`, or `pickup <PR URL>`, read [references/handoff.md](references/handoff.md).
 
 ## Start the session
 
@@ -32,8 +32,6 @@ If the user invokes `pickup <PR URL>`, run the cross-developer handoff workflow 
 4. Map the initial design tree and frontier.
 5. Summarize known facts and assumptions in one or two sentences.
 6. Estimate total decisions, rounds, and time. Update estimates as the tree changes.
-
-For a bug, establish the symptom, root cause, confidence, and safest fix shape through the bug workflow before asking the user to choose among fixes.
 
 Finding facts is the agent's job. Retrieve facts instead of asking the user. When independent fact-finding would help and sub-agents are available, dispatch it with only the needed context. Do not block the whole frontier: defer only questions downstream of unfinished research and ask the rest now.
 
@@ -124,13 +122,6 @@ Resolved: 4 | Frontier: 2 | Estimated remaining: ~6 decisions
    C. Ask first
    Recommendation: B — avoids empty sessions. Business context: lowers storage and support noise without removing useful customer history.
 
-2. How long should saved sessions be retained?
-   A. 30 days
-   B. 90 days
-   C. Forever
-   Recommendation: B — preserves useful history. Business context: balances customer continuity with storage cost and privacy risk.
-
-Reply by number. Use `rec all`, `1 rec`, `idu 2`, or `ask 2`.
 ```
 
 ## Finish the session

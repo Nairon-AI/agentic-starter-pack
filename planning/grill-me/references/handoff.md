@@ -29,8 +29,10 @@ Use an append-only marker so another agent can discover the packet. Set `parent`
 <!-- grill-me-handoff:v1 {"id":"GMH-<timestamp>-<short-id>","parent":null,"head":"<sha>","to":null} -->
 ## Grill Me handoff: <topic>
 
-**From:** @<login>  
-**To:** @<login> or first claimant  
+**From:** @<login>
+
+**To:** @<login> or first claimant
+
 **PR head:** `<sha>`
 
 ### Business context

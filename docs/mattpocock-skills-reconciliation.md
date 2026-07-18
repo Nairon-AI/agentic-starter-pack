@@ -12,7 +12,6 @@ Source: `mattpocock/skills` at `5d78bd0` (`2026-06-28` sync).
 - `engineering/resolving-merge-conflicts`
 - `engineering/writing-great-skills`
 - `planning/decision-mapping`
-- `planning/grilling`
 - `planning/loop-me`
 - `writing/writing-beats`
 - `writing/writing-fragments`
@@ -35,7 +34,7 @@ Upstream updates applied:
 
 Merged selectively:
 
-- `engineering/grill-with-docs` keeps the starter-pack codebase/domain grilling workflow, plus upstream's `disable-model-invocation` metadata and `/grilling` + `/domain-modeling` wrapper instruction.
+- `planning/grill-me` absorbs upstream `planning/grilling` plus the starter-pack codebase/domain workflow formerly exposed as `engineering/grill-with-docs`. `domain-modeling` remains its internal specialist; the two overlapping public skills were retired.
 
 ## Still Needs Human Double-Check
 

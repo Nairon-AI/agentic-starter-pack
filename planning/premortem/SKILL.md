@@ -111,7 +111,7 @@ If the idea gets more complex and the question count changes, say so explicitly 
 
 Be more relentless than polite brainstorming, but keep the target narrow: expose the assumptions that make the idea premortemable. Do not drift into implementation planning unless implementation constraints are the source of risk.
 
-For repo/codebase feature ideas, inspect the relevant files/docs before asking if the repository can answer the question. If the issue is really unsettled domain language, glossary, or ADRs, say that `/grill-with-docs` should run before or alongside the premortem.
+For repo/codebase feature ideas, inspect the relevant files/docs before asking if the repository can answer the question. If the issue is really unsettled domain language, glossary, or ADRs, say that repository-aware `/grill-me` should run before or alongside the premortem.
 
 ### question ladder
 

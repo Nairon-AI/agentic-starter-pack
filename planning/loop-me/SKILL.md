@@ -5,7 +5,7 @@ disable-model-invocation: true
 argument-hint: "A workflow to design, or nothing to go find one"
 ---
 
-Run a stateful `/grilling` session whose only output is **workflow** specs. Use the grilling discipline — relentless, one question at a time, a recommended answer attached to each — aimed at the vocabulary and goal below. Create, edit, and delete specs as the grilling resolves things.
+Run a stateful `/grill-me` session whose only durable output is **workflow** specs. Use dependency-aware rounds with a recommended answer for every question, aimed at the vocabulary and goal below. Create, edit, and delete specs as the grilling resolves things.
 
 ## The loop lens
 

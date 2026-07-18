@@ -35,12 +35,25 @@ The **frontier** is every unresolved decision whose prerequisites are settled.
 For each round:
 
 1. Compute the whole frontier.
-2. Ask every frontier question together, numbered.
-3. Give concrete options and a concise recommendation for each.
-4. Wait for answers to all frontier questions before starting the next round.
-5. Update the log, reshape the tree, and recompute the frontier.
+2. Select up to 10 frontier questions. Keep any overflow on the frontier for the next round.
+3. Ask the selected questions through the host's native structured user-question tool as described below.
+4. Give concrete options and a concise recommendation for each.
+5. Wait for answers to the whole logical round before starting the next round.
+6. Update the log, reshape the tree, and recompute the frontier.
 
 Never ask a question that depends on another question still open in the same round. Put it in a later round. Remove branches eliminated by earlier answers and update the estimate.
+
+## Use the native question UI
+
+Use the host's native structured user-question tool whenever it is exposed:
+
+- Claude Code, including Claude sessions in Conductor: `AskUserQuestion`.
+- Codex, including Codex sessions in Conductor: `request_user_input`.
+- Other hosts: inspect the available tools for their native ask-user or structured-question equivalent.
+
+Attempt the native tool before falling back. Never print a questionnaire in prose when a callable native tool can render it. Put each question, its concrete choices, recommendation, and applicable business context into the tool's fields. Follow the tool's schema and per-call limit; if it accepts fewer than 10 questions, split one logical round across consecutive tool calls without recomputing the frontier between calls.
+
+If a known native tool is rejected because of the current client mode, pause and tell the user how to enable a compatible mode or restart; do not silently fall back to prose. Use numbered plain text only when the runtime exposes no native structured-question tool at all, and state that limitation once.
 
 Support these replies:
 
@@ -50,7 +63,7 @@ Support these replies:
 - `idu <number>`: explain that question with a dumb-simple example, then wait for its answer.
 - `ask <number>` or `ask all`: run the teammate-escalation workflow. This does not answer the question; keep it and its downstream branches unresolved.
 
-End each round with:
+For the plain-text fallback only, end each round with:
 
 ```text
 Reply by number. Use `rec all`, `1 rec`, `idu 2`, or `ask 2`.

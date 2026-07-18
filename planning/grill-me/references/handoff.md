@@ -9,7 +9,7 @@ Commands:
 - `pass <PR URL> [@developer]`: transfer it through an explicit PR.
 - `pickup <PR URL>`: claim and resume the newest eligible handoff on that PR.
 
-This protocol requires a GitHub PR accessible to both developers. For work without a PR, use the generic `handoff` skill and share its file through a user-approved channel.
+This protocol requires a GitHub PR both developers can access. Without one, use `handoff` when available. Otherwise write a redacted OS-temp handoff with canonical pointers, unresolved state, evidence, and suggested skills; share only through a user-approved channel.
 
 ## Pass
 

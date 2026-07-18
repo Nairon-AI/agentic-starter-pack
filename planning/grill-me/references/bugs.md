@@ -5,9 +5,9 @@ Use this workflow when the subject is a bug, regression, incident, or incorrect 
 ## Investigate before asking fix questions
 
 1. Read the supplied ticket, attachments, screenshots, comments, logs, and relevant repository history.
-2. Invoke the `rca` skill. Reproduce when safe, trace backward from symptom to source, test realistic production conditions, state confidence, and challenge the diagnosis.
+2. Invoke `rca` when available. Otherwise do it directly: classify severity; reproduce safely; trace `file:line` evidence to the first divergence; test relevant scale, concurrency, retries, partial failure, and timing; show root cause → propagation → symptom; state confidence; challenge deeper or alternate causes; define regression proof and structural prevention.
 3. If protected-system evidence is needed, follow the main skill's protected-access workflow. Ask for a precise permission only after repository docs fail to provide access.
-4. Invoke `blast-radius` to find non-obvious breakage and prove the cheapest safety-critical fact. Use read-only checks, existing tests, or temporary proof during grilling; do not edit product files yet.
+4. Invoke `blast-radius` when available; otherwise do its pass directly. Find non-obvious breakage and prove the cheapest safety-critical fact with read-only checks, existing tests, or temporary proof; do not edit product files yet.
 5. Recommend the smallest safe source fix, regression coverage, and any defense in depth. Stop before implementation until the user confirms shared understanding and explicitly approves the fix.
 
 Do not call a guess a root cause. If reproduction or production evidence is missing, lower confidence and keep the missing fact on the frontier.
@@ -59,7 +59,7 @@ Do not inflate priority from uncertainty alone.
 
 Use Linear in this order:
 
-1. **CLI first.** If `linear` is on `PATH`, run `linear auth status`. When it succeeds, use the CLI for duplicate search and issue reads/writes. Verify current commands through the main skill's third-party documentation workflow before relying on them. If the CLI is missing or unauthenticated, do not add it to project dependencies or request an API key in chat; continue to the next option.
+1. **CLI first.** If `linear` is on `PATH`, inspect `linear auth --help`; prove authentication with listed `whoami`, otherwise legacy `status`. Then use the CLI for duplicate search and issue reads/writes. Check commands through the third-party-docs workflow, but installed help wins conflicts. If missing or unauthenticated, do not add a project dependency or request an API key in chat; try the next option.
 2. **App or MCP fallback.** Inspect loaded tools and the client's MCP or app list. If either connection works, continue without adding another. If Linear is configured but logged out, authenticate that connection with its native flow (`codex mcp login linear`, Claude Code `/mcp`, or the app's OAuth prompt); never add a duplicate. If Linear is missing, verify current official setup, then add its OAuth MCP at user scope (`codex mcp add linear --url https://mcp.linear.app/mcp` or `claude mcp add --transport http linear-server https://mcp.linear.app/mcp`) and authenticate.
 
 After installation, or when authentication succeeds but tools are not loaded, save the session state and tell the user to restart. Do not claim Linear is usable before a tool call succeeds. Never put a Linear token in project files. If setup or authentication is unavailable, prepare the exact ticket body and report the blocker instead of claiming creation.

@@ -15,7 +15,7 @@ Inspect these categories in this exact order:
 7. **Security and privacy** — access control, tenant boundaries, secret exposure, sensitive data, retention, abuse, audit, and compliance constraints.
 8. **Accessibility** — keyboard, screen reader, focus, semantics, contrast, motion, zoom, touch, cognitive load, and error communication.
 
-For repository-aware work, invoke the `blast-radius` skill after category 8. If no diff exists yet, treat the proposed scope and behavior as the change. Inspect what it could break beyond obvious callers and prove the cheapest safety-critical fact with existing tests, runtime checks, or a temporary proof. During grilling, do not edit product files merely to prove it; mark unproven facts clearly.
+For repository-aware work, invoke `blast-radius` after category 8 when available; otherwise do its pass directly. Without a diff, treat proposed scope and behavior as the change. Inspect breakage beyond obvious callers and prove the cheapest safety-critical fact with existing tests, runtime checks, or temporary proof. During grilling, do not edit product files merely for proof; mark unproven facts.
 
 ## Adapt depth without skipping coverage
 

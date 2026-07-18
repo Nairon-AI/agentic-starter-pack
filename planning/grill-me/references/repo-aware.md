@@ -38,7 +38,7 @@ After the user confirms shared understanding, verify publication, remove the in-
 
 ## Keep the domain model honest
 
-Use the `domain-modeling` skill as an internal specialist when answers change domain terms, relationships, boundaries, or architectural decisions.
+When answers change domain terms, relationships, boundaries, or architecture, use `domain-modeling` when available; otherwise apply the rules below directly.
 
 - Challenge conflicts with the existing glossary immediately.
 - Replace vague or overloaded terms with one precise canonical term.

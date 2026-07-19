@@ -95,7 +95,6 @@ Use these rules as a practical clarity standard. Do not claim formal ASD-STE100 
 Before sending, ensure a smart teammate outside the conversation can understand the text on the first read. Name the actor, action, affected thing, and consequence. Make options concrete, distinct, and comparable. Replace vague references. Include enough context to answer confidently, but no irrelevant detail. Rewrite anything that fails.
 
 ## Make recommendations decision-ready
-
 Explain why each recommendation is best. When business context applies, cover the relevant customer, user, or operator outcome; business goal or constraint; revenue, cost, risk, speed, support, or operational effect; main tradeoff; and timing.
 
 Use known facts and label inferences. Never invent business context. Research missing retrievable context or leave it as an unresolved prerequisite.

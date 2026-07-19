@@ -18,4 +18,4 @@ If the path is missing or ambiguous, ask through the native question UI where ac
 
 Once clarified, update the canonical setup or runbook with the mechanism, scope, owner, and retrieval steps. Never document a secret value.
 
-Never place credentials in chat, native-question fields, `.context`, Sideshow, clipboard packets, PR comments, Linear tickets, screenshots, commits, or shell output. If no safe documented route exists, ask the developer to configure access outside the conversation or run the sensitive command themselves and return redacted results. Production mutation always requires separate explicit approval.
+Never place credentials in chat, native-question fields, `.context`, live diagrams, clipboard packets, PR comments, Linear tickets, screenshots, commits, or shell output. If no safe documented route exists, ask the developer to configure access outside the conversation or run the sensitive command themselves and return redacted results. Production mutation always requires separate explicit approval.

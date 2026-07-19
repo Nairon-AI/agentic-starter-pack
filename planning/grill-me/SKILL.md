@@ -1,6 +1,6 @@
 ---
 name: grill-me
-description: Relentlessly interview the user in dependency-aware batches to sharpen a plan, decision, design, idea, codebase change, or bug fix. Use when the user wants to get grilled, investigate a bug from a ticket or screenshots, pass unfinished grilling to a teammate, or pick it up from a PR. In repositories, inspect current behavior, run a mandatory gap and blast-radius pass, and maintain durable decision docs as answers settle.
+description: Relentlessly interview the user in dependency-aware batches to sharpen a plan, decision, design, idea, codebase change, or bug fix. Use when the user wants to get grilled, investigate a bug from a ticket or screenshots, pass unfinished grilling to a teammate, or pick it up from a PR. Begin each session by asking whether live diagrams should use Sideshow or experimental Grill Visuals. In repositories, inspect current behavior, run a mandatory gap and blast-radius pass, and maintain durable decision docs as answers settle.
 ---
 
 Interview the user until the subject is clear enough to act on. Map it as a design tree: every decision branches into decisions that depend on it.
@@ -14,7 +14,7 @@ Read the relevant reference completely before using that capability:
 - **Bug investigation:** For a bug, regression, incident, incorrect behavior, or bug-like Linear ticket, read [references/bugs.md](references/bugs.md).
 - **Protected access:** When investigation needs a protected system, read [references/credentials.md](references/credentials.md).
 - **Mandatory gap analysis:** Before finishing every session, read [references/gap-analysis.md](references/gap-analysis.md).
-- **Visual explanation:** Before the first useful Sideshow visual, read [references/sideshow.md](references/sideshow.md).
+- **Live-diagram choice:** Before any grilling question in every session, read [references/visuals.md](references/visuals.md).
 - **Current third-party documentation:** Before looking up current or versioned third-party docs, read [references/context7.md](references/context7.md).
 - **Other online research:** Before broader external research, or when Context7 cannot answer, read [references/exa.md](references/exa.md).
 - **Teammate escalation:** On `ask <number>` or `ask all`, read [references/ask.md](references/ask.md).
@@ -24,7 +24,9 @@ Read the relevant reference completely before using that capability:
 
 Before the first round:
 
-If the user invokes `pickup <PR URL>`, run the cross-developer handoff workflow first. It reconstructs the local decision log; skip blank-session initialization and rejoin at **Work in rounds** with the recovered frontier.
+Make the renderer choice in the visual reference the first user-facing question. Ask it through the host's native structured question tool even when no diagram is useful yet, the repository has a default, a previous session chose a renderer, or the user invokes `pickup`. Retain the answer, then record it when creating or reconstructing the decision log. Do not silently switch renderers if setup fails.
+
+If the user invokes `pickup <PR URL>`, ask the renderer question, then run the cross-developer handoff workflow. It reconstructs the local decision log; skip blank-session initialization and rejoin at **Work in rounds** with the recovered frontier.
 
 1. Inspect the relevant conversation, files, repository, and tools.
 2. Decide whether this is a general or repository-aware session. For repository-aware work, load the reference above and identify the canonical durable document before decisions need publishing.
@@ -147,6 +149,6 @@ In repository-aware mode, after confirmation:
 2. Remove in-progress markers and promote accepted ADRs as described in the repository-aware reference.
 3. Delete the transient decision log. If publication is incomplete, keep the log and state what is missing.
 
-If Sideshow was used, stop the local Sideshow server this session started, following its cleanup rules. Never kill a pre-existing or shared server.
+If a local visual server was used, stop only the exact Sideshow or Grill Visuals server this session started, following its cleanup rules. Never kill a pre-existing or shared server.
 
 These document updates are part of grilling. Do not implement product changes or take the agreed next action unless the user explicitly asks.

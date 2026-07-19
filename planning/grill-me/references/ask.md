@@ -11,7 +11,7 @@ Use `ask` to get help with selected questions while the current developer keeps 
 1. Resolve the developer's name from the conversation, workspace identity, or `git config user.name`. If still unknown, ask once.
 2. Infer the work type: Feature, Migration, Bug, Incident, Architecture decision, Plan, or another accurate label.
 3. Rewrite the question so it stands alone and follows the main skill's writing and business-context rules.
-4. Extract only the relevant Sideshow branch. Include portable Mermaid source and a short plain-text reading. Include a shareable HTTPS Sideshow URL when available; never rely on localhost or expose a token.
+4. Extract only the relevant branch from the session's chosen renderer. Include a shareable HTTPS deep link only when it already exists and the developer approved its publication or sharing. Always include a portable Mermaid fallback and short plain-text reading; never auto-publish, rely on localhost, or expose a token.
 5. Remove secrets, private file contents, inaccessible internal links, and irrelevant implementation detail.
 
 Use this Markdown packet:
@@ -31,7 +31,7 @@ C. <option, when useful>
 Current recommendation: <option and concise rationale, including applicable customer/user outcome, business goal, revenue/cost/risk/operations impact, tradeoff, and timing; never invent context>
 
 Diagram:
-<focused Mermaid source and plain-text reading>
+<approved shareable deep link when available, plus a focused portable fallback and plain-text reading>
 
 What I need from you: Choose an option or propose another. Briefly explain any missing constraint or risk.
 ```

@@ -57,11 +57,16 @@ Use an append-only marker so another agent can discover the packet. Set `parent`
 <portable focused diagram>
 ```
 
+### Live visual
+- Renderer: <Sideshow or Grill Visuals>
+- Shareable deep link: <approved HTTPS URL or none>
+- Grill Visuals ownership receipt: <non-secret `grill-visuals handoff --json` output or none>
+
 ### Pick up
 Run `/grill-me pickup <PR URL>` from a clean workspace for this PR.
 ````
 
-Never include secrets, inaccessible local paths, private file contents, or localhost Sideshow URLs. Include a shareable HTTPS Sideshow URL only when both developers can access it. Always include portable Mermaid so pickup can recreate the visual.
+Never include secrets, inaccessible local paths, private file contents, credentials, or localhost URLs. Include a shareable renderer link only when the original developer approved sharing. Include a Grill Visuals ownership receipt only when the original developer confirmed publication and the PR is an approved handoff channel. Always include a portable diagram so pickup can recover without the hosted page.
 
 ## Pick up
 
@@ -79,7 +84,7 @@ Treat `pickup <PR URL>` as permission to read the PR and publish one claim comme
 4. Re-fetch claims. The earliest claim wins; if another claim is earlier, stop without modifying grilling documents.
 5. Compare the handoff SHA with the current PR head. If they differ, inspect intervening changes, invalidate stale facts, and recompute affected frontier branches before asking anything.
 6. Recreate `.context/grill-me-<topic>.md` from pointers, evidence, and unresolved state. Read canonical docs for settled decisions instead of copying them into the log.
-7. Recreate the decision map in a new Sideshow session from the portable Mermaid, then update it from current repository facts.
+7. Recreate the decision map with the renderer chosen at the start of this pickup session. If Grill Visuals was chosen and the handoff has a receipt, show its exact project and URLs through the native question UI. After explicit confirmation, import it with `grill-visuals pickup --session <id> --receipt <file> --yes`; this transfers no credential. Otherwise recreate it from the portable diagram and use any approved shareable link only as reference. Update it from current repository facts.
 8. Resume at the current frontier through the native question UI. Do not re-ask settled questions.
 
 When this developer later runs `pass`, create a new handoff whose `parent` is the handoff they claimed. This supports transfers back to the original developer or onward to another developer while keeping a clear lineage on one PR.

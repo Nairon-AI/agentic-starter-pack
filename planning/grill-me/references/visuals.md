@@ -11,11 +11,18 @@ Which live-diagram renderer should this grilling session use?
 
 A. Sideshow (Recommended) — stable renderer for one evolving decision map.
 B. Grill Visuals (Experimental) — richer question-specific diagrams and optional Cloudflare Pages sharing, but its package and workflows are still experimental.
+C. I don't understand — explain the difference more simply, then ask again.
 ```
 
 Ask through the native structured user-question tool. Do not infer the answer from repository configuration, tool availability, a handoff, or a previous session. Record `visual_renderer: sideshow` or `visual_renderer: grill-visuals` in the decision log. The choice does not require a diagram for every question and never permits public sharing by itself.
 
 Use one renderer for the session. If setup fails, explain the exact blocker and ask through the native question UI before switching. Never silently fall back to the other renderer. If the user declines a switch, use compact Mermaid or ASCII when useful and continue grilling.
+
+## Simplify on request
+
+When the user selects **I don't understand**, follow the native-question simplification loop. Keep this control in the native question UI, not as a decision answer inside either renderer.
+
+Do not add more visual detail. Isolate the current decision, hide unrelated branches, use plain labels, show each material option's main consequence, and add a short text reading. If the visual still makes the decision harder to understand, remove it and explain with one concrete example before asking again.
 
 ## Sideshow
 

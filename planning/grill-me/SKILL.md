@@ -47,7 +47,7 @@ For each round:
 
 1. Compute the whole frontier.
 2. Select up to 10 frontier questions. Keep any overflow on the frontier for the next round.
-3. Ask the selected questions through the host's native structured user-question tool as described below.
+3. Ask the selected questions through the host's native structured user-question tool. Include its required simplification option every time.
 4. Give concrete options and a concise recommendation for each.
 5. Wait for answers to the whole logical round before starting the next round.
 6. Update the log and, in repository-aware mode, publish settled decisions to their canonical docs.
@@ -60,7 +60,7 @@ Support these replies:
 - `rec all`: accept every recommendation in the round.
 - `rec`: when only one frontier question remains, accept its recommendation; otherwise ask for the question number.
 - `<number> rec`: accept one recommendation.
-- `idu <number>`: explain that question with a dumb-simple example, then wait for its answer.
+- `idu <number>` or selecting **I don't understand**: run the simplification loop in the native-question reference. Keep the decision unresolved.
 - `ask <number>` or `ask all`: run the teammate-escalation workflow. This does not answer the question; keep it and its downstream branches unresolved.
 - `pass`, `pass @developer`, or `pass <PR URL> [@developer]`: publish the unfinished session through the cross-developer handoff workflow, then stop.
 
@@ -131,7 +131,7 @@ Resolved: 4 | Frontier: 2 | Estimated remaining: ~6 decisions
 1. Should saves happen automatically when everyone leaves?
    A. Always
    B. Only when a transcript exists
-   C. Ask first
+   C. I don't understand — explain this more simply
    Recommendation: B — avoids empty sessions. Business context: lowers storage and support noise without removing useful customer history.
 
 ```

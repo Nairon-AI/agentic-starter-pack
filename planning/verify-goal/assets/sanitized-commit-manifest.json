@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "include_exact": [
+    "GOAL.md",
+    "verification-readiness.yaml",
+    "sanitized-commit-manifest.json",
+    "proof/proof-plan.md",
+    "proof/execution-results.json",
+    "proof/proof-results.md",
+    "proof/remote-receipts.json",
+    "proof/privacy-report.json"
+  ],
+  "include_directories": [
+    {
+      "path": "proof/automated",
+      "extensions": [".json", ".md", ".txt", ".xml"],
+      "max_file_bytes": 1048576
+    }
+  ],
+  "exclude_directories": [
+    "proof/recordings",
+    "proof/screenshots",
+    "proof/traces",
+    "proof/logs"
+  ],
+  "exclude_names": [
+    ".env",
+    ".env.local",
+    "cookies.json",
+    "auth.json",
+    "token.json"
+  ]
+}

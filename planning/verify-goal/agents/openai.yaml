@@ -1,0 +1,11 @@
+interface:
+  display_name: "Verify Goal"
+  short_description: "Build a proof-ready, approval-gated goal contract"
+  default_prompt: "Use $verify-goal to research this outcome and create an approval-gated goal contract with every verifier ready."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "exa"
+      description: "Current verification-tool discovery and capability gap research"
+      transport: "streamable_http"
+      url: "https://mcp.exa.ai/mcp"

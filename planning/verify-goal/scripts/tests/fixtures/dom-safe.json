@@ -1,0 +1,8 @@
+{
+  "page": "checkout",
+  "user": {
+    "displayName": "Test User",
+    "email": "masked"
+  },
+  "href": "https://example.test/checkout"
+}

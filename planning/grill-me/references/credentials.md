@@ -14,7 +14,7 @@ If the path is documented:
 2. Use existing authenticated tools or the documented mechanism.
 3. Ask only for the smallest missing permission, preferring read-only, time-limited, and narrowly scoped access.
 
-If the path is missing or ambiguous, ask through the native question UI where access is managed and how this repository expects an agent to use it. Be specific: ask for “read-only production Orders DB access through <documented mechanism>” rather than “send prod credentials.”
+If the path is missing or ambiguous, ask through the selected question surface where access is managed and how this repository expects an agent to use it. Be specific: ask for “read-only production Orders DB access through <documented mechanism>” rather than “send prod credentials.”
 
 Once clarified, update the canonical setup or runbook with the mechanism, scope, owner, and retrieval steps. Never document a secret value.
 

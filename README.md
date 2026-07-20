@@ -70,6 +70,10 @@ scripts/     helper scripts for building the flat skill install source
 
 The category folders are the real source of truth. `scripts/build-install-source.sh` builds a temporary flat install source for `npx skills add`.
 
+For Grill Me specifically, `planning/grill-me/` is canonical. User-level, `.agents`, `.claude`, and other installed copies must be produced from a pinned release or commit of that directory rather than maintained independently or fetched live from `main` on every session.
+
+An installed Grill Me copy may warn about a newer canonical release. It updates only after explicit approval: preserve the decision log, back up the exact proven installation, install the pinned release, verify its skill and references, then restart the agent session.
+
 ### Maintainer note
 
 Do not run or initialize the `no-mistakes` CLI while maintaining this repository. Its bundled files are catalog content for downstream installs only. Use repo-native checks and push directly to `origin` only when explicitly authorized. See `AGENTS.md` for the repository-local rule.

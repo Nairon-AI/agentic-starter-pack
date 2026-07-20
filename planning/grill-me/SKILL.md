@@ -1,6 +1,6 @@
 ---
 name: grill-me
-description: Relentlessly interview the user in dependency-aware batches to sharpen a plan, decision, design, idea, codebase change, or bug fix. Use when the user wants to get grilled, investigate a bug from a ticket or screenshots, pass unfinished grilling to a teammate, or pick it up from a PR. Begin each session by asking whether live diagrams should use Sideshow or experimental Grill Visuals. In repositories, inspect current behavior, run a mandatory gap and blast-radius pass, and maintain durable decision docs as answers settle.
+description: Relentlessly interview the user in dependency-aware batches to sharpen a plan, decision, design, idea, codebase change, or bug fix. Use when the user wants to get grilled, investigate a bug from a ticket or screenshots, pass unfinished grilling to a teammate, or pick it up from a PR. Begin each session by choosing native dialogs or one full text batch, then Sideshow or experimental Grill Visuals for live diagrams. In repositories, inspect current behavior, run a mandatory gap and blast-radius pass, and maintain durable decision docs as answers settle.
 ---
 
 Interview the user until the subject is clear enough to act on. Map it as a design tree: every decision branches into decisions that depend on it.
@@ -9,7 +9,7 @@ Interview the user until the subject is clear enough to act on. Map it as a desi
 
 Read the relevant reference completely before using that capability:
 
-- **Native question UI:** Before the first round, read [references/questions.md](references/questions.md).
+- **Question presentation:** Before the first user-facing question, read [references/questions.md](references/questions.md).
 - **Repository-aware grilling:** For work in an existing repository, read [references/repo-aware.md](references/repo-aware.md) before asking.
 - **Bug investigation:** For a bug, regression, incident, incorrect behavior, or bug-like Linear ticket, read [references/bugs.md](references/bugs.md).
 - **Protected access:** When investigation needs a protected system, read [references/credentials.md](references/credentials.md).
@@ -24,9 +24,13 @@ Read the relevant reference completely before using that capability:
 
 Before the first round:
 
-Make the renderer choice in the visual reference the first user-facing question. Ask it through the host's native structured question tool even when no diagram is useful yet, the repository has a default, a previous session chose a renderer, or the user invokes `pickup`. Retain the answer, then record it when creating or reconstructing the decision log. Do not silently switch renderers if setup fails.
+Make the question-surface choice in the question reference the first user-facing question. Then make the renderer choice in the visual reference through the selected surface. Ask both on every new or resumed session even when no diagram is useful yet, the repository has defaults, a previous session made choices, or the user invokes `pickup`. Retain both answers, then record them when creating or reconstructing the decision log. Do not silently switch either choice.
 
-If the user invokes `pickup <PR URL>`, ask the renderer question, then run the cross-developer handoff workflow. It reconstructs the local decision log; skip blank-session initialization and rejoin at **Work in rounds** with the recovered frontier.
+When install provenance identifies a pinned release or commit, check for a newer canonical Grill Me version without blocking the session. Warn when an update exists, but never load live `main` or update automatically. If the check is offline, unavailable, or provenance is missing, continue with the installed version and record the limitation.
+
+If the user approves the warning, save the current decision log, locate the exact installed copy from its provenance, back it up, install the newer pinned release through the host's supported skill installer, and verify the installed `SKILL.md` plus references against that release. Never overwrite an installation whose target or provenance is uncertain. If permissions, backup, installation, or verification fail, preserve the old copy, report the failed stage, and give the narrow manual recovery command. After success, tell the user to restart the agent session and stop; the running session cannot claim to use newly installed instructions.
+
+If the user invokes `pickup <PR URL>`, ask the question-surface and renderer questions, then run the cross-developer handoff workflow. It reconstructs the local decision log; skip blank-session initialization and rejoin at **Work in rounds** with the recovered frontier.
 
 1. Inspect the relevant conversation, files, repository, and tools.
 2. Decide whether this is a general or repository-aware session. For repository-aware work, load the reference above and identify the canonical durable document before decisions need publishing.
@@ -35,7 +39,14 @@ If the user invokes `pickup <PR URL>`, ask the renderer question, then run the c
 5. Summarize known facts and assumptions in one or two sentences.
 6. Estimate total decisions, rounds, and time. Update estimates as the tree changes.
 
-Finding facts is the agent's job. Retrieve facts instead of asking the user. When independent fact-finding would help and sub-agents are available, dispatch it with only the needed context. Do not block the whole frontier: defer only questions downstream of unfinished research and ask the rest now.
+Finding facts is the agent's job. Before asking, classify the missing input:
+
+- **Retrievable fact:** inspect the repository; use Context7 for current third-party documentation; use Exa for broader current information. Record the source, then ask only if a real decision remains.
+- **Inference:** state the evidence, unknowns, and that it is an inference.
+- **Decision:** ask the user because it selects an intended outcome or tradeoff.
+- **Unavailable fact:** ask only for the missing context or access needed to investigate it.
+
+Never disguise a retrievable fact as a preference question or ask the user to verify what the agent can verify. When independent fact-finding would help and sub-agents are available, dispatch it with only the needed context. Do not block the whole frontier: defer only questions downstream of unfinished research and ask the rest now.
 
 Ask the user only about decisions or information only they can know. Every consequential decision belongs to the user. Recommend, but wait for their answer.
 
@@ -47,7 +58,7 @@ For each round:
 
 1. Compute the whole frontier.
 2. Select up to 10 frontier questions. Keep any overflow on the frontier for the next round.
-3. Ask the selected questions through the host's native structured user-question tool. Include its required simplification option every time.
+3. Ask the selected questions through the session's chosen question surface. Include its required simplification option every time.
 4. Give concrete options and a concise recommendation for each.
 5. Wait for answers to the whole logical round before starting the next round.
 6. Update the log and, in repository-aware mode, publish settled decisions to their canonical docs.
@@ -60,11 +71,14 @@ Support these replies:
 - `rec all`: accept every recommendation in the round.
 - `rec`: when only one frontier question remains, accept its recommendation; otherwise ask for the question number.
 - `<number> rec`: accept one recommendation.
-- `idu <number>` or selecting **I don't understand**: run the simplification loop in the native-question reference. Keep the decision unresolved.
+- `idu <number>` or selecting **I don't understand**: run the simplification loop in the question-presentation reference. Keep the decision unresolved.
 - `ask <number>` or `ask all`: run the teammate-escalation workflow. This does not answer the question; keep it and its downstream branches unresolved.
+- `questions native` or `questions text`: switch the question surface for later rounds and record the change.
+- `visuals on-demand`: stop proactive diagrams for the rest of the session. Keep the chosen renderer available when the user asks for a visual or selects **I don't understand**.
+- `visuals auto`: restore the agreed proactive trigger policy.
 - `pass`, `pass @developer`, or `pass <PR URL> [@developer]`: publish the unfinished session through the cross-developer handoff workflow, then stop.
 
-For the plain-text fallback only, end each round with:
+In text mode, end each round with:
 
 ```text
 Reply by number. Use `rec all`, `1 rec`, `idu 2`, or `ask 2`.

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "fps": 60,
+  "windows": [
+    {
+      "id": "MW-ZOOM-01",
+      "kind": "zoom",
+      "startFrame": 0,
+      "endFrameExclusive": 12
+    }
+  ]
+}

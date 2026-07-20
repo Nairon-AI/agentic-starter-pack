@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "client": {
+    "name": "codex",
+    "version": "__REQUIRED__",
+    "skill_revision_sha256": "__REQUIRED__",
+    "support": "best_effort",
+    "evaluation_receipt_path": "__REQUIRED__"
+  },
+  "approval": {
+    "status": "pending",
+    "approver_alias": null,
+    "approved_at": null,
+    "method": null,
+    "semantic_sha256": null,
+    "proof_plan_sha256": null
+  },
+  "contract": {
+    "slug": "{{goal_slug}}",
+    "title": "{{goal_title}}",
+    "status": "draft",
+    "work_type": "__REQUIRED__",
+    "created_at": "{{created_at}}",
+    "verified_at": null,
+    "objective": "__REQUIRED__",
+    "scope": ["__REQUIRED__"],
+    "constraints": ["__REQUIRED__"],
+    "non_goals": ["__REQUIRED__"],
+    "affected_users": ["__REQUIRED__"],
+    "affected_systems": ["__REQUIRED__"],
+    "authority": ["__REQUIRED__"],
+    "residual_risks": ["__REQUIRED__"],
+    "unresolved_questions": ["__REQUIRED__"]
+  },
+  "workflow": {
+    "phase": "authoring",
+    "revision": 1,
+    "updated_at": "{{created_at}}",
+    "blockers": [],
+    "completed_checks": [],
+    "next_checks": ["inventory", "exa_gap_analysis", "capability_smoke_tests", "proof_plan", "approval"]
+  },
+  "lease": {
+    "state": "active",
+    "owner": "__REQUIRED__",
+    "run_id": "__REQUIRED__",
+    "revision": 1,
+    "parent_readiness_sha256": null,
+    "acquired_at": "{{created_at}}",
+    "released_at": null,
+    "takeovers": []
+  },
+  "source_hashes": {
+    "goal_sha256": null,
+    "proof_plan_sha256": null,
+    "checked_at": null
+  },
+  "research": {
+    "exa": {
+      "status": "pending",
+      "queried_at": null,
+      "sources": []
+    }
+  },
+  "vault": {
+    "provider": "__REQUIRED__",
+    "mechanism": "__REQUIRED__",
+    "status": "pending",
+    "checked_at": null,
+    "reference_names": []
+  },
+  "criteria": [
+    {
+      "id": "SC-01",
+      "description": "__REQUIRED__",
+      "pass_threshold": "__REQUIRED__",
+      "claim_ids": ["CL-01"],
+      "scenario_ids": ["S-01"],
+      "artifact_ids": ["AR-01"]
+    }
+  ],
+  "claims": [
+    {
+      "id": "CL-01",
+      "description": "__REQUIRED__",
+      "required_evidence": "__REQUIRED__",
+      "capability_ids": ["CP-01"],
+      "criterion_ids": ["SC-01"],
+      "verifier_ids": ["V-01"],
+      "scenario_ids": ["S-01"],
+      "artifact_ids": ["AR-01"]
+    }
+  ],
+  "verifiers": [
+    {
+      "id": "V-01",
+      "name": "__REQUIRED__",
+      "kind": "repo_test",
+      "version": "__REQUIRED__",
+      "status": "pending",
+      "claim_ids": ["CL-01"],
+      "capability_ids": ["CP-01"],
+      "sources": [
+        {
+          "url": "__REQUIRED__",
+          "authority": "authoritative",
+          "version": "__REQUIRED__",
+          "checked_at": "__REQUIRED__",
+          "valid_until": "__REQUIRED__"
+        }
+      ],
+      "installation": {
+        "status": "pending",
+        "source": "__REQUIRED__",
+        "installed_by_goal": false,
+        "receipt_path": "__REQUIRED__"
+      },
+      "authentication": {
+        "route": "none",
+        "status": "not_required",
+        "vault_provider": "__REQUIRED__",
+        "reference_names": [],
+        "identity_alias": "__REQUIRED__",
+        "environment": "none",
+        "checked_at": "__REQUIRED__",
+        "expires_at": null,
+        "production_approval": null
+      },
+      "smoke_test": {
+        "status": "pending",
+        "capability_proved": "__REQUIRED__",
+        "checked_at": "__REQUIRED__",
+        "receipt_path": "__REQUIRED__"
+      },
+      "fallback_or_blocker": "__REQUIRED__"
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "CP-01",
+      "description": "__REQUIRED__",
+      "claim_ids": ["CL-01"],
+      "verifier_id": "V-01"
+    }
+  ],
+  "risks": [
+    {
+      "id": "RISK-01",
+      "description": "__REQUIRED__",
+      "class": "other",
+      "disposition": "covered",
+      "scenario_ids": ["S-01"],
+      "exclusion_reason": null
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "S-01",
+      "name": "__REQUIRED__",
+      "risk": "happy_path",
+      "criterion_ids": ["SC-01"],
+      "claim_ids": ["CL-01"],
+      "artifact_ids": ["AR-01"],
+      "risk_ids": ["RISK-01"],
+      "identity_aliases": ["__REQUIRED__"],
+      "preconditions": "__REQUIRED__",
+      "cleanup": "__REQUIRED__",
+      "pass_condition": "__REQUIRED__",
+      "record": false
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "AR-01",
+      "type": "automated",
+      "path": "proof/automated/sc-01.json",
+      "criterion_ids": ["SC-01"],
+      "claim_ids": ["CL-01"],
+      "scenario_ids": ["S-01"],
+      "required": true,
+      "retention": "commit_if_sanitized",
+      "privacy_status": "planned",
+      "review_status": "planned"
+    }
+  ],
+  "release": {
+    "strategy": "__REQUIRED__",
+    "rationale": "__REQUIRED__",
+    "old_path": "__REQUIRED__",
+    "new_path": "__REQUIRED__",
+    "transition": "__REQUIRED__",
+    "fallback": "__REQUIRED__",
+    "telemetry": "__REQUIRED__",
+    "cleanup": "__REQUIRED__"
+  },
+  "evidence_lifecycle": {
+    "delivery": "__REQUIRED__",
+    "provider": "__REQUIRED__",
+    "attachment_visibility": "__REQUIRED__",
+    "pr_number": null,
+    "pr_url": null,
+    "pr_state": "not_created",
+    "local_video_policy": "__REQUIRED__",
+    "sanitized_manifest": "sanitized-commit-manifest.json"
+  },
+  "handoff": {
+    "last_checkpoint": null,
+    "branch": "__REQUIRED__",
+    "commit": null,
+    "next_action": "__REQUIRED__"
+  }
+}

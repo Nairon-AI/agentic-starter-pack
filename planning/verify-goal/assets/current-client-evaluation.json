@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "client": {
+    "name": "codex",
+    "version": "codex-cli 0.144.6"
+  },
+  "skill_revision_sha256": "592504de75c74d3bea3673730965d78546707617bbc85c57a5b6502ff9264e18",
+  "status": "passed",
+  "evaluated_at": "2026-07-20T10:23:03Z",
+  "deterministic_checks": {
+    "typecheck": "PASS",
+    "tests": "PASS",
+    "skill_validation": "PASS"
+  },
+  "matrix": {
+    "attempts_per_archetype": 2,
+    "total_runs": 8,
+    "passed_runs": 8
+  },
+  "runs": [
+    {
+      "id": "browser-video-1",
+      "archetype": "browser_video",
+      "attempt": 1,
+      "status": "PASS",
+      "checked_at": "2026-07-20T10:23:03Z",
+      "contract_sha256": "9edd7bf8b6fc887c3fe767e36cee2019d48f488840bdb44bbbf94afd9dde72ff"
+    },
+    {
+      "id": "browser-video-2",
+      "archetype": "browser_video",
+      "attempt": 2,
+      "status": "PASS",
+      "checked_at": "2026-07-20T10:23:03Z",
+      "contract_sha256": "8ab482467520a7fa8fb1015c119e7a038bdad67b8f7029b9b5b203657c33f6f7"
+    },
+    {
+      "id": "external-tool-auth-1",
+      "archetype": "external_tool_auth",
+      "attempt": 1,
+      "status": "PASS",
+      "checked_at": "2026-07-20T10:23:03Z",
+      "contract_sha256": "8260701eb82fd2eba0e145258245ba935093cc65dcb85267d1cd7208a93d3067"
+    },
+    {
+      "id": "external-tool-auth-2",
+      "archetype": "external_tool_auth",
+      "attempt": 2,
+      "status": "PASS",
+      "checked_at": "2026-07-20T10:23:03Z",
+      "contract_sha256": "9788f6f3e39ce220e2503e02d1c205e2e924709c40acca111c2fd4e594843aa0"
+    },
+    {
+      "id": "local-only-1",
+      "archetype": "local_only",
+      "attempt": 1,
+      "status": "PASS",
+      "checked_at": "2026-07-20T10:23:03Z",
+      "contract_sha256": "90eb165fc7416f65ae6149b488cd2a5907d8273b9f5e1ec13c40b2ff9e490e99"
+    },
+    {
+      "id": "local-only-2",
+      "archetype": "local_only",
+      "attempt": 2,
+      "status": "PASS",
+      "checked_at": "2026-07-20T10:23:03Z",
+      "contract_sha256": "b0edca498d2ee0ffb812842ed899d1ab3a757befc96fe687e10fdba7eb53ef80"
+    },
+    {
+      "id": "migration-multi-role-1",
+      "archetype": "migration_multi_role",
+      "attempt": 1,
+      "status": "PASS",
+      "checked_at": "2026-07-20T10:23:03Z",
+      "contract_sha256": "b93697512acc2801db37e7bcb7f5e0eab0f9ce975980cc8e725427969d6fbe7d"
+    },
+    {
+      "id": "migration-multi-role-2",
+      "archetype": "migration_multi_role",
+      "attempt": 2,
+      "status": "PASS",
+      "checked_at": "2026-07-20T10:23:03Z",
+      "contract_sha256": "b56d33f10d144ce79c108ac5eca5c112c734a698bfa5a92e1733e03bedab417b"
+    }
+  ]
+}

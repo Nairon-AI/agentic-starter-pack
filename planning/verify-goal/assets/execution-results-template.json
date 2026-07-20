@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "goal": {
+    "slug": "{{goal_slug}}",
+    "title": "{{goal_title}}",
+    "source_binding": {
+      "readiness_path": "verification-readiness.yaml",
+      "readiness_sha256": "__REQUIRED__",
+      "proof_plan_path": "proof/proof-plan.md",
+      "proof_plan_sha256": "__REQUIRED__"
+    },
+    "tested_commit": "__REQUIRED__",
+    "environment": "__REQUIRED__",
+    "executed_by": "__REQUIRED__",
+    "started_at": "__REQUIRED__",
+    "completed_at": null
+  },
+  "overall_result": "BLOCKED",
+  "workflow_phase": "executing",
+  "receipts": [],
+  "criterion_results": [],
+  "scenario_results": [],
+  "verifier_results": [],
+  "artifact_results": [],
+  "privacy": {
+    "status": "N/A",
+    "automated_receipt_id": null,
+    "visual_review_receipt_id": null,
+    "motion_receipt_ids": []
+  },
+  "deviations": [],
+  "residual_risks": [],
+  "failed_attempt_summary": [],
+  "pr_evidence": {
+    "provider": "github",
+    "state": "not_uploaded",
+    "repository": "__REQUIRED__",
+    "pr_number": null,
+    "pr_url": null,
+    "comment_url": null,
+    "tested_head_sha": "__REQUIRED__",
+    "merge_sha": null,
+    "checked_at": null,
+    "blocker": "Execution results have not been uploaded.",
+    "attachments": []
+  }
+}

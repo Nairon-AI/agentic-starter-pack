@@ -1,0 +1,6 @@
+{
+  "page": "account",
+  "password": "fake-password-for-detector",
+  "contact": "person@example.test",
+  "href": "http://localhost:3000/account?token=fake-query-token"
+}

@@ -11,6 +11,7 @@ You are a **Task subagent**. The parent agent already collected git output and c
 
 1. Load the `thermo-nuclear-code-quality-review` skill (shipped in the cursor-team-kit plugin) and treat its `SKILL.md` as the **complete** rubric - tone, approval bar, output ordering, code-judo / 1k-line / spaghetti rules.
 2. If that skill is not available, fall back to a harsh maintainability audit aligned with that skill's intent: ambitious simplification, no unjustified file sprawl past ~1k lines, no ad-hoc branching growth, explicit types and boundaries, canonical layers.
+3. Enforce **Jane Street house style** for naming: prefer precise verb-object names that state the real transformation or effect. Flag terse lifecycle labels such as `ingest`, `announce`, `hydrate`, and `finalize` when they hide what the code actually does. Trace call sites and task-identity behavior before proposing renames.
 
 ## Work
 

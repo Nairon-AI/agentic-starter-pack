@@ -2,6 +2,14 @@
 
 Use this mode when the subject lives in an existing repository or depends on its current behavior, domain language, architecture, or durable plans.
 
+## Establish the ubiquitous language
+
+Before the first decision, find and read the repository's canonical domain glossary. Prefer an existing `UBIQUITOUS_LANGUAGE.md`, domain `CONTEXT.md`, or equivalent canonical home; never create a competing glossary.
+
+If no glossary exists, run `ubiquitous-language` and create `UBIQUITOUS_LANGUAGE.md` before grilling. Seed only the terms needed for the current feature, migration, bug, and its immediately related domain boundaries; do not block the first question on a whole-repository language audit. On every later session, read it first and add new domain-specific terms, names, concepts, aliases, relationships, and ambiguities discovered through investigation or answers. Keep definitions short and exclude generic implementation words without domain meaning.
+
+If code, tickets, documentation, or conversation conflicts with the glossary, use the canonical term in questions and briefly explain the correction so the developer can use it going forward. Record the conflicting usage as an ambiguity; do not silently redefine the glossary. Resolve the meaning with evidence or a user decision, then update the canonical entry.
+
 ## Inspect before asking
 
 Read the nearest project instructions first. Then inspect only the relevant:
@@ -13,7 +21,9 @@ Read the nearest project instructions first. Then inspect only the relevant:
 
 Confirm what the system does today. Answer repository-findable questions yourself. Ask the user only for real decisions or information the repository cannot supply.
 
-Before the first round, summarize the most relevant current behavior, vocabulary, decision history, contradictions, and gaps. For a code-linked question, name the primary file and behavior in the native question dialog. Add at most two supporting paths and only the shortest useful snippet.
+For missing external facts, use Context7 first when current or versioned third-party documentation can answer, then Exa when Context7 lacks coverage or broader online research is needed. A sourced fact narrows the decision; it is not an answer option. Label conclusions not directly established by the sources as inferences, with their evidence and remaining unknowns.
+
+Before the first round, summarize the most relevant current behavior, vocabulary, decision history, contradictions, and gaps. For a code-linked question, name the primary file and behavior on the selected question surface. Add at most two supporting paths and only the shortest useful snippet.
 
 ## Publish to one canonical home
 

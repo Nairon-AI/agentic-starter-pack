@@ -1,0 +1,6 @@
+interface:
+  display_name: "Communicate Clearly"
+  short_description: "Rewrite the last response, answer first"
+  default_prompt: "Use $communicate-clearly to restate your last response in plain language, with the answer first."
+policy:
+  allow_implicit_invocation: false

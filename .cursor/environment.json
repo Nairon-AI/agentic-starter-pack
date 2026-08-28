@@ -1,0 +1,4 @@
+{
+  "name": "Agentic Starter Pack",
+  "install": "cd planning/verify-goal && npm ci || npm install"
+}

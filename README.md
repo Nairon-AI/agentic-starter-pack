@@ -4,11 +4,11 @@
 
 ### Default repo setup for coding agents
 
-**One agent prompt -> starter AGENTS.md -> 261 portable skills + brain vault**
-*Context, planning, frontend, engineering, security, writing, marketing, and persistent-agent-memory workflows in one public repo.*
+**One agent prompt -> starter AGENTS.md -> 282 portable skills + brain vault**
+*Context, planning, frontend, engineering, security, writing, marketing, business, and persistent-agent-memory workflows in one public repo.*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/Skills-261-111827.svg)](#skill-catalog)
+[![Skills](https://img.shields.io/badge/Skills-282-111827.svg)](#skill-catalog)
 
 ---
 
@@ -42,7 +42,7 @@ Do the full install cleanly:
 
 ### What gets installed
 
-- **261 skills** - task-specific workflows for context, planning, frontend polish, engineering cleanup, security, writing, and marketing. They give agents concrete procedures instead of vibes.
+- **282 skills** - task-specific workflows for context, planning, frontend polish, engineering cleanup, security, writing, marketing, and business. They give agents concrete procedures instead of vibes.
 - **Curated third-party skills** - not every skill here was created by Nairon AI. This repo is a starter pack: a curated, adapted bundle of skills we have found useful while operating products.
 - **Categorized `skills/` mirror** - browsable source layout inside the target repo, useful for humans and future agents to inspect or edit installed skills.
 - **Starter `AGENTS.md`** - repo-local operating rules: type checks, tests, git safety, PR workflow, browser validation, and handoff expectations.
@@ -63,6 +63,7 @@ engineering/ source of truth for engineering skills
 security/    source of truth for security skills
 writing/     source of truth for writing skills
 marketing/   source of truth for marketing skills
+business/    source of truth for business skills
 brain/       starter persistent-memory vault and principles
 .claude/     optional Claude Code brain hooks
 scripts/     helper scripts for building the flat skill install source
@@ -174,6 +175,19 @@ Do not run or initialize the `no-mistakes` CLI while maintaining this repository
 - `analytics`, `churn-prevention`, `free-tools`, `referrals`, `revops`, `sales-enablement`
 - `prospecting`, `competitor-profiling`, `first-customer-finder`
 
+### Business SKILLS — `business/`
+
+From [Jason Cohen / A Smart Bear](https://skills.asmartbear.com/): 21 skills covering all four workshops and four standalone tools. Workshop skills run in the order shown. See [business/README.md](business/README.md) for source and license details.
+
+- **Find Yourself:** [asb-who-me](business/asb-who-me/SKILL.md) → [asb-voters](business/asb-voters/SKILL.md)
+- **Find Your Carol:** [asb-carol-observations](business/asb-carol-observations/SKILL.md) → [asb-carol-strengths](business/asb-carol-strengths/SKILL.md) → [asb-carol-keystones](business/asb-carol-keystones/SKILL.md) → [asb-carol-dealbreakers](business/asb-carol-dealbreakers/SKILL.md) → [asb-carol-inciting-events](business/asb-carol-inciting-events/SKILL.md) → [asb-carol-define](business/asb-carol-define/SKILL.md)
+- **Customer Interviews:** [asb-interview-goals](business/asb-interview-goals/SKILL.md) → [asb-interview-hypotheses](business/asb-interview-hypotheses/SKILL.md) → [asb-interview-questions](business/asb-interview-questions/SKILL.md) → [asb-interview-debrief](business/asb-interview-debrief/SKILL.md) → [asb-interview-learning](business/asb-interview-learning/SKILL.md) → [asb-interview-report](business/asb-interview-report/SKILL.md)
+- **Set Your Price:** [asb-more-or-less](business/asb-more-or-less/SKILL.md) → [asb-willingness-to-pay](business/asb-willingness-to-pay/SKILL.md) → [asb-raise-prices](business/asb-raise-prices/SKILL.md)
+- **Rude Q&A:** [asb-rude-qa](business/asb-rude-qa/SKILL.md)
+- **Good Market?:** [asb-problem](business/asb-problem/SKILL.md)
+- **Positioning:** [asb-positioning](business/asb-positioning/SKILL.md)
+- **Needs Stack:** [asb-needs-stack](business/asb-needs-stack/SKILL.md)
+
 ---
 
 ## Credits
@@ -182,6 +196,7 @@ This starter pack bundles skills from multiple authors and projects. Some are ou
 
 Special thanks to:
 
+- [Jason Cohen / A Smart Bear](https://skills.asmartbear.com/) / [asmartbear/asb-skills](https://github.com/asmartbear/asb-skills) - business workshops and standalone skills, licensed CC BY 4.0.
 - [Matt Pocock](https://x.com/mattpocockuk) / `mattpocock/skills` - engineering, planning, and writing workflows.
 - [Corey Haines](https://www.corey.co/) - marketing strategy concepts adapted in the marketing planning skills.
 - [Anthony Fu](https://github.com/antfu) - generated framework skills and source tooling patterns.
@@ -200,7 +215,7 @@ If a skill has its own license, metadata, README, or source reference, treat tha
 
 ## License
 
-[MIT](LICENSE)
+[MIT](LICENSE) for this starter pack. Bundled third-party skills retain their own licenses; the [Business SKILLS](business/README.md) are CC BY 4.0.
 
 ---
 

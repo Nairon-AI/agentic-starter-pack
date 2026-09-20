@@ -19,7 +19,7 @@ link_skill_dir() {
   cp -R "${skill_dir}" "${tmp_dir}/skills/${skill_name}"
 }
 
-for category in context planning engineering security writing frontend marketing; do
+for category in context planning engineering security writing frontend marketing business; do
   category_dir="${repo_root}/${category}"
   [[ -d "${category_dir}" ]] || continue
 
